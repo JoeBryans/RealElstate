@@ -1,11 +1,8 @@
-import mongoose from "mongoose"; // Erase if already required
-
-// Declare the Schema of the Mongo model
+import mongoose from "mongoose";
 const userSchema = new mongoose.Schema({
-  name: {
+  username: {
     type: String,
     required: true,
-    unique: true,
     index: true,
   },
   email: {
