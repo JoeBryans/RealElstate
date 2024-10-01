@@ -13,8 +13,9 @@ const app = express();
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
+// app.use('auth',userRouter);
 
-app.use("auth", userRouter);
+app.use("/auth", userRouter);
 app.listen(port, () =>
   console.log(`server runing at http://localhost:${port}`)
 );

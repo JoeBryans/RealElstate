@@ -1,0 +1,13 @@
+import React from "react";
+import banner from "../assets/hero_2.webp";
+import Find from "./Find";
+const Banner = () => {
+  return (
+    <div className="relative  ">
+      <img src={banner} alt={banner} className="h-[90vh] w-screen" />
+      <Find />
+    </div>
+  );
+};
+
+export default Banner;

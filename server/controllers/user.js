@@ -8,10 +8,10 @@ export const Create = async (req, res) => {
     if (user) {
       res.json("user already exist ");
     } else {
-      const hash = bcrypt.hashSync(password, 20);
+      const hash = await bcrypt.hashSync(password, 20);
       const user = await userModel.create({ ...req.body, password: hash });
-      const { password, ...others } = user._doc;
-      res.json(...others);
+      // const { password, ...others } = user._doc;
+      res.json(user);
     }
   } catch (error) {
     console.log(error);
