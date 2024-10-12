@@ -51,5 +51,21 @@
     color: #646cff;
     background: #fff;
   } */
-  
-  
+ .bg-trans{
+  background:rgb(67, 67, 66)
+ }
+  /* .k{
+    animation-name: k;
+    
+    animation-duration: 0.3;
+    animation-iteration-count: infinite;
+  }
+    @keyframes K {
+    0%{background-color: aqua;}
+    50%{opacity:0.5;}
+    100%{opacity:0;}
+  }
+  .p{
+    animation: p 300s infinite ;
+
+  } */

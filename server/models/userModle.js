@@ -19,10 +19,12 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    address: [{ city: String, state: String, country: String }],
     role: {
       type: String,
       defualt: "user",
     },
+    Links: [{ type: mongoose.Schema.Types.ObjectId, ref: "medial" }],
   },
   { timestamps: true }
 );

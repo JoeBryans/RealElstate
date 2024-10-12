@@ -55,6 +55,7 @@ var estateSchema = new mongoose.Schema(
     image: {
       type: [String],
     },
+
     feature: String,
   },
   { timestamps: true }

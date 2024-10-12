@@ -10,45 +10,79 @@ import * as MdIcons from "react-icons/md";
 import * as FaIcons from "react-icons/fa";
 import { useParams } from "react-router-dom";
 import { useGetPropertyIdQuery } from "../Api/Api";
+import Loading from "../components/Loading";
 
 const Property = () => {
   const param = useParams();
-  const { data } = useGetPropertyIdQuery(param.id);
-  console.log(data);
+  const { data, isLoading } = useGetPropertyIdQuery(param.id);
+  console.log(isLoading);
   const property = data;
 
   const [index, setIndex] = useState(0);
+  const [show, setShow] = useState(false);
   console.log(index);
   const handleClick = (i) => {
+    setShow(true);
     setIndex(i);
+  };
+  const HandleSlide = () => {
+    // setIndex(i);
+  };
+  const handleClose = (i) => {
+    setShow(false);
   };
 
   return (
-    <div className="mx-auto">
-      <div className="flex flex-col mb-4 relative">
+    <div className="mx-auto relative">
+      {isLoading && <Loading />}
+      <div
+        className={
+          show
+            ? " mb-4 z-20 bg-black  -top-20 absolute w-full flex justify-center items-center h-[100vh] opacity-90"
+            : "hidden"
+        }
+      >
+        <div className="fixed right-3 top-24">
+          <MdIcons.MdClose
+            size={30}
+            strokeWidth={2}
+            onClick={handleClose}
+            className=" cursor-pointer"
+          />
+        </div>
         <img
           src={property?.image && property?.image[index]}
           alt=""
-          className="h-[60vh]"
+          className="w-max h-[64vh] object-center "
         />
-        {/* <div className="flex absolute bottom-5 left-[50%]">
+        <div className="flex absolute justify-between w-4/6 ">
+          <FaIcons.FaArrowAltCircleLeft
+            size={30}
+            color="white"
+            className="z-10 cursor-pointer"
+            onClick={() => HandleSlide(l)}
+          />
+          <FaIcons.FaArrowAltCircleRight
+            size={30}
+            color="white"
+            className="z-10 cursor-pointer"
+            onClick={() => HandleSlide(r)}
+          />
+          {/* <FaIcons.FaCircle size={20} color="red" className="z-10" />
           <FaIcons.FaCircle size={20} color="red" className="z-10" />
-          <FaIcons.FaCircle size={20} color="red" className="z-10" />
-          <FaIcons.FaCircle size={20} color="red" className="z-10" />
-          <FaIcons.FaCircle size={20} color="red" className="z-10" />
-          <FaIcons.FaCircle size={20} color="red" className="z-10" />
-        </div> */}
+          <FaIcons.FaCircle size={20} color="red" className="z-10" /> */}
+        </div>
       </div>
       <Container>
-        <div className="flex flex-wrap  justify-between gap-4 ">
+        <div className="flex flex-wrap  justify-between gap-4 mt-20">
           <div className="w-[50rem] mx-auto flex flex-col gap-4 text-slate-700 mb-5">
             <div className="flex gap-2 -mt-4 mx-auto">
               {property?.image &&
-                property.image.map((item, i) => {
+                property.image.slice(0, 1).map((item, i) => {
                   return (
-                    <div className="flex gap-2 justify-center ">
+                    <div className="flex gap-2 justify-center " key={i}>
                       <img
-                        className="w-12 h-12 "
+                        className="w-5/6 "
                         src={item}
                         alt=""
                         onClick={() => handleClick(i)}
@@ -57,24 +91,28 @@ const Property = () => {
                   );
                 })}{" "}
             </div>
+            <h2>{property?.name}</h2>
+            {/* <img
+              className="w-5/6 "
+              src={property?.image && property?.image[0]}
+              alt=""
+              onClick={() => handleClick()}
+            /> */}
 
-            <div className="flex items-center gap-1 ">
-              <h2>{property?.name}</h2>
-              <b className="text-3xl ">-</b>
-              <strong className="text-xl ">$ {property?.price}</strong>
-            </div>
+            <strong className="text-xl ">$ {property?.price}</strong>
             <span className="flex gap-1 font-medium">
               <MdIcons.MdLocationPin size={25} color="green" />{" "}
               {property?.address}
             </span>
-            {property?.type === "sale" ? (
+            {property?.type === "sale" && (
               <Button
                 variant="primary"
                 className="text-white font-semibold w-fit px-2"
               >
                 For Sell
               </Button>
-            ) : (
+            )}
+            {property?.type === "rent" && (
               <Button
                 variant="danger"
                 className="text-white font-semibold w-fit px-2"
@@ -85,28 +123,34 @@ const Property = () => {
             <div className="flex flex-wrap items-center gap-4">
               <div className="flex items-center gap-1 text-green-900">
                 <FaIcons.FaBed size={25} color="green" />
-                <span className="font-medium">{property?.bedroom} bed</span>
+                <span className="font-medium">
+                  {`${property?.bedroom}bed`}{" "}
+                </span>
               </div>
               <div className="flex items-center gap-1 text-green-900">
                 <FaIcons.FaBath size={25} color="green" />
-                <span className="font-medium">{property?.bathroom} bath</span>
+                <span className="font-medium">{`${property?.bathroom}bath`}</span>
               </div>
-              <div className="flex items-center gap-1 text-green-900">
-                <FaIcons.FaParking size={25} color="green" />
-                {property?.packing ? (
-                  <span className="font-medium">Parking space</span>
-                ) : (
-                  <span className="font-medium">No Parking</span>
-                )}
-              </div>
-              <div className="flex items-center gap-1 text-green-900">
-                <FaIcons.FaChair size={25} color="green" />
-                {property?.furnished ? (
-                  <span className="font-medium">Furnished</span>
-                ) : (
-                  <span className="font-medium">Unfurnished</span>
-                )}
-              </div>
+              {property?.packing && (
+                <div className="flex items-center gap-1 text-green-900">
+                  <FaIcons.FaParking size={25} color="green" />
+                  {property?.packing ? (
+                    <span className="font-medium">Parking space</span>
+                  ) : (
+                    <span className="font-medium">No Parking</span>
+                  )}
+                </div>
+              )}
+              {property?.furnished && (
+                <div className="flex items-center gap-1 text-green-900">
+                  <FaIcons.FaChair size={25} color="green" />
+                  {property?.furnished ? (
+                    <span className="font-medium">Furnished</span>
+                  ) : (
+                    <span className="font-medium">Unfurnished</span>
+                  )}
+                </div>
+              )}
             </div>
             <div className="flex flex-col gap-1">
               <span className="font-bold text-2xl ">Description </span>

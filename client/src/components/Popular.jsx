@@ -12,7 +12,10 @@ const Popular = () => {
       <div className="flex flex-wrap gap-4">
         {[0, 1, 2, 3].map((items) => {
           return (
-            <div className="flex flex-col border justify-center items-center  mx-auto overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg">
+            <div
+              className="flex flex-col border justify-center items-center  mx-auto overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
+              key={items}
+            >
               <div className="overflow-hidden">
                 <img src={home1} alt="" className="w-[38rem] " />
               </div>

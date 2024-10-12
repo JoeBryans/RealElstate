@@ -31,16 +31,16 @@ const NavBar = () => {
           />
           <div className="flex items-center gap-4">
             <Link
-              to="/"
+              to="/buy"
               className="hidden sm:flex text-2xl text-white font-semibold "
             >
-              Home
+              Buy
             </Link>
             <Link
-              to="/about"
+              to="/rent"
               className="hidden sm:flex text-2xl text-white font-semibold "
             >
-              About
+              Rent
             </Link>
             <Link
               to="/property"
@@ -49,10 +49,16 @@ const NavBar = () => {
               Properties
             </Link>
             <Link
-              to="/property"
+              to="/agent"
               className="hidden sm:flex text-2xl text-white font-semibold "
             >
               Agent
+            </Link>
+            <Link
+              to="/blog"
+              className="hidden sm:flex text-2xl text-white font-semibold "
+            >
+              Blog
             </Link>
             {user ? (
               <Link to="/account" className="hidden sm:flex  ">

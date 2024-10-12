@@ -4,6 +4,7 @@ import * as MdIcons from "react-icons/md";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useGetPropertyQuery } from "../Api/Api";
+import Loading from "../components/Loading";
 const Properties = () => {
   const { data, error, isLoading } = useGetPropertyQuery();
   const [property, setProperty] = useState([]);
@@ -16,6 +17,8 @@ const Properties = () => {
       {" "}
       <div className="text-slate-800 text-center flex flex-col justify-center ml-9 md:ml-0 mb-16 mt-5">
         {/* <h1 className="mb-5">Feature home</h1> */}
+        {isLoading && <Loading />}
+
         <div className="flex flex-wrap gap-4 ">
           {property &&
             property.map((items, i) => {
