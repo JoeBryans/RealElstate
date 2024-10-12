@@ -9,6 +9,8 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import Profile from "./pages/Profile";
 import AddProperty from "./pages/AddProperty";
+import Property from "./pages/Property";
+import Properties from "./pages/Properties";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -24,6 +26,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/account" element={<Profile />} />
           <Route path="/add-property" element={<AddProperty />} />
+          <Route path="/property" element={<Properties />} />
+          <Route path="/property-details/:id" element={<Property />} />
         </Routes>
       </div>
     </>

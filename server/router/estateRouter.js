@@ -1,11 +1,18 @@
 import express from "express";
-import { Create } from "../controllers/estate";
+import {
+  Create,
+  DeleteItem,
+  GetItem,
+  GetItems,
+  UpdateItem,
+} from "../controllers/estate.js";
+import { Agent, Authenticate } from "../Auth/auth.js";
 
 const estateRouter = express.Router();
 
-estateRouter.post("/", Create);
-estateRouter.get("/estater");
-estateRouter.get("/estater/:id");
-estateRouter.put("/:id");
-estateRouter.delete("/:id");
+estateRouter.post("/", Authenticate, Agent, Create);
+estateRouter.get("/estate", GetItems);
+estateRouter.get("/estate/:id", GetItem);
+estateRouter.put("/:id", UpdateItem);
+estateRouter.delete("/:id", DeleteItem);
 export default estateRouter;

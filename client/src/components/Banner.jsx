@@ -4,7 +4,7 @@ import Find from "./Find";
 const Banner = () => {
   return (
     <div className="relative  ">
-      <img src={banner} alt={banner} className="h-[90vh] w-screen" />
+      <img src={banner} alt={banner} className="h-[100vh] w-screen" />
       <Find />
     </div>
   );

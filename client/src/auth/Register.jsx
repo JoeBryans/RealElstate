@@ -1,7 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useRegisterMutation } from "../Api/Api";
 
 const Register = () => {
+  const [formData, setFormData] = useState({});
+  const [AddformData] = useRegisterMutation();
+  const handInput = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.id]: e.target.value,
+    });
+  };
+  const handRegistration = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await AddformData(formData);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="max-w-2xl  mx-auto mt-44 text-slate-700 ">
       <form className="w-max bg-white  mx-auto p-4  rounded-md shadow-lg text-center">
@@ -12,6 +31,7 @@ const Register = () => {
             placeholder="username"
             id="username"
             type="text"
+            onChange={handInput}
             className="p-2 rounded-lg focus:outline-none font-medium w-72 border"
           />
         </label>
@@ -21,6 +41,7 @@ const Register = () => {
             placeholder="email"
             id="email"
             type="text"
+            onChange={handInput}
             className="p-2 rounded-lg focus:outline-none font-medium w-72 border"
           />
         </label>
@@ -28,8 +49,9 @@ const Register = () => {
           <span>Phone</span>
           <input
             placeholder="phone"
-            id="phone"
+            id="mobile"
             type="text"
+            onChange={handInput}
             className="p-2 rounded-lg focus:outline-none font-medium w-72 border"
           />
         </label>
@@ -40,12 +62,16 @@ const Register = () => {
             placeholder="password"
             id="password"
             type="password"
+            onChange={handInput}
             className="p-2 rounded-lg focus:outline-none font-medium w-72 border"
           />
         </label>
         <br />
 
-        <button className="w-full rounded p-2 bg-blue-800 hover:opacity-90 self-center text-white ">
+        <button
+          onClick={handRegistration}
+          className="w-full rounded p-2 bg-blue-800 hover:opacity-90 self-center text-white "
+        >
           Create
         </button>
         <p>

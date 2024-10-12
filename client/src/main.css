@@ -45,11 +45,11 @@
     cursor: pointer;
     transition: border-color 0.25s;
   }
- 
+/*  
   button:focus,
   button:focus-visible {
     color: #646cff;
     background: #fff;
-  }
+  } */
   
   

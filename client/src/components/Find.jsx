@@ -1,4 +1,4 @@
-import { Button, Container } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import React, { useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as MdIcons from "react-icons/md";
@@ -11,51 +11,48 @@ const Find = () => {
   // const[]=useState(true)
 
   const Search = () => {
-    navigate("/listen");
+    navigate("/listen", { state: { searchlocation, propertyType, bedroom } });
   };
   return (
-    <div className="absolute top-20">
+    <div className="">
       <Container>
-        <div className=" flex flex-col flex-wrap  ">
-          <div className=" bg-blue-800 px-5  rounded-md ">
-            <h2 className="mt-5 sm:text-2xl font-semibold">
-              Find a Perfect Dream House
-            </h2>
-            <span className="font-semibold text-xl sm:text-2xl">
-              We Have Over Million Properties For You
-            </span>
-            <p className="font-semibold text-sm sm:text-xl">
-              Browse The Top Morden Homes
-            </p>
-            <div className="flex mt-10 gap-10">
-              <Button
-                variant="primary text-light"
-                className="lg:w-64 md:w-44 sm:w-fit"
+        <div className="bg-red-800 absolute top-20  px-5  rounded-md text-slate-500">
+          <h2 className="mt-5 sm:text-2xl font-semibold">
+            Find a Perfect Dream House
+          </h2>
+          <span className="font-semibold text-xl sm:text-2xl">
+            We Have Over Million Properties For You
+          </span>
+          <p className="font-semibold text-sm sm:text-xl">
+            Browse The Top Morden Homes
+          </p>
+        </div>
+        <div className=" flex flex-col flex-wrap mb-5 ">
+          <div className="bg-white rounded p-1 mx-auto flex flex-wrap   items-center  gap-4">
+            <label className=" flex gap-2 items-center  rounded-lg border p-2 text-slate-500 text-xl">
+              <MdIcons.MdLocationPin size={20} color="green" />
+              <input
+                type="text"
+                placeholder="Location"
+                className="focus:outline-none"
+                value={searchlocation}
+                onChange={(e) => setSearchlocation(e.target.value)}
+              />
+            </label>
+            <div className="flex flex-wrap gap-3 ">
+              <select
+                onChange={(e) => setPropertyType(e.target.value)}
+                className="  rounded-lg border p-2 text-slate-500 text-xl"
               >
-                Buy
-              </Button>
-              <Button variant="secondary" className="lg:w-64 md:w-44 sm:w-fit">
-                Rent
-              </Button>
-            </div>
-          </div>
-          <div className=" sm:px-5 ">
-            <div className="bg-white rounded p-1  flex flex-wrap   items-center gap-4">
-              <label className="flex gap-2 items-center  rounded-lg border p-2 text-slate-500 text-xl">
-                <MdIcons.MdLocationCity color="gray" size={20} />
-                <input
-                  type="text"
-                  placeholder="Location"
-                  className="focus:outline-none"
-                />
-              </label>
-              <select className="  rounded-lg border p-2 text-slate-500 text-xl">
                 <option value="">Property Type</option>
                 <option value="Property Type">Property Type</option>
                 <option value="Property Type">Property Type</option>
                 <option value="Property Type">Property Type</option>
               </select>
-              <select className="  rounded-lg border p-2 text-slate-500 text-xl">
+              <select
+                className="  rounded-lg border p-2 text-slate-500 text-xl"
+                onChange={(e) => setBedroom(e.target.value)}
+              >
                 <option value="Bedroom">Bedroom</option>
                 <option value="2 Bedroom">2 Bedroom</option>
                 <option value="3 Bedroom">3 Bedroom</option>
@@ -68,7 +65,9 @@ const Find = () => {
                 >
                   Search
                 </button> */}
-              <Button onClick={Search}>Search</Button>
+              <Button onClick={Search} className="">
+                Search
+              </Button>
             </div>
           </div>
         </div>

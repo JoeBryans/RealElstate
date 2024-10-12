@@ -4,7 +4,7 @@ import * as FaIcons from "react-icons/fa";
 import userimg from "../assets/users.jpeg";
 
 const NavBar = () => {
-  const [openNav, setOpenNav] = useState(true);
+  const [openNav, setOpenNav] = useState(false);
   const Bar = () => {
     setOpenNav(!openNav);
     console.log(openNav);
@@ -48,6 +48,12 @@ const NavBar = () => {
             >
               Properties
             </Link>
+            <Link
+              to="/property"
+              className="hidden sm:flex text-2xl text-white font-semibold "
+            >
+              Agent
+            </Link>
             {user ? (
               <Link to="/account" className="hidden sm:flex  ">
                 <img
@@ -73,7 +79,7 @@ const NavBar = () => {
           <div
             className={
               openNav
-                ? " sm:hidden flex flex-col gap-3 absolute h-[93vh] bg-blue-800 w-44 top-12 right-0 p-4"
+                ? " sm:hidden flex flex-col gap-3 absolute h-[93vh] bg-blue-800 w-44 top-12 right-0 p-4 z-30"
                 : "hidden"
             }
           >
@@ -85,6 +91,9 @@ const NavBar = () => {
               className="  text-2xl text-white font-semibold "
             >
               Properties
+            </Link>
+            <Link to="/agent" className="  text-2xl text-white font-semibold ">
+              Agent
             </Link>
             {user ? (
               <Link
