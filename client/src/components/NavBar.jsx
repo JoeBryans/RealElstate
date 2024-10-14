@@ -14,7 +14,7 @@ const NavBar = () => {
   return (
     <>
       {" "}
-      <div className="bg-blue-800 relative text-white py-2">
+      <div className="bg-blue-800 relative text-white py-2 z-50">
         <div className="flex items-center justify-between  sm:justify-around px-5 sm:px-0">
           <div>
             <h1>

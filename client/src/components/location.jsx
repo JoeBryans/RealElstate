@@ -6,20 +6,16 @@ import { Link } from "react-router-dom";
 import { useGetPropertyQuery } from "../Api/Api";
 import Loading from "./Loading";
 import * as FaIcons from "react-icons/fa";
-const Feature = () => {
+const Location = () => {
   const { data, error, isLoading } = useGetPropertyQuery();
-  const [property, setProperty] = useState([]);
+  const property = data && data.filter((items) => items.address);
   console.log(property);
-  useEffect(() => {
-    setProperty(data);
-  }, [data]);
-
   return (
     <>
       {" "}
       {isLoading && <Loading />}
       <div className="text-slate-800  flex flex-col justify-center ml-9 md:ml-0 mb-16 ">
-        <h1 className="mb-5">Feature home</h1>
+        <h1 className="mb-5">Properties In Lagos</h1>
         <div className="flex flex-wrap gap-4 justify-start ">
           {property &&
             property.slice(0, 5).map((items, i) => {
@@ -37,7 +33,7 @@ const Feature = () => {
                       />
                     </Link>
                     <div className="absolute top-2 left-2 text-center">
-                      <span className="bg-yellow-500 text-white px-2 rounded ">
+                      <span className="bg-green-600 text-white px-2 rounded ">
                         Features
                       </span>
                     </div>
@@ -52,8 +48,8 @@ const Feature = () => {
                         </span>
                       )}
                     </div>
-                    <div className="absolute top-10 left-2">
-                      <span className="bg-green-600 text-white px-2 rounded ">
+                    <div className="absolute top-10 right-2">
+                      <span className="bg-yellow-500 text-white px-2 rounded ">
                         status
                       </span>
                     </div>
@@ -69,14 +65,9 @@ const Feature = () => {
                     </div>
                   </div>
                   <div className="flex flex-col items-start w-full gap-1 p-3">
-                    <Link
-                      to={`/property-details/${items._id}`}
-                      className="text-slate-700 hover:text-slate-500"
-                    >
-                      <span className="font-semibold text-xl mb-1  line-clamp-1">
-                        {items.name}
-                      </span>
-                    </Link>
+                    <span className="font-semibold text-xl mb-1  line-clamp-1">
+                      {items.name}
+                    </span>
                     <span className="text-sm flex gap-2 items-center">
                       <MdIcons.MdLocationOn color="green" />
                       {items.address}{" "}
@@ -84,16 +75,10 @@ const Feature = () => {
                     <span className="font-semibold text-md text-uppercase">
                       {items.propertyType}
                     </span>
-                    <div className="flex justify-between items-center w-full">
-                      <small className="flex items-center gap-2">
-                        <FaIcons.FaBed color="green" />
-                        {items.bedroom}
-                      </small>
-                      <small className="flex items-center gap-2">
-                        <FaIcons.FaBath color="green" />
-                        {items.bathroom}
-                      </small>
-                    </div>
+                    <small className="flex items-center gap-2">
+                      <FaIcons.FaBed color="green" />
+                      {items.bedroom}
+                    </small>
                   </div>
                 </div>
               );
@@ -104,4 +89,4 @@ const Feature = () => {
   );
 };
 
-export default Feature;
+export default Location;

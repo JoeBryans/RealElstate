@@ -4,6 +4,7 @@ import { useGetUsersQuery } from "../Api/Api";
 import { Container } from "react-bootstrap";
 import Feature from "../components/Feature";
 import Popular from "../components/Popular";
+import Location from "../components/location";
 
 const Home = () => {
   const { data, error, isLoading } = useGetUsersQuery();
@@ -14,6 +15,7 @@ const Home = () => {
       <Banner />
       <Container>
         <Feature />
+        <Location />
         <Popular />
       </Container>
     </div>

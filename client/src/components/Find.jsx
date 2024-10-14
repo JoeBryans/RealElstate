@@ -28,13 +28,20 @@ const Find = () => {
           </p>
         </div>
         <div className=" flex flex-col flex-wrap mb-5 ">
-          <div className="bg-white rounded p-1 mx-auto flex flex-wrap   items-center  gap-4">
-            <label className=" flex gap-2 items-center  rounded-lg border p-2 text-slate-500 text-xl">
+          <div className="bg-blue-800 rounded p-1 mx-auto flex flex-wrap   items-center  gap-2">
+            <input
+              type="text"
+              placeholder="keyword"
+              className="border p-2 rounded focus:outline-none"
+              value={searchlocation}
+              onChange={(e) => setSearchlocation(e.target.value)}
+            />
+            <label className=" flex gap-2 items-center  rounded-lg border p-2 text-slate-500 text-xl bg-white">
               <MdIcons.MdLocationPin size={20} color="green" />
               <input
                 type="text"
                 placeholder="Location"
-                className="focus:outline-none"
+                className="focus:outline-none bg-transparent"
                 value={searchlocation}
                 onChange={(e) => setSearchlocation(e.target.value)}
               />

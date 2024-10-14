@@ -8,19 +8,17 @@ import userimg from "../assets/users.jpeg";
 import { Button, Container } from "react-bootstrap";
 import * as MdIcons from "react-icons/md";
 import * as FaIcons from "react-icons/fa";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useGetPropertyIdQuery } from "../Api/Api";
 import Loading from "../components/Loading";
 
 const Property = () => {
   const param = useParams();
   const { data, isLoading } = useGetPropertyIdQuery(param.id);
-  console.log(isLoading);
   const property = data;
-
   const [index, setIndex] = useState(0);
   const [show, setShow] = useState(false);
-  console.log(index);
+  const [message, setMessage] = useState(property?.description);
   const handleClick = (i) => {
     setShow(true);
     setIndex(i);
@@ -38,7 +36,7 @@ const Property = () => {
       <div
         className={
           show
-            ? " mb-4 z-20 bg-black  -top-20 absolute w-full flex justify-center items-center h-[100vh] opacity-90"
+            ? " mb-4 z-10 bg-black  -top-2 mt-2 fixed w-full flex justify-center items-center h-[100vh] opacity-50"
             : "hidden"
         }
       >
@@ -158,42 +156,93 @@ const Property = () => {
             </div>
           </div>
           {/* Agent details */}
-          <div className="w-80 h-96 flex flex-col gap-2 shadow-md py-4 px-4 text-slate-700 mx-auto md:mt-20">
-            <img
-              src={userimg}
-              alt=""
-              className="w-24 h-24 rounded-full object-center self-center mb-3  "
-            />
-            <span className="font-semibold text-nowrap self-center">
-              {property?.userId?.username}
-            </span>
-            <span className="font-medium flex justify-between items-center  ">
-              <MdIcons.MdLocationOn size={20} /> city
-            </span>
-            <span className="font-medium flex justify-between items-center  ">
-              <MdIcons.MdPhone size={20} /> {property?.userId?.mobile}
-            </span>
-            <span className="font-medium flex justify-between items-center ">
-              <MdIcons.MdEmail size={20} /> {property?.userId?.email}
-            </span>
-            {/* <span className="font-medium flex justify-between items-center   ">
+          <div className="flex flex-col items-center mx-auto gap-6 ">
+            <div className=" w-full sm:w-80 h-96 flex flex-col gap-2 shadow-md py-4 px-4 text-slate-700 mx-auto md:mt-20">
+              <img
+                src={userimg}
+                alt=""
+                className="w-24 h-24 rounded-full object-center self-center mb-3  "
+              />
+              <span className="font-bold text-nowrap self-center">
+                {property?.userId?.username}
+              </span>
+              <span className="font-medium flex justify-between items-center  ">
+                <MdIcons.MdLocationOn size={20} /> city
+              </span>
+              <span className="font-medium flex justify-between items-center  ">
+                <MdIcons.MdPhone size={20} /> {property?.userId?.mobile}
+              </span>
+              <span className="font-medium flex justify-between items-center ">
+                <MdIcons.MdEmail size={20} /> {property?.userId?.email}
+              </span>
+              {/* <span className="font-medium flex justify-between items-center   ">
               Blair Owens
             </span> */}
-            <div className="flex items-center gap-2 mx-auto mt-2">
-              <div className="border p-2">
-                <FaIcons.FaTwitter size={30} />
+              <div className="flex items-center gap-2 mx-auto mt-2">
+                <div className="border p-2">
+                  <FaIcons.FaTwitter size={30} />
+                </div>
+                <div className="border p-2">
+                  {" "}
+                  <FaIcons.FaFacebook size={30} />
+                </div>
+                <div className="border p-2">
+                  {" "}
+                  <FaIcons.FaInstagram size={30} />
+                </div>
+                <div className="border p-2">
+                  {" "}
+                  <FaIcons.FaLinkedin size={30} />
+                </div>
               </div>
-              <div className="border p-2">
-                {" "}
-                <FaIcons.FaFacebook size={30} />
-              </div>
-              <div className="border p-2">
-                {" "}
-                <FaIcons.FaInstagram size={30} />
-              </div>
-              <div className="border p-2">
-                {" "}
-                <FaIcons.FaLinkedin size={30} />
+
+              <Link className="text-center mt-2 hover:text-blue-800">
+                <span className="flex gap-1">
+                  More properties from {`${property?.userId?.username}>>`}
+                </span>
+              </Link>
+            </div>
+            {/* Message Form */}
+            <div className="w-80 h-96 flex flex-col gap-2 shadow-md py-4 px-4 text-slate-700 mx-auto md:mt-20">
+              <input
+                type="text"
+                placeholder="Name "
+                className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border  "
+              />
+              <input
+                type="text"
+                placeholder="Phone "
+                className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border  "
+              />
+              <input
+                type="text"
+                placeholder="Email "
+                className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border  "
+              />
+              <textarea
+                name=""
+                id=""
+                cols="50"
+                rows="20"
+                placeholder="message"
+                value={message}
+                className=" rounded-lg focus:outline-none text-slate-700 font-medium border h-[100px] px-2 "
+                onChange={(e) => setMessage(e.target.value)}
+              ></textarea>
+
+              <div className="flex  gap-2 m mt-2">
+                <Button className="w-32 h-10">
+                  <span className="flex items-center gap-2">
+                    <FaIcons.FaMailBulk size={25} />
+                    Email
+                  </span>
+                </Button>
+                <Button variant="success" className="w-32 h-10">
+                  <span className="flex items-center gap-2">
+                    <FaIcons.FaWhatsapp size={25} />
+                    Whatsapp
+                  </span>
+                </Button>
               </div>
             </div>
           </div>

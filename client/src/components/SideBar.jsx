@@ -5,15 +5,9 @@ import * as FaIcons from "react-icons/fa";
 const SideBar = () => {
   const location = useLocation();
   const [open, setOpen] = useState(false);
-  const [openOptions, setOpenOptions] = useState(false);
-  const [destination, setDestination] = useState("");
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+  const [min, setMin] = useState(10);
+  const [max, setMax] = useState(99999);
+
   const [options, setOptions] = useState({
     Adult: 1,
     children: 3,
@@ -30,7 +24,7 @@ const SideBar = () => {
           placeholder="Search Home "
           className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border  "
         />
-        <div className="flex justify-between md:justify-stretch gap-3">
+        {/* <div className="flex justify-between md:justify-stretch gap-3">
           <input
             type="text"
             placeholder="max price "
@@ -41,7 +35,7 @@ const SideBar = () => {
             placeholder="min price"
             className="w-56 md:w-[150px] p-2 rounded-lg focus:outline-none text-slate-700 font-medium border  "
           />
-        </div>
+        </div> */}
         <select
           name=""
           id=""
@@ -83,6 +77,21 @@ const SideBar = () => {
             return <option value={item}>{item}</option>;
           })}
         </select>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="price">
+            Price:{min}-{max}
+          </label>
+          <input
+            type="range"
+            name=""
+            id="price"
+            min="10"
+            max="99999"
+            value={max}
+            className="focus:outline-0"
+            onChange={(e) => setMax(e.target.value)}
+          />
+        </div>
         <div className="flex flex-wrap gap-4 px-1 text-slate-700">
           {/* <input
             type="checked"

@@ -1,11 +1,12 @@
+import React from "react";
 import { Link } from "react-router-dom";
 import { useGetPropertyQuery } from "../Api/Api";
 import Loading from "../components/Loading";
 import * as MdIcons from "react-icons/md";
 
-const Buy = () => {
+const Rent = () => {
   const { data, isLoading, error } = useGetPropertyQuery();
-  const Buy = data && data.filter((items) => items.type === "sale");
+  const Buy = data && data.filter((items) => items.type === "rent");
   console.log(Buy);
   return (
     <>
@@ -60,4 +61,4 @@ const Buy = () => {
   );
 };
 
-export default Buy;
+export default Rent;
