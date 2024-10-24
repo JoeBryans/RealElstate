@@ -13,6 +13,7 @@ import Property from "./pages/Property";
 import Properties from "./pages/Properties";
 import Buy from "./pages/Buy";
 import Rent from "./pages/Rent";
+import Saved from "./pages/Saved";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -32,6 +33,7 @@ function App() {
           <Route path="/buy" element={<Buy />} />
           <Route path="/rent" element={<Rent />} />
           <Route path="/property-details/:id" element={<Property />} />
+          <Route path="/save" element={<Saved />} />
         </Routes>
       </div>
     </>
