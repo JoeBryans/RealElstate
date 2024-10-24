@@ -15,7 +15,7 @@ const NavBar = () => {
     <>
       {" "}
       <div className="bg-blue-800 relative text-white py-2 z-50">
-        <div className="flex items-center justify-between  sm:justify-around px-5 sm:px-0">
+        <div className="flex items-center justify-between  px-5 sm:px-0">
           <div>
             <h1>
               <Link to="/" className="">
@@ -24,11 +24,7 @@ const NavBar = () => {
               </Link>
             </h1>
           </div>
-          <FaIcons.FaSearch
-            size={30}
-            className="self-center"
-            onClick={Search}
-          />
+
           <div className="flex items-center gap-4">
             <Link
               to="/buy"
