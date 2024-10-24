@@ -27,6 +27,23 @@ export const Api = createApi({
     getPropertyId: builder.query({
       query: (id) => `/property/estate/${id}`,
     }),
+    SearchProperty: builder.query({
+      query: (value) => `/property/?${value}`,
+    }),
+    // SearchProperty: builder.query({
+    //   query: (
+    //     search,
+    //     address,
+    //     bedroom,
+    //     bathroom,
+    //     price,
+    //     propertyType,
+    //     offer,
+    //     furnished,
+    //     type,
+    //     packing
+    //   ) => `/property/?${value}`,
+    // }),
   }),
 });
 //http://localhost:5500/property/estate
@@ -39,4 +56,5 @@ export const {
   useLoginMutation,
   useGetUsersQuery,
   useGetPropertyIdQuery,
+  useSearchPropertyQuery,
 } = Api;

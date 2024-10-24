@@ -234,7 +234,11 @@ const Property = () => {
                 <Button className="w-32 h-10">
                   <span className="flex items-center gap-2">
                     <FaIcons.FaMailBulk size={25} />
-                    Email
+                    <Link
+                      to={`mailto:${property?.userId?.email}?subject=Regarding to ${property?.name}&body=${message}`}
+                    >
+                      Equire
+                    </Link>
                   </span>
                 </Button>
                 <Button variant="success" className="w-32 h-10">

@@ -28,23 +28,29 @@ var estateSchema = new mongoose.Schema(
     },
     price: {
       type: Number,
-      default: "0.00",
+      default: 0.0,
     },
     discountPrice: {
       type: Number,
-      default: "0.00",
+      default: 0.0,
     },
     bathroom: {
       type: Number,
+      default: 0,
     },
     bedroom: {
       type: Number,
+      default: 0,
     },
     furnished: {
       type: Boolean,
       default: false,
     },
     packing: {
+      type: Boolean,
+      default: false,
+    },
+    pool: {
       type: Boolean,
       default: false,
     },
@@ -56,7 +62,9 @@ var estateSchema = new mongoose.Schema(
       type: [String],
     },
 
-    feature: String,
+    propertyStatus: { type: String, default: "available" },
+    withFeature: { type: Boolean, default: false },
+    feature: [String],
   },
   { timestamps: true }
 );
