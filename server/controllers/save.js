@@ -2,10 +2,7 @@ import saveModel from "./../models/saveModle.js";
 export const Create = async (req, res, next) => {
   const user = req.user;
   try {
-    const property = await saveModel.create({
-      ...req.body,
-      userId: req.user.id,
-    });
+    const property = await saveModel.create();
     res.json(property);
   } catch (error) {
     console.log(error);
