@@ -2,6 +2,7 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import bcrypt from "bcrypt";
 import UserModel from "../models/userModle.js";
+import savedModel from "../models/saveModle.js";
 // import { CreateError } from "../utils/errorCreater.js";
 dotenv.config();
 
@@ -75,7 +76,7 @@ export const Users = async (req, res, nex) => {
 };
 
 export const UserID = async (req, res, next) => {
-  const { id } = req.params;
+  const id = req.user.id;
   try {
     const user = await UserModel.findById(id);
     if (!user) {
@@ -89,7 +90,7 @@ export const UserID = async (req, res, next) => {
 };
 
 export const Update = async (req, res, nex) => {
-  const { id } = req.params;
+  const id = req.user.id;
   try {
     const user = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
     await user.save();
@@ -98,11 +99,27 @@ export const Update = async (req, res, nex) => {
 };
 
 export const Deletes = async (req, res, nex) => {
-  const { id } = req.params;
+  const id = req.user.id;
   try {
     const user = await UserModel.findByIdAndDelete(id);
     res.json({ message: "user delete successful", id: user._id });
   } catch (error) {}
+};
+
+export const GetItem = async (req, res, next) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+  try {
+    const user = await UserModel.findById(userId);
+    if (user) {
+      return res.json("No saved Item with this user");
+    } else {
+      const item = await savedModel.find();
+      res.json(item);
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 export const Profile = async (req, res, nex) => {

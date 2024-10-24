@@ -25,7 +25,8 @@ const userSchema = new mongoose.Schema(
       type: String,
       defualt: "user",
     },
-    Links: [{ type: mongoose.Schema.Types.ObjectId, ref: "medial" }],
+    links: [{ type: mongoose.Schema.Types.ObjectId, ref: "medial" }],
+    saved: [{ type: mongoose.Schema.Types.ObjectId, ref: "save" }],
   },
   { timestamps: true }
 );

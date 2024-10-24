@@ -4,15 +4,15 @@ import {
   DeleteItem,
   GetItem,
   GetItems,
-  UpdateItem,
-} from "../controllers/blog.js";
+  //   UpdateItem,
+} from "../controllers/save.js";
 import { Agent, Authenticate } from "../Auth/auth.js";
 
 const saveRouter = express.Router();
 
 saveRouter.post("/", Authenticate, Create);
-saveRouter.get("/", GetItems);
-saveRouter.get("/:id", GetItem);
-// saveRouter.put("/:id", Agent, UpdateItem);
-saveRouter.delete("/:id", DeleteItem);
+saveRouter.get("/", Agent, GetItems);
+saveRouter.get("/:id", Authenticate, GetItem);
+// // saveRouter.put("/:id", Agent, UpdateItem);
+saveRouter.delete("/:id", Authenticate, DeleteItem);
 export default saveRouter;
