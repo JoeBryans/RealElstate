@@ -108,13 +108,13 @@ export const Deletes = async (req, res, nex) => {
 
 export const GetItem = async (req, res, next) => {
   const { id } = req.params;
-  const userId = req.user.id;
+  // const userId = req.user.id;
   try {
-    const user = await UserModel.findById(userId);
-    if (user) {
+    const user = await UserModel.findById(id);
+    if (!user) {
       return res.json("No saved Item with this user");
     } else {
-      const item = await savedModel.find();
+      const item = await savedModel.find().populate("estateId");
       res.json(item);
     }
   } catch (error) {
