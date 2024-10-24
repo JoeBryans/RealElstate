@@ -6,6 +6,7 @@ import userRouter from "./router/userRouter.js";
 import DataBase from "./config/db.js";
 import estateRouter from "./router/estateRouter.js";
 import blogRouter from "./router/blogRouter.js";
+import saveRouter from "./router/saveRouter.js";
 // import cookieParser from "cookie-parser";
 dotenv.config();
 const port = process.env.PORT || 8000;
@@ -17,6 +18,7 @@ app.use(cookieParser());
 app.use(express.json());
 app.use("/property", estateRouter);
 app.use("/blog", blogRouter);
+app.use("/save", saveRouter);
 
 app.use("/auth", userRouter);
 app.listen(port, () =>
