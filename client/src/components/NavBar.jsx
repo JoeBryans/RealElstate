@@ -56,6 +56,7 @@ const NavBar = () => {
             >
               Blog
             </Link>
+
             {user ? (
               <Link to="/account" className="hidden sm:flex  ">
                 <img

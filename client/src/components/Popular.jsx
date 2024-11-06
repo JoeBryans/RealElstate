@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 const Popular = () => {
   return (
     <div className="text-slate-800 text-center flex flex-col justify-center ml-9 md:ml-0">
-      <h1 className="mb-5">NeighbourHood Homes</h1>
+      <h1 className="mb-5">Neighbourhood Properties</h1>
       <div className="flex flex-wrap gap-4">
         {[0, 1, 2, 3].map((items) => {
           return (

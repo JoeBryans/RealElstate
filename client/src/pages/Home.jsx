@@ -5,6 +5,7 @@ import { Container } from "react-bootstrap";
 import Feature from "../components/Feature";
 import Popular from "../components/Popular";
 import Location from "../components/location";
+import Luxury from "../components/Luxury";
 
 const Home = () => {
   const { data, error, isLoading } = useGetUsersQuery();
@@ -15,6 +16,7 @@ const Home = () => {
       <Banner />
       <Container>
         <Feature />
+        <Luxury />
         <Location />
         <Popular />
       </Container>

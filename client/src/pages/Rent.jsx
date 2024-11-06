@@ -41,13 +41,13 @@ const Rent = () => {
         <div className="w-full  md:mt-5  ">
           <div className="relative text-slate-700 ">
             {isLoading && <Loading />}
-            <div className="flex flex-wrap gap-4 mx-auto ">
+            <div className="flex flex-wrap gap-4  ">
               {Buy &&
                 Buy.map((items, i) => {
                   return (
                     <div
                       key={i}
-                      className="w-44 md:w-60  flex flex-col border  items-start md:items-center  mx-auto md:mx-1 overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
+                      className="w-44 md:w-60 mx-2 flex flex-col border  items-start md:items-center    overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
                     >
                       <div className="relative overflow-hidden">
                         <Link to={`/property-details/${items._id}`}>

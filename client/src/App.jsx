@@ -14,6 +14,7 @@ import Properties from "./pages/Properties";
 import Buy from "./pages/Buy";
 import Rent from "./pages/Rent";
 import Saved from "./pages/Saved";
+import Footer from "./components/Footer";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -35,6 +36,7 @@ function App() {
           <Route path="/property-details/:id" element={<Property />} />
           <Route path="/save" element={<Saved />} />
         </Routes>
+        <Footer />
       </div>
     </>
   );
