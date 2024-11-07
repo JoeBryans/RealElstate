@@ -54,6 +54,9 @@
  .bg-trans{
   background:rgb(67, 67, 66)
  }
+ input,textarea,select,:checked{
+  background: #fff;
+ }
   /* .k{
     animation-name: k;
     

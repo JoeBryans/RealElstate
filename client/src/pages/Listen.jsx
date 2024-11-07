@@ -8,9 +8,20 @@ import SideBar from "./../components/SideBar";
 import user from "../assets/user.jpg";
 const Listen = () => {
   const [show, setShow] = useState(false);
-  const [data, setData] = useState();
-  console.log(data);
-
+  const [data, setData] = useState([]);
+  const [searchForm, setSearchForm] = useState({
+    search: "",
+    address: "",
+    bedroom: 0,
+    bathroom: 0,
+    min: 0,
+    max: 0,
+    propertyType: "",
+    offer: false,
+    furnished: false,
+    type: "all",
+    packing: false,
+  });
   const [index, setIndex] = useState(0);
   const handleClick = (i) => {
     setIndex(i);
@@ -18,50 +29,64 @@ const Listen = () => {
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
     const searchUrl = urlParams.get("search");
+
     const addressUrl = urlParams.get("address");
     const propertyTypeUrl = urlParams.get("property");
     const bedroomUrl = urlParams.get("bedroom");
     const bathroomUrl = urlParams.get("bathroom");
     const minUrl = urlParams.get("min");
     const maxUrl = urlParams.get("max");
-    const parkingUrl = urlParams.get("parking");
+    const packingUrl = urlParams.get("parking");
     const furnishedUrl = urlParams.get("furnished");
     const typeUrl = urlParams.get("type");
     const offerUrl = urlParams.get("offer");
-    // if (
-    //   searchUrl ||
-    //   addressUrl ||
-    //   propertyTypeUrl ||
-    //   bedroomUrl ||
-    //   bathroomUrl ||
-    //   minUrl ||
-    //   maxUrl ||
-    //   parkingUrl ||
-    //   furnishedUrl ||
-    //   typeUrl ||
-    //   offerUrl
-    // ) {
-    // }
-    // const fechData = async () => {
-    //   const searchQuery = urlParams.toString();
-    //   const res = await fetch(`http://localhost:5500/property/?${searchQuery}`);
-    //   const datas = await res.json();
-    //   console.log(datas);
-    //   setData(datas);
-    // };
-    // fechData();
-  }, [data]);
+    if (
+      searchUrl ||
+      addressUrl ||
+      propertyTypeUrl ||
+      bedroomUrl ||
+      bathroomUrl ||
+      minUrl ||
+      maxUrl ||
+      packingUrl ||
+      furnishedUrl ||
+      typeUrl ||
+      offerUrl
+    ) {
+      setSearchForm({
+        search: searchUrl || "",
+        address: addressUrl || "",
+        bedroom: bedroomUrl || 0,
+        bathroom: bathroomUrl || 0,
+        min: minUrl || 0,
+        max: maxUrl || 0,
+        propertyType: propertyTypeUrl || "",
+        packing: packingUrl || false,
+        furnished: furnishedUrl || false,
+        type: typeUrl || "all",
+        offer: offerUrl || false,
+      });
+    }
+    const fechData = async () => {
+      const searchQuery = urlParams.toString();
+      const res = await fetch(`http://localhost:5500/property/?${searchQuery}`);
+      const datas = await res.json();
+      console.log(datas);
+      setData(datas);
+    };
+    fechData();
+  }, [location]);
   const HandleButton = () => {
     setShow(true);
   };
   return (
-    <div className="w-full flex flex-col md:flex-row gap-3  text-slate-700 px-4 sm:px-5 ">
+    <div className="w-full flex flex-col lg:flex-row gap-3  text-slate-700 px-4 sm:px-5 ">
       <div className="hidden lg:inline">
-        <SideBar />
+        <SideBar searchForm={searchForm} setSearchForm={setSearchForm} />
       </div>
       <div className=" lg:hidden md:mx-16 -mx-10">
         <div className={show ? "inline " : "hidden"}>
-          <SideBar />
+          <SideBar searchForm={searchForm} setSearchForm={setSearchForm} />
         </div>
         <div className="md:mx-10 ">
           <button
@@ -83,7 +108,8 @@ const Listen = () => {
               return (
                 <div
                   key={i}
-                  className="w-44 md:w-60  flex flex-col border  items-start md:items-center  mx-auto md:mx-1 overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
+                  // className="w-44 md:w-60  flex flex-col border  items-start md:items-center  mx-auto md:mx-1 overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
+                  className="w-48 md:w-60  flex flex-col border  items-start md:items-center   overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
                 >
                   <div className="relative overflow-hidden">
                     <Link to={`/property-details/${items._id}`}>
@@ -153,8 +179,8 @@ const Listen = () => {
                         alt=""
                         className="w-10 h-10 rounded-full object-cover"
                       />
-                      <div className="w-52 flex justify-between">
-                        <span>{items.userId.username}</span>
+                      <div className="w-40 sm:w-52 flex justify-between">
+                        <span>{items.userId.username || "JoeBryan"}</span>
                         <span>10/09/2023</span>
                         {/* <span>{items.userId.username}</span> */}
                       </div>

@@ -5,6 +5,7 @@ import * as FaIcons from "react-icons/fa";
 import { Button } from "react-bootstrap";
 const SideBar = () => {
   const navigate = useNavigate();
+  // { searchForm, setSearchForm }
   const [max, setMax] = useState();
   const [min, setMin] = useState(10);
   const [searchForm, setSearchForm] = useState({
@@ -18,7 +19,7 @@ const SideBar = () => {
     offer: false,
     furnished: false,
     type: "all",
-    parking: false,
+    packing: false,
   });
   const HandleInput = (e) => {
     if (
@@ -33,7 +34,7 @@ const SideBar = () => {
     }
     if (
       e.target.id === "furnished" ||
-      e.target.id === "parking" ||
+      e.target.id === "packing" ||
       e.target.id === "offer"
     ) {
       setSearchForm({
@@ -61,10 +62,10 @@ const SideBar = () => {
       });
     }
   };
-  console.log(searchForm);
+  // console.log(searchForm);
   const handleFiter = (e) => {
     e.preventDefault();
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams();
     urlParams.set("search", searchForm.search);
     urlParams.set("address", searchForm.address);
     urlParams.set("property", searchForm.propertyType);
@@ -72,51 +73,15 @@ const SideBar = () => {
     urlParams.set("bathroom", searchForm.bathroom);
     urlParams.set("min", searchForm.min);
     urlParams.set("max", searchForm.max);
-    urlParams.set("parking", searchForm.parking);
+    urlParams.set("packing", searchForm.packing);
     urlParams.set("furnished", searchForm.furnished);
     urlParams.set("type", searchForm.type);
     urlParams.set("offer", searchForm.offer);
-    // urlParams.set("offer", searchForm.offer);
+    // urlParams.set("offer", searchForm.offer);;
     const searchQuery = urlParams.toString();
     navigate(`/listen?${searchQuery}`);
   };
-  // useEffect(() => {
-  //   const urlParams = new URLSearchParams(location.search);
-  //   const searchUrl = urlParams.get("search");
-  //   const addressUrl = urlParams.get("address");
-  //   const propertyTypeUrl = urlParams.get("property");
-  //   const bedroomUrl = urlParams.get("bedroom");
-  //   const bathroomUrl = urlParams.get("bathroom");
-  //   const minUrl = urlParams.get("min");
-  //   const maxUrl = urlParams.get("max");
-  //   const parkingUrl = urlParams.get("parking");
-  //   const furnishedUrl = urlParams.get("furnished");
-  //   const typeUrl = urlParams.get("type");
-  //   const offerUrl = urlParams.get("offer");
-  //   // if (
-  //   searchUrl ||
-  //   addressUrl ||
-  //   propertyTypeUrl ||
-  //   bedroomUrl ||
-  //   bathroomUrl ||
-  //   minUrl ||
-  //   maxUrl ||
-  //   parkingUrl ||
-  //   furnishedUrl ||
-  //   typeUrl ||
-  //   offerUrl
-  // ) {
-  // }
-  //   const fechData = async () => {
-  //     const searchQuery = urlParams.toString();
-  //     const res = await fetch(`http://localhost:5500/property/?${searchQuery}`);
-  //     const datas = await res.json();
-  //     console.log(datas);
-  //     setData(datas);
-  //   };
-  //   fechData();
-  // }, [location.search]);
-  useEffect(() => {}, []);
+
   return (
     <div className="w-full md:w-96 md:px-4  px-3 mt-10 sticky top-10  ">
       <div className="flex flex-col gap-4 p-3   shadow-md">
@@ -159,7 +124,6 @@ const SideBar = () => {
           />
         </div>
         <select
-          name=""
           id="propertyType"
           className="p-2 rounded-lg text-slate-700 font-medium focus:outline-none capitalize border "
           onChange={HandleInput}
@@ -170,7 +134,6 @@ const SideBar = () => {
           <option value="Property Type">Property Type</option>
         </select>
         <select
-          name=""
           id="bedroom"
           onChange={HandleInput}
           className="p-2 rounded-lg text-slate-700 font-medium focus:outline-none capitalize border "
@@ -180,7 +143,6 @@ const SideBar = () => {
           <option value={4}>{4}</option>;<option value={5}>{5}</option>;
         </select>
         <select
-          name=""
           id="bathroom"
           onChange={HandleInput}
           className="p-2 rounded-lg text-slate-700 font-medium focus:outline-none capitalize border "
@@ -195,7 +157,7 @@ const SideBar = () => {
           </label>
           <input
             type="range"
-            name=""
+            
             id="price"
             min="10"
             max="99999"
@@ -212,7 +174,7 @@ const SideBar = () => {
           {/* <div className="flex gap-2 items-center ">
             <input
               type="checkbox"
-              name=""
+              
               id="rent"
               className="w-5 h-5"
               checked={searchForm.type === "all"}
@@ -223,7 +185,16 @@ const SideBar = () => {
           <div className="flex gap-2 items-center ">
             <input
               type="checkbox"
-              name=""
+              id="all"
+              className="w-5 h-5"
+              checked={searchForm.type === "all"}
+              onChange={HandleInput}
+            />
+            <span className="font-semibold ">All</span>
+          </div>
+          <div className="flex gap-2 items-center ">
+            <input
+              type="checkbox"
               id="rent"
               className="w-5 h-5"
               checked={searchForm.type === "rent"}
@@ -234,7 +205,6 @@ const SideBar = () => {
           <div className="flex gap-2 items-center ">
             <input
               type="checkbox"
-              name=""
               id="sale"
               className="w-5 h-5"
               checked={searchForm.type === "sale"}
@@ -245,7 +215,6 @@ const SideBar = () => {
           <div className="flex gap-2 items-center ">
             <input
               type="checkbox"
-              name=""
               id="furnished"
               className="w-5 h-5"
               checked={searchForm.furnished}
@@ -256,7 +225,6 @@ const SideBar = () => {
           <div className="flex gap-2 items-center ">
             <input
               type="checkbox"
-              name=""
               id="offer"
               className="w-5 h-5"
               checked={searchForm.offer}
@@ -267,18 +235,16 @@ const SideBar = () => {
           <div className="flex gap-2 items-center ">
             <input
               type="checkbox"
-              name=""
-              id="parking"
+              id="packing"
               className="w-5 h-5"
-              checked={searchForm.parking}
+              checked={searchForm.packing}
               onChange={HandleInput}
             />
-            <span className="font-semibold ">Parking</span>
+            <span className="font-semibold ">parking</span>
           </div>
           <div className="flex gap-2 items-center ">
             <input
               type="checkbox"
-              name=""
               id="pool"
               className="w-5 h-5"
               // checked={searchForm.pool}

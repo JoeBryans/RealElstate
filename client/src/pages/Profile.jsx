@@ -7,7 +7,7 @@ const Profile = () => {
   const navigate = useNavigate();
   return (
     <div className="flex flex-wrap">
-      <SideBar />
+      {/* <SideBar /> */}
       <div className="max-w-2xl  mx-auto mt-44 text-slate-700 ">
         <input type="file" id={ref} className="hidden" />
         <img

@@ -1,5 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import SimpleMDE from "react-simplemde-editor";
 
 const AddProperty = () => {
   return (
@@ -61,14 +62,14 @@ discountPrice */}
             <option value={4}>{4}</option>;<option value={5}>{5}</option>;
           </select>
 
-          <textarea
+          <SimpleMDE
             name=""
             id=""
-            cols="30"
-            rows="10"
+            // cols="30"
+            // rows="10"
             placeholder="descriptions"
             className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
-          ></textarea>
+          />
 
           <div className="flex w-full gap-2 items-center">
             <label htmlFor=""></label>
