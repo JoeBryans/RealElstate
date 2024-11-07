@@ -30,26 +30,17 @@ export const Api = createApi({
     SearchProperty: builder.query({
       query: (value) => `/property/?${value}`,
     }),
-    // SearchProperty: builder.query({
-    //   query: (
-    //     search,
-    //     address,
-    //     bedroom,
-    //     bathroom,
-    //     price,
-    //     propertyType,
-    //     offer,
-    //     furnished,
-    //     type,
-    //     packing
-    //   ) => `/property/?${value}`,
-    // }),
+    CreateListen: builder.mutation({
+      query: (formData) => ({
+        url: "/property/",
+        method: "POST",
+        body: formData,
+      }),
+    }),
   }),
 });
 //http://localhost:5500/property/estate
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
 export const {
   useGetPropertyQuery,
   useRegisterMutation,
@@ -57,4 +48,5 @@ export const {
   useGetUsersQuery,
   useGetPropertyIdQuery,
   useSearchPropertyQuery,
+  useCreateListenMutation,
 } = Api;

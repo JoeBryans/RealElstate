@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 import "./App.css";
-import "easymde/dist/easymde.min.css";
+// import "easymde/dist/easymde.min.css";
 
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";

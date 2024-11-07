@@ -1,21 +1,103 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import SimpleMDE from "react-simplemde-editor";
+import { useCreateListenMutation } from "../Api/Api";
 
 const AddProperty = () => {
+  const [AddformData, isLoading] = useCreateListenMutation();
+
+  const [data, setData] = useState({
+    name: "",
+    description: "",
+    address: "",
+    type: "",
+    propertyType: "",
+    squareFeet: "",
+    price: 0,
+    discountPrice: 0,
+    bathroom: 0,
+    bedroom: 0,
+    furnished: false,
+    packing: false,
+    pool: false,
+    offer: false,
+    image: [],
+    withFeature: false,
+    feature: [],
+  });
+  console.log(data);
+
+  const HandleChange = (e) => {
+    if (e.target.id === "rent" || e.target.id === "sale") {
+      setData({
+        ...data,
+        type: e.target.id,
+      });
+    }
+    if (
+      e.target.id === "furnished" ||
+      e.target.id === "packing" ||
+      e.target.id === "offer" ||
+      e.target.id === "pool" ||
+      e.target.id === "withFeature"
+    ) {
+      setData({
+        ...data,
+        [e.target.id]: e.target.checked,
+      });
+    }
+    if (
+      e.target.id === "search" ||
+      e.target.id === "address" ||
+      e.target.id === "price" ||
+      e.target.id === "description"
+    ) {
+      setData({
+        ...data,
+        [e.target.id]: e.target.value,
+      });
+    }
+    // if (e.target.id === "min" || e.target.id === "max") {
+    //   setData({
+    //     ...data,
+    //     [e.target.id]: e.target.value,
+    //   });
+    // }
+    if (
+      e.target.id === "bedroom" ||
+      e.target.id === "bathroom" ||
+      e.target.id === "propertyType"
+    ) {
+      setData({
+        ...data,
+        [e.target.id]: e.target.value,
+      });
+    }
+  };
+  const handleCreate = async (e) => {
+    e.preventdefault();
+    try {
+      isLoading(true);
+      const res = await AddformData(formData);
+      console.log(res.data);
+      isLoading(false);
+    } catch (error) {
+      console.log(error);
+      isLoading(false);
+    }
+  };
   return (
     <div className="text-slate-700 flex mt-10  ">
       <div className="w-4/5   mx-auto">
         <form
-          action=""
+          onSubmit={handleCreate}
           className="flex flex-col gap-3 mx-auto w-max md:w-[40rem] shadow-md p-4"
         >
           <input
             type="text"
             placeholder="Name "
             id="name"
-            // value={searchForm.search}
-            // onChange={HandleInput}
+            onChange={HandleChange}
             className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
           />
           {/* address
@@ -25,8 +107,7 @@ discountPrice */}
             type="number"
             placeholder="Price "
             id="price"
-            // value={searchForm.search}
-            // onChange={HandleInput}
+            onChange={HandleChange}
             className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
           />
 
@@ -34,7 +115,7 @@ discountPrice */}
             name=""
             id="propertyType"
             className="p-2 rounded-lg text-slate-700 font-medium focus:outline-none capitalize border "
-            // onChange={HandleInput}
+            onChange={HandleChange}
           >
             <option value="">Property Type</option>
             <option value="Apartment">Apartment</option>
@@ -44,7 +125,7 @@ discountPrice */}
           <select
             name=""
             id="bedroom"
-            // onChange={HandleInput}
+            onChange={HandleChange}
             className="p-2 rounded-lg text-slate-700 font-medium focus:outline-none capitalize border "
           >
             <option value={0}>Bedroom</option>;<option value={1}>{1}</option>;
@@ -54,7 +135,7 @@ discountPrice */}
           <select
             name=""
             id="bathroom"
-            // onChange={HandleInput}
+            onChange={HandleChange}
             className="p-2 rounded-lg text-slate-700 font-medium focus:outline-none capitalize border "
           >
             <option value={0}> Bathroom</option>;<option value={1}>{1}</option>;
@@ -62,27 +143,38 @@ discountPrice */}
             <option value={4}>{4}</option>;<option value={5}>{5}</option>;
           </select>
 
-          <SimpleMDE
+          <textarea
             name=""
-            id=""
-            // cols="30"
-            // rows="10"
+            id="description"
+            cols="30"
+            rows="10"
+            onChange={HandleChange}
             placeholder="descriptions"
             className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
           />
+          {/* <SimpleMDE
+            name=""
+            id="description"
+            // cols="30"
+            // rows="10"C
+            onChange={HandleChange}
+            placeholder="descriptions"
+            className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
+          /> */}
 
-          <div className="flex w-full gap-2 items-center">
+          {/* <div className="flex w-full gap-2 items-center">
             <label htmlFor=""></label>
             <input
               type="file"
               id="file"
               multiple={true}
               // value={searchForm.search}
-              // onChange={HandleInput}
+              onChange={HandleChange}
               className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
             />
             <Button>Upload</Button>
-          </div>
+          </div> */}
+
           <div className="flex flex-wrap">
             <div className="flex gap-2 items-center ">
               <input
@@ -90,8 +182,8 @@ discountPrice */}
                 name=""
                 id="rent"
                 className="w-5 h-5"
-                // checked={searchForm.type === "rent"}
-                // onChange={HandleInput}
+                checked={data.type === "rent"}
+                onChange={HandleChange}
               />
               <span className="font-semibold ">Rent</span>
             </div>
@@ -101,8 +193,8 @@ discountPrice */}
                 name=""
                 id="sale"
                 className="w-5 h-5"
-                // checked={searchForm.type === "sale"}
-                // onChange={HandleInput}
+                checked={data.type === "sale"}
+                onChange={HandleChange}
               />
               <span className="font-semibold ">Sale</span>
             </div>
@@ -112,8 +204,8 @@ discountPrice */}
                 name=""
                 id="furnished"
                 className="w-5 h-5"
-                // checked={searchForm.furnished}
-                // onChange={HandleInput}
+                checked={data.furnished}
+                onChange={HandleChange}
               />
               <span className="font-semibold ">Furnished</span>
             </div>
@@ -123,8 +215,8 @@ discountPrice */}
                 name=""
                 id="offer"
                 className="w-5 h-5"
-                // checked={searchForm.offer}
-                // onChange={HandleInput}
+                checked={data.offer}
+                onChange={HandleChange}
               />
               <span className="font-semibold ">Offer</span>
             </div>
@@ -132,10 +224,10 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
-                id="parking"
+                id="packing"
                 className="w-5 h-5"
-                // checked={searchForm.parking}
-                // onChange={HandleInput}
+                checked={data.packing}
+                onChange={HandleChange}
               />
               <span className="font-semibold ">Parking</span>
             </div>
@@ -145,8 +237,8 @@ discountPrice */}
                 name=""
                 id="pool"
                 className="w-5 h-5"
-                // checked={searchForm.pool}
-                // onChange={HandleInput}
+                checked={data.pool}
+                onChange={HandleChange}
               />
               <span className="font-semibold ">Pool</span>
             </div>

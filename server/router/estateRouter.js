@@ -10,8 +10,8 @@ import {
 import { Agent, Authenticate } from "../Auth/auth.js";
 
 const estateRouter = express.Router();
-
-estateRouter.post("/", Authenticate, Agent, Create);
+// Agent,
+estateRouter.post("/", Authenticate, Create);
 estateRouter.get("/estate", GetItems);
 estateRouter.get("/estate/:id", GetItem);
 estateRouter.get("/", Search);
