@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 var estateSchema = new mongoose.Schema(
   {
-    userId: { type: {}, required: true },
+    userId: { type: mongoose.Schema.Types.ObjectId, ref: "user" },
     name: {
       type: String,
       required: true,

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import SimpleMDE from "react-simplemde-editor";
 import { useCreateListenMutation } from "../Api/Api";
+import axios from "axios";
 
 const AddProperty = () => {
   const [AddformData, isLoading] = useCreateListenMutation();
@@ -47,7 +48,7 @@ const AddProperty = () => {
       });
     }
     if (
-      e.target.id === "search" ||
+      e.target.id === "name" ||
       e.target.id === "address" ||
       e.target.id === "price" ||
       e.target.id === "description"
@@ -75,28 +76,33 @@ const AddProperty = () => {
     }
   };
   const handleCreate = async (e) => {
-    e.preventdefault();
+    e.preventDefault();
     try {
-      isLoading(true);
-      const res = await AddformData(formData);
+      // isLoading(true);
+      const res = await AddformData(data);
+      // const res = await axios.post("http://localhost:5500/property/", data);
       console.log(res.data);
-      isLoading(false);
+      // isLoading(false);
     } catch (error) {
       console.log(error);
-      isLoading(false);
+      // isLoading(false);
     }
   };
   return (
     <div className="text-slate-700 flex mt-10  ">
       <div className="w-4/5   mx-auto">
-        <form
-          onSubmit={handleCreate}
-          className="flex flex-col gap-3 mx-auto w-max md:w-[40rem] shadow-md p-4"
-        >
+        <form className="flex flex-col gap-3 mx-auto w-max md:w-[40rem] shadow-md p-4">
           <input
             type="text"
             placeholder="Name "
             id="name"
+            onChange={HandleChange}
+            className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
+          />
+          <input
+            type="text"
+            placeholder="Address "
+            id="address"
             onChange={HandleChange}
             className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
           />
@@ -244,7 +250,7 @@ discountPrice */}
             </div>
           </div>
 
-          <Button>Create</Button>
+          <Button onClick={handleCreate}>Create</Button>
         </form>
       </div>
     </div>

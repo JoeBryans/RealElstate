@@ -180,7 +180,7 @@ const Listen = () => {
                         className="w-10 h-10 rounded-full object-cover"
                       />
                       <div className="w-40 sm:w-52 flex justify-between">
-                        <span>{items.userId.username || "JoeBryan"}</span>
+                        <span>{items.userId?.username || "JoeBryan"}</span>
                         <span>10/09/2023</span>
                         {/* <span>{items.userId.username}</span> */}
                       </div>
