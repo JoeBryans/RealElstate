@@ -1,10 +1,25 @@
+import cloudinary from "../middleware/cloudinary.js";
 import estateModel from "./../models/estateModle.js";
-export const Create = async (req, res, next) => {
-  // const user = req.user._id;
+export const CreateImg = async (req, res) => {
+  console.log(req.file);
   try {
+    const cloud = await cloudinary.uploader.upload(req.file.path);
+    res.json(cloud);
+    console.log(cloud);
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const Create = async (req, res, next) => {
+  // const images = req.file.fileName;
+  console.log(req.file);
+  try {
+    const upload = await cloudinary.uploader.upload(req.file.path);
+
     const property = await estateModel.create({
       ...req.body,
       userId: req.user,
+      image: upload.secure_url,
     });
     res.json(property);
   } catch (error) {

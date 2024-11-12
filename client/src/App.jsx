@@ -19,6 +19,7 @@ import Saved from "./pages/Saved";
 import Footer from "./components/Footer";
 import Agent from "./pages/Agent";
 import Blog from "./pages/Blog";
+import Upload from "./pages/upload";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -41,6 +42,7 @@ function App() {
           <Route path="/save" element={<Saved />} />
           <Route path="/agent" element={<Agent />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/upload" element={<Upload />} />
         </Routes>
         <Footer />
       </div>

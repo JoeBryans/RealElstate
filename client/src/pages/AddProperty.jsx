@@ -6,6 +6,7 @@ import axios from "axios";
 
 const AddProperty = () => {
   const [AddformData, isLoading] = useCreateListenMutation();
+  const [image, setImage] = useState();
 
   const [data, setData] = useState({
     name: "",
@@ -51,11 +52,19 @@ const AddProperty = () => {
       e.target.id === "name" ||
       e.target.id === "address" ||
       e.target.id === "price" ||
+      e.target.id === "discountPrice" ||
       e.target.id === "description"
     ) {
       setData({
         ...data,
         [e.target.id]: e.target.value,
+      });
+    }
+
+    if (e.target.id === "image") {
+      setData({
+        ...data,
+        [e.target.id]: e.target.files[0],
       });
     }
     // if (e.target.id === "min" || e.target.id === "max") {
@@ -77,9 +86,27 @@ const AddProperty = () => {
   };
   const handleCreate = async (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("address", data.address);
+    formData.append("price", data.price);
+    formData.append("propertyType", data.propertyType);
+    formData.append("bathroom", data.bathroom);
+    formData.append("bedroom", data.bedroom);
+    formData.append("description", data.description);
+    formData.append("discountPrice", data.discountPrice);
+    formData.append("feature", data.feature);
+    formData.append("furnished", data.furnished);
+    formData.append("offer", data.offer);
+    formData.append("packing", data.packing);
+    formData.append("pool", data.pool);
+    formData.append("type", data.type);
+    formData.append("squareFeet", data.squareFeet);
+    formData.append("withFeature", data.withFeature);
+    formData.append("image", data.image);
     try {
       // isLoading(true);
-      const res = await AddformData(data);
+      const res = await AddformData(formData);
       // const res = await axios.post("http://localhost:5500/property/", data);
       console.log(res.data);
       // isLoading(false);
@@ -168,18 +195,18 @@ discountPrice */}
             className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
           /> */}
 
-          {/* <div className="flex w-full gap-2 items-center">
+          <div className="flex w-full gap-2 items-center">
             <label htmlFor=""></label>
             <input
               type="file"
-              id="file"
+              id="image"
               multiple={true}
-              // value={searchForm.search}
+              accept="image/"
               onChange={HandleChange}
               className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
             />
             <Button>Upload</Button>
-          </div> */}
+          </div>
 
           <div className="flex flex-wrap">
             <div className="flex gap-2 items-center ">
