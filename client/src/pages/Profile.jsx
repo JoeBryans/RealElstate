@@ -2,17 +2,21 @@ import React, { useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import profile from "../assets/users.jpeg";
 import SideBar from "../components/SideBar";
+import { useSelector } from "react-redux";
+import AgentListen from "../components/agent_Listen";
 const Profile = () => {
+  //
+  // https://cdn-icons-png.flaticon.com/128/706/706830.png
+  const user = useSelector((state) => state.user.user);
   const ref = useRef();
   const navigate = useNavigate();
   return (
     <div className="flex flex-wrap">
-      {/* <SideBar /> */}
       <div className="max-w-2xl  mx-auto mt-44 text-slate-700 ">
         <input type="file" id={ref} className="hidden" />
         <img
-          src={profile}
-          alt={profile}
+          src={user?.picture}
+          alt="photo"
           onClick={() => ref}
           className="w-20 h-20 rounded-full mx-auto cursor-pointer object-center"
         />
@@ -20,21 +24,21 @@ const Profile = () => {
           <input
             id="username"
             type="text"
-            value="Joshua"
+            value={user?.username}
             className="p-2 rounded-lg focus:outline-none font-medium w-96 border"
           />
           <input
             placeholder="email"
             id="email"
             type="text"
-            value="Joshua@gmail.com"
+            value={user?.email}
             className="p-2 rounded-lg focus:outline-none font-medium w-96 border"
           />
           <input
             placeholder="phone"
             id="phone"
             type="text"
-            value="08162373317"
+            value={user?.mobile}
             className="p-2 rounded-lg focus:outline-none font-medium w-96 border"
           />
           <button className="w-full rounded p-1 bg-blue-800 hover:opacity-90 self-center text-white ">
@@ -50,6 +54,7 @@ const Profile = () => {
           </button>
         </div>
       </div>
+      <AgentListen />
     </div>
   );
 };

@@ -18,6 +18,7 @@ app.use(express.json());
 app.use("/property", estateRouter);
 app.use("/blog", blogRouter);
 app.use("/save", saveRouter);
+
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;
   const errMessage = err.message || "error from the server";

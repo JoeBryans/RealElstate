@@ -23,10 +23,13 @@ const userSchema = new mongoose.Schema(
     address: [{ city: String, state: String, country: String }],
     role: {
       type: String,
+      required: true,
       defualt: "user",
     },
     links: [{ type: mongoose.Schema.Types.ObjectId, ref: "medial" }],
     saved: [{ type: mongoose.Schema.Types.ObjectId, ref: "save" }],
+    picture: { type: String, required: true },
+    gender: { type: String, enum: ["male", "female"] },
   },
   { timestamps: true }
 );

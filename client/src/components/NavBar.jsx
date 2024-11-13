@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import userimg from "../assets/users.jpeg";
+import { useSelector } from "react-redux";
 
 const NavBar = () => {
+  const user = useSelector((state) => state.user.user);
   const [openNav, setOpenNav] = useState(false);
   const Bar = () => {
     setOpenNav(!openNav);
     console.log(openNav);
   };
   const Search = () => {};
-  const user = true;
   return (
     <>
       {" "}
@@ -60,8 +61,8 @@ const NavBar = () => {
             {user ? (
               <Link to="/account" className="hidden sm:flex  ">
                 <img
-                  src={userimg}
-                  alt={userimg}
+                  src={user?.picture}
+                  alt={user?.picture}
                   className="w-7 h-7 rounded-full object-center "
                 />
               </Link>

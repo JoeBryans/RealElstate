@@ -1,14 +1,16 @@
 // import { Input } from "postcss";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../Api/Api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getUser } from "../Api/Slices/userSlice";
 
 const Login = () => {
-  // const { getUser } = useSelector((state) => state.user.user);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
+  // const [error, setError] = useState("");
   const [AddformData, isLoading] = useLoginMutation();
   const handleInput = (e) => {
     setFormData({
@@ -19,15 +21,16 @@ const Login = () => {
   const handelLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(false);
+    // setError(false);
     try {
-      const res = await AddformData(formData);
-      console.log(res.data);
+      const { data } = await AddformData(formData);
+      console.log(data.message);
       // setError(res.data);
-      localStorage.setItem("user", res.data);
+      dispatch(getUser(data));
       setLoading(false);
+      // navigate("/");
     } catch (error) {
-      setError(error);
+      // setError(error);
       setLoading(false);
     }
   };
@@ -35,7 +38,7 @@ const Login = () => {
     <div className="max-w-2xl  mx-auto mt-44 text-slate-700 ">
       <form className="w-max bg-white  mx-auto p-4  rounded-md shadow-lg text-center">
         <h1 className="text-center">Login</h1>
-        <span className="text-red-700"> {error ? error : null}</span>
+        {/* <span className="text-red-700"> {error ? error : null}</span> */}
         <label className="flex flex-col gap-1 items-start mt-5">
           <span>Email</span>
           <input
