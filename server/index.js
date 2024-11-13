@@ -11,7 +11,6 @@ import saveRouter from "./router/saveRouter.js";
 dotenv.config();
 const port = process.env.PORT || 8000;
 
-DataBase();
 const app = express();
 app.use(cors());
 app.use(cookieParser());
@@ -19,7 +18,18 @@ app.use(express.json());
 app.use("/property", estateRouter);
 app.use("/blog", blogRouter);
 app.use("/save", saveRouter);
+app.use((err, req, res, next) => {
+  const errStatus = err.status || 500;
+  const errMessage = err.message || "error from the server";
+  return res.status(errStatus).json({
+    success: false,
+    status: errStatus,
+    message: errMessage,
+    stack: err.stack,
+  });
+});
 
+DataBase();
 app.use("/auth", userRouter);
 app.listen(port, () =>
   console.log(`server runing at http://localhost:${port}`)

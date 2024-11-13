@@ -26,40 +26,54 @@ export const Register = async (req, res, next) => {
   }
 };
 
-export const Login = async (req, res, nex) => {
+// export const Login = async (req, res, nex) => {
+//   const { email, password } = req.body;
+
+//   try {
+//     const user = await UserModel.findOne({ email });
+
+//     if (!user) return res.json("Wrong credential");
+//     console.log(password);
+//     const Compare = await bcrypt.compare(password, user.password);
+//     console.log(Compare);
+//     if (!Compare) return res.json("invalid email or password");
+//     const token = jwt.sign(
+//       {
+//         id: user._id,
+//         email: user.email,
+//         mobile: user.mobile,
+//       },
+//       process.env.Jkeys
+//     );
+
+//     res.cookie("token", token).json({
+//       message: "Login successful",
+//       id: user._id,
+//       email: user.email,
+//       mobile: user.mobile,
+//       username: user.username,
+//     });
+//   } catch (error) {
+//     console.log(error);
+//   }};
+
+export const Login = async (req, res, next) => {
   const { email, password } = req.body;
-
+  const user = await UserModel.findOne({ email });
   try {
-    const user = await UserModel.findOne({ email });
+    if (!user) return res.json("user not found!");
 
-    if (!user) {
-      res.json("Wrong credential");
-    }
-    console.log(user);
-    console.log(password);
-    const Compare = await bcrypt.compareSync(password, user.password);
-    console.log(Compare);
-    if (!Compare) {
-      res.json("invalid email or password");
-    }
-    const token = jwt.sign(
-      {
-        id: user._id,
-        email: user.email,
-        mobile: user.mobile,
-      },
-      process.env.Jkeys
-    );
+    const existpassword = await bcrypt.compare(password, user.password);
+    if (!existpassword) return res.json("Invalid email or password");
 
-    res.cookie("token", token).json({
-      message: "Login successful",
-      id: user._id,
-      email: user.email,
-      mobile: user.mobile,
-      username: user.username,
-    });
+    const token = jwt.sign({ id: user._id, username: user.username }, key);
+    res
+      .cookie("access_token", token, {
+        httpOnly: true,
+      })
+      .json({ user: user.username, id: user._id });
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 

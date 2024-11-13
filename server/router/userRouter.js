@@ -2,12 +2,13 @@ import express from "express";
 import {
   Deletes,
   GetItem,
-  Login,
+  // Login,
   Register,
   Update,
   UserID,
   Users,
 } from "../controllers/user.js";
+import { Login } from "../controllers/users.js";
 import { Authenticate } from "../Auth/auth.js";
 
 const userRouter = express.Router();
