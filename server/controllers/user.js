@@ -28,15 +28,18 @@ export const Register = async (req, res, next) => {
 
 export const Login = async (req, res, nex) => {
   const { email, password } = req.body;
-  const user = await UserModel.findOne({ email });
 
   try {
+    const user = await UserModel.findOne({ email });
+
     if (!user) {
       res.json("Wrong credential");
     }
-
-    const verifyPass = await bcrypt.compare(password, user.password);
-    if (!verifyPass) {
+    console.log(user);
+    console.log(password);
+    const Compare = await bcrypt.compareSync(password, user.password);
+    console.log(Compare);
+    if (!Compare) {
       res.json("invalid email or password");
     }
     const token = jwt.sign(

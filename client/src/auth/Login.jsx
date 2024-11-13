@@ -2,8 +2,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useLoginMutation } from "../Api/Api";
+import { useSelector } from "react-redux";
 
 const Login = () => {
+  // const { getUser } = useSelector((state) => state.user.user);
   const [formData, setFormData] = useState({});
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -22,7 +24,7 @@ const Login = () => {
       const res = await AddformData(formData);
       console.log(res.data);
       // setError(res.data);
-
+      localStorage.setItem("user", res.data);
       setLoading(false);
     } catch (error) {
       setError(error);
