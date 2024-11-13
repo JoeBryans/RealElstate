@@ -1,11 +1,17 @@
 import cloudinary from "../middleware/cloudinary.js";
+import upload from "../middleware/multer.js";
 import estateModel from "./../models/estateModle.js";
+import fs from "fs";
+// upload;
+
 export const CreateImg = async (req, res) => {
   console.log(req.file);
   try {
     const cloud = await cloudinary.uploader.upload(req.file.path);
     res.json(cloud);
+
     console.log(cloud);
+    fs.unlinkSync(`server/public/images/${req.file.filename}`);
   } catch (error) {
     console.log(error);
   }
@@ -22,6 +28,7 @@ export const Create = async (req, res, next) => {
       image: upload.secure_url,
     });
     res.json(property);
+    fs.unlinkSync(`server/public/images/${req.file.filename}`);
   } catch (error) {
     console.log(error);
   }

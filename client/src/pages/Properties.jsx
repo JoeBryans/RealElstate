@@ -73,10 +73,15 @@ const Properties = () => {
                   </div>
                   <div className="flex flex-col w-full gap-1 p-3">
                     <div className="flex flex-col mb-3 items-start">
-                      <span className="font-semibold text-xl mb-2">
-                        {`${items.name.slice(30)}...`}
-                        {/* {items.name.toString(20)} */}
-                      </span>
+                      <Link
+                        to={`/property-details/${items._id}`}
+                        className="text-slate-700 hover:text-slate-500"
+                      >
+                        {" "}
+                        <span className="font-semibold text-xl mb-2 line-clamp-1">
+                          {items.name}
+                        </span>
+                      </Link>
                       <span className="text-sm flex gap-2 items-center">
                         <MdIcons.MdLocationOn color="green" />
                         {items.address}{" "}
