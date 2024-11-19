@@ -20,7 +20,7 @@ import Footer from "./components/Footer";
 import Agent from "./pages/Agent";
 import Blog from "./pages/Blog";
 import Upload from "./pages/upload";
-import Edit from "./pages/Edit";
+// import Edit from "./pages/Edit";
 import Protected from "./private/protected";
 import { useSelector } from "react-redux";
 
@@ -58,7 +58,7 @@ function App() {
           <Route path="/agent" element={<Agent />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/upload" element={<Upload />} />
-          <Route path="/edit/:name" element={<Edit />} />
+          {/* <Route path="/edit/:name" element={<Edit />} /> */}
         </Routes>
         <Footer />
       </div>

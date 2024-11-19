@@ -2,6 +2,7 @@ import cloudinaryUploader from "../middleware/cloudinary.js";
 // import cloudinary from "../middleware/cloudinary.js";
 import estateModel from "./../models/estateModle.js";
 import fs from "fs";
+import UserModel from "./../models/userModle.js";
 
 export const CreateImg = async (req, res, next) => {
   // console.log(req.files);
@@ -107,7 +108,6 @@ export const Create = async (req, res, next) => {
       }),
     });
     res.json(property);
-    // fs.unlinkSync(`server/uploads/${req.file.filename}`);
   } catch (error) {
     console.log(error);
   }
@@ -226,9 +226,11 @@ export const Search = async (req, res, next) => {
   }
 };
 export const GetuserListings = async (req, res, next) => {
+  const { userId } = req.body;
   try {
-    const item = await estateModel.find();
-    res.json(item);
+    const AgentProperty = await estateModel.find({ userId });
+
+    return res.json(AgentProperty);
   } catch (error) {
     console.log(error);
   }
