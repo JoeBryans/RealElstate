@@ -1,34 +1,113 @@
-import cloudinary from "../middleware/cloudinary.js";
-import upload from "../middleware/multer.js";
+import cloudinaryUploader from "../middleware/cloudinary.js";
+// import cloudinary from "../middleware/cloudinary.js";
 import estateModel from "./../models/estateModle.js";
 import fs from "fs";
-// upload;
 
-export const CreateImg = async (req, res) => {
-  console.log(req.file);
+export const CreateImg = async (req, res, next) => {
+  // console.log(req.files);
   try {
-    const cloud = await cloudinary.uploader.upload(req.file.path);
-    res.json(cloud);
+    const uploader = async (path) => await cloudinaryUploader(path, "Images");
+    const urls = [];
+    const files = req.files;
+    for (const file of files) {
+      // console.log(file);
+      const { path } = file;
+      console.log(path);
+      const newPath = await uploader(path);
+      console.log(newPath);
+      urls.push(newPath);
+      // fs.unlinkSync(`server/public/images/${req.file.filename}`);
+    }
+    res.json({ data: urls });
+    // console.log(req.user);
+  } catch (error) {}
+  // try {
+  //   const urls = [];
+  //   const files = req.files;
+  //   for (const file of files) {
+  //     const { path } = file;
+  //     urls.push(path);
+  //     fs.unlinkSync(path);
+  //   }
+  //   res.json({ data: urls });
+  //   console.log(urls);
+  // } catch (err) {
+  //   next(err);
+  // }
 
-    console.log(cloud);
-    fs.unlinkSync(`server/public/images/${req.file.filename}`);
-  } catch (error) {
-    console.log(error);
-  }
+  // try {
+  //   const photos = req.files;
+  //   console.log(photos.path);
+
+  //   if (!photos) {
+  //     res.json({ message: "No image found" });
+  //   }
+  //   let images = photos.map((photo) => {
+  //     // console.log(photo.path);
+  //     cloudinary.uploader.upload(photo.path);
+  //   });
+  //   let cloud = await Promise.all(images);
+
+  //   console.log(cloud);
+
+  //   res.json({ message: "Uploaded", cloud });
+  // } catch (error) {
+  //   next(error);
+  // }
+  // try {
+  //   const cloud = await cloudinary.uploader.upload(req.files.path);
+  //   res.json(cloud);
+  //   console.log(cloud);
+  //   fs.unlinkSync(`server/public/images/${req.file.filename}`);
+  // } catch (error) {
+  //   next(error);
+  // }
 };
-export const Create = async (req, res, next) => {
-  // const images = req.file.fileName;
-  console.log(req.file);
-  try {
-    const upload = await cloudinary.uploader.upload(req.file.path);
+// try {
+//   const uploader = async (path) => await cloudinaryUploader(path, "Images");
+//   const urls = [];
+//   const files = req.files;
+//   for (const file of files) {
+//     const { path } = file;
+//     console.log(`path is ${path}`);
+//     const newPath = await uploader(path);
+//     urls.push(newPath);
+//   }
 
+//   const property = new estateModel({
+//     ...req.body,
+//     userId: req.user,
+//     image: urls.map((url) => {
+//       return url;
+//     }),
+//   });
+//   const pro = await property.save();
+//   res.json(pro);
+export const Create = async (req, res, next) => {
+  console.log(req.user);
+  try {
+    const uploader = async (path) => await cloudinaryUploader(path, "Images");
+    const urls = [];
+    const files = req.files;
+    for (const file of files) {
+      console.log(file);
+      const { path } = file;
+      console.log(path);
+      const newPath = await uploader(path);
+      console.log(newPath);
+      urls.push(newPath);
+      // fs.unlinkSync(path);
+      // fs.unlinkSync(path);
+    }
     const property = await estateModel.create({
       ...req.body,
-      userId: req.user,
-      image: upload.secure_url,
+      userId: req.user.id,
+      image: urls.map((url) => {
+        return url;
+      }),
     });
     res.json(property);
-    fs.unlinkSync(`server/public/images/${req.file.filename}`);
+    // fs.unlinkSync(`server/uploads/${req.file.filename}`);
   } catch (error) {
     console.log(error);
   }

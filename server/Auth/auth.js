@@ -3,20 +3,21 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const Authenticate = (req, res, next) => {
-  const token = req.cookies.token;
+  const token = req.cookies.access_token;
   if (!token) {
-    res.status(403).json("unauthenticated");
+    return res.status(403).json("unauthenticated");
   }
   jwt.verify(token, process.env.Jkeys, (err, user) => {
     if (err) return res.json("invalid token");
     req.user = user;
+    console.log(req.user);
     next();
   });
 };
 export const Agent = (req, res, next) => {
   Authenticate(req, res, next, () => {
-    if (req.user.role === "seller") {
+    if (req.user.role === "agent") {
       next();
-    } else res.ststus(403).json("Not Authenticated");
+    } else return res.ststus(403).json("Not Authenticated");
   });
 };

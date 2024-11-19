@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../Api/Api";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../Api/Slices/userSlice";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -23,12 +24,21 @@ const Login = () => {
     setLoading(true);
     // setError(false);
     try {
-      const { data } = await AddformData(formData);
+      // const { data } = await AddformData(formData);
+      const { data } = await axios.post(
+        "http://localhost:5500/auth/login",
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
+
       console.log(data.message);
       // setError(res.data);
       dispatch(getUser(data));
       setLoading(false);
-      // navigate("/");
+      navigate("/");
     } catch (error) {
       // setError(error);
       setLoading(false);

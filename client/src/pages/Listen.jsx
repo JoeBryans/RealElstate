@@ -114,7 +114,11 @@ const Listen = () => {
                 >
                   <div className="relative overflow-hidden">
                     <Link to={`/property-details/${items._id}`}>
-                      <img src={items.image[0]} alt="" className="w-60 md " />
+                      <img
+                        src={items.image[0].url}
+                        alt=""
+                        className="w-60 md "
+                      />
                     </Link>
                     <div className="absolute top-2 left-2 text-center">
                       <span className="bg-yellow-500 text-white px-2 rounded ">
