@@ -16,6 +16,7 @@ const Property = () => {
   const param = useParams();
   const { data, isLoading } = useGetPropertyIdQuery(param.id);
   const property = data;
+  console.log(property);
   const [index, setIndex] = useState(0);
   const [show, setShow] = useState(false);
   const [message, setMessage] = useState(property?.description);
@@ -29,7 +30,12 @@ const Property = () => {
   const handleClose = (i) => {
     setShow(false);
   };
-
+  const AgentProperties = async () => {
+    const res = await axios.get(
+      "http://localhost:5500/property/estate/agent/",
+      data
+    );
+  };
   return (
     <div className="mx-auto relative">
       {isLoading && <Loading />}

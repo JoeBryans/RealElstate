@@ -52,7 +52,7 @@ const Rent = () => {
                       <div className="relative overflow-hidden">
                         <Link to={`/property-details/${items._id}`}>
                           <img
-                            src={items.image[0].url}
+                            src={items?.image[0].url}
                             alt=""
                             className="w-60 md hover:scale-150 transition-scale duration-300"
                           />

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
-import SimpleMDE from "react-simplemde-editor";
+// import SimpleMDE from "react-simplemde-editor";
 import { useCreateListenMutation } from "../Api/Api";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const AddProperty = () => {
-  const [AddformData, isLoading] = useCreateListenMutation();
-  const [image, setImage] = useState();
-
+  // const user = useSelector((state) => state.user.user);
+  // const [AddformData, isLoading] = useCreateListenMutation();
+  const [file, setFile] = useState([]);
+  console.log(file);
   const [data, setData] = useState({
     name: "",
     description: "",
@@ -23,7 +25,6 @@ const AddProperty = () => {
     packing: false,
     pool: false,
     offer: false,
-    image: [],
     withFeature: false,
     feature: [],
   });
@@ -61,18 +62,6 @@ const AddProperty = () => {
       });
     }
 
-    if (e.target.id === "image") {
-      setData({
-        ...data,
-        [e.target.id]: e.target.files[0],
-      });
-    }
-    // if (e.target.id === "min" || e.target.id === "max") {
-    //   setData({
-    //     ...data,
-    //     [e.target.id]: e.target.value,
-    //   });
-    // }
     if (
       e.target.id === "bedroom" ||
       e.target.id === "bathroom" ||
@@ -84,6 +73,7 @@ const AddProperty = () => {
       });
     }
   };
+
   const handleCreate = async (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -103,11 +93,20 @@ const AddProperty = () => {
     formData.append("type", data.type);
     formData.append("squareFeet", data.squareFeet);
     formData.append("withFeature", data.withFeature);
-    formData.append("image", data.image);
+    for (let index = 0; index < file.length; index++) {
+      const eachFile = file[index];
+      formData.append("image", eachFile);
+    }
     try {
       // isLoading(true);
-      const res = await AddformData(formData);
-      // const res = await axios.post("http://localhost:5500/property/", data);
+      const res = await axios.post(
+        "http://localhost:5500/property/",
+        formData,
+        {
+          // headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
       console.log(res.data);
       // isLoading(false);
     } catch (error) {
@@ -199,13 +198,13 @@ discountPrice */}
             <label htmlFor=""></label>
             <input
               type="file"
-              id="image"
-              multiple={true}
-              accept="image/"
-              onChange={HandleChange}
+              name="file"
+              multiple
+              accept="image/*"
+              onChange={(e) => setFile(e.target.files)}
               className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
             />
-            <Button>Upload</Button>
+            {/* <Button onClick={uploadImage}>Upload</Button> */}
           </div>
 
           <div className="flex flex-wrap">

@@ -86,6 +86,7 @@ export const CreateImg = async (req, res, next) => {
 //   res.json(pro);
 export const Create = async (req, res, next) => {
   console.log(req.user);
+  console.log(req.files);
   try {
     const uploader = async (path) => await cloudinaryUploader(path, "Images");
     const urls = [];
