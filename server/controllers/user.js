@@ -48,10 +48,16 @@ export const Login = async (req, res, next) => {
     );
     const { password, __v, ...rest } = user._doc;
 
-    res.cookie("token", token).json({
-      message: "Login successful",
-      ...rest,
-    });
+    res
+      .cookie("access_token", token, {
+        httpOny: true,
+        secure: false,
+        sameSite: true,
+      })
+      .json({
+        message: "Login successful",
+        ...rest,
+      });
   } catch (error) {
     next(error);
   }

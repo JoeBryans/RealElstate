@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./App.css";
 // import "easymde/dist/easymde.min.css";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import NavBar from "./components/NavBar";
 import Listen from "./pages/Listen";
@@ -20,9 +20,12 @@ import Footer from "./components/Footer";
 import Agent from "./pages/Agent";
 import Blog from "./pages/Blog";
 import Upload from "./pages/upload";
+import Edit from "./pages/Edit";
+import Protected from "./private/protected";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const user = useSelector((state) => state.user.user);
 
   return (
     <>
@@ -31,18 +34,31 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/listen" element={<Listen />} />
+          <Route element={<Protected />}>
+            <Route path="/account" element={<Profile />} />
+            <Route path="/save" element={<Saved />} />
+          </Route>
+          {/* {user ? (
+            <Navigate to="/" />
+          ) : ( */}
           <Route path="/login" element={<Login />} />
+          {/* )} */}
+          {/* {user ? (
+            <Navigate to="/" />
+          ) : ( */}
           <Route path="/register" element={<Register />} />
-          <Route path="/account" element={<Profile />} />
+          {/* )} */}
+
           <Route path="/add-property" element={<AddProperty />} />
           <Route path="/property" element={<Properties />} />
           <Route path="/buy" element={<Buy />} />
           <Route path="/rent" element={<Rent />} />
           <Route path="/property-details/:id" element={<Property />} />
-          <Route path="/save" element={<Saved />} />
+
           <Route path="/agent" element={<Agent />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/upload" element={<Upload />} />
+          <Route path="/edit/:name" element={<Edit />} />
         </Routes>
         <Footer />
       </div>
