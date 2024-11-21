@@ -46,7 +46,7 @@ var estateSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-    packing: {
+    parking: {
       type: Boolean,
       default: false,
     },
@@ -59,7 +59,7 @@ var estateSchema = new mongoose.Schema(
       default: false,
     },
     image: {
-      type: [String],
+      type: [],
     },
 
     propertyStatus: { type: String, default: "available" },

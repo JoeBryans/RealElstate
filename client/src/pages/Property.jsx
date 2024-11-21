@@ -55,7 +55,7 @@ const Property = () => {
           />
         </div>
         <img
-          src={property?.image && property?.image[index]}
+          src={property?.image && property?.image[index].url}
           alt=""
           className="w-max h-[64vh] object-center "
         />
@@ -87,7 +87,7 @@ const Property = () => {
                     <div className="flex gap-2 justify-center " key={i}>
                       <img
                         className="w-5/6 "
-                        src={item}
+                        src={item.url}
                         alt=""
                         onClick={() => handleClick(i)}
                       />

@@ -178,9 +178,9 @@ export const Search = async (req, res, next) => {
     if (type === "rent") {
       type = "rent";
     }
-    let packing = req.query.packing;
-    if (packing === undefined || packing === "false") {
-      packing = { $in: [false, true] };
+    let parking = req.query.parking;
+    if (parking === undefined || parking === "false") {
+      parking = { $in: [false, true] };
     }
     let pool = req.query.pool;
     if (pool === undefined || pool === "false") {
@@ -214,7 +214,7 @@ export const Search = async (req, res, next) => {
             offer,
             furnished,
             type,
-            packing,
+            parking,
           },
         ],
       })

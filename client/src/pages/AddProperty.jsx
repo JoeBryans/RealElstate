@@ -22,7 +22,7 @@ const AddProperty = () => {
     bathroom: 0,
     bedroom: 0,
     furnished: false,
-    packing: false,
+    parking: false,
     pool: false,
     offer: false,
     withFeature: false,
@@ -39,7 +39,7 @@ const AddProperty = () => {
     }
     if (
       e.target.id === "furnished" ||
-      e.target.id === "packing" ||
+      e.target.id === "parking" ||
       e.target.id === "offer" ||
       e.target.id === "pool" ||
       e.target.id === "withFeature"
@@ -88,7 +88,7 @@ const AddProperty = () => {
     formData.append("feature", data.feature);
     formData.append("furnished", data.furnished);
     formData.append("offer", data.offer);
-    formData.append("packing", data.packing);
+    formData.append("parking", data.parking);
     formData.append("pool", data.pool);
     formData.append("type", data.type);
     formData.append("squareFeet", data.squareFeet);
@@ -256,9 +256,9 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
-                id="packing"
+                id="parking"
                 className="w-5 h-5"
-                checked={data.packing}
+                checked={data.parking}
                 onChange={HandleChange}
               />
               <span className="font-semibold ">Parking</span>
