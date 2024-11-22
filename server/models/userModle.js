@@ -28,6 +28,7 @@ const userSchema = new mongoose.Schema(
     },
     links: [{ type: mongoose.Schema.Types.ObjectId, ref: "medial" }],
     saved: [{ type: mongoose.Schema.Types.ObjectId, ref: "save" }],
+    properties: [{ type: mongoose.Schema.Types.ObjectId, ref: "estate" }],
     picture: { type: String, required: true },
     gender: { type: String, enum: ["male", "female"] },
   },

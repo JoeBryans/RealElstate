@@ -85,29 +85,32 @@ export const CreateImg = async (req, res, next) => {
 //   const pro = await property.save();
 //   res.json(pro);
 export const Create = async (req, res, next) => {
-  console.log(req.user);
+  const user = req.user.id;
   console.log(req.files);
   try {
     const uploader = async (path) => await cloudinaryUploader(path, "Images");
     const urls = [];
     const files = req.files;
     for (const file of files) {
-      console.log(file);
       const { path } = file;
-      console.log(path);
       const newPath = await uploader(path);
-      console.log(newPath);
       urls.push(newPath);
-      // fs.unlinkSync(path);
-      // fs.unlinkSync(path);
+      fs.unlinkSync(path);
     }
     const property = await estateModel.create({
       ...req.body,
-      userId: req.user.id,
+      userId: user,
       image: urls.map((url) => {
         return url;
       }),
     });
+    try {
+      await UserModel.findByIdAndUpdate(user, {
+        $push: { properties: property._id },
+      });
+    } catch (error) {
+      console.log(error);
+    }
     res.json(property);
   } catch (error) {
     console.log(error);

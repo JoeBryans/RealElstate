@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-import home1 from "../assets/home1.jpg";
-import home2 from "../assets/home2.jpg";
-import home3 from "../assets/home3.jpg";
-import home4 from "../assets/home4.jpg";
-import home5 from "../assets/home5.jpg";
-import userimg from "../assets/users.jpeg";
 import { Button, Container } from "react-bootstrap";
 import * as MdIcons from "react-icons/md";
 import * as FaIcons from "react-icons/fa";
 import { Link, useParams } from "react-router-dom";
 import { useGetPropertyIdQuery } from "../Api/Api";
 import Loading from "../components/Loading";
+import axios from "axios";
 
 const Property = () => {
   const param = useParams();
-  const { data, isLoading } = useGetPropertyIdQuery(param.id);
-  const property = data;
+  // const { data, isLoading } = useGetPropertyIdQuery(param.id);
+  // const property = data;
+  const id = param.id;
+  const [property, setProperty] = useState([]);
+  const [loading, setLoading] = useState(false);
   console.log(property);
   const [index, setIndex] = useState(0);
   const [show, setShow] = useState(false);
@@ -30,15 +28,18 @@ const Property = () => {
   const handleClose = (i) => {
     setShow(false);
   };
-  const AgentProperties = async () => {
-    const res = await axios.get(
-      "http://localhost:5500/property/estate/agent/",
-      data
-    );
+
+  const fetchData = async (id) => {
+    const res = await axios.get(`http://localhost:5500/property/estate/${id}`);
+    setProperty(res.data);
+    console.log(res.data);
   };
+  useEffect(() => {
+    fetchData(id);
+  }, [id]);
   return (
     <div className="mx-auto relative">
-      {isLoading && <Loading />}
+      {/* {isLoading && <Loading />} */}
       <div
         className={
           show
@@ -165,11 +166,11 @@ const Property = () => {
           <div className="flex flex-col items-center mx-auto gap-6 ">
             <div className=" w-full sm:w-80 h-96 flex flex-col gap-2 shadow-md py-4 px-4 text-slate-700 mx-auto md:mt-20">
               <img
-                src={userimg}
-                alt=""
+                src={property?.userId?.image}
+                alt="photo"
                 className="w-24 h-24 rounded-full object-center self-center mb-3  "
               />
-              <span className="font-bold text-nowrap self-center">
+              <span className="font-bold text-nowrap self-center capitalize">
                 {property?.userId?.username}
               </span>
               <span className="font-medium flex justify-between items-center  ">
@@ -202,9 +203,13 @@ const Property = () => {
                 </div>
               </div>
 
-              <Link className="text-center mt-2 hover:text-blue-800">
-                <span className="flex gap-1">
-                  More properties from {`${property?.userId?.username}>>`}
+              <Link
+                className="text-center mt-2 hover:text-blue-800"
+                to={`/property/agent/${property?.userId?._id}`}
+              >
+                <span className="flex gap-1 line-clamp-1">
+                  More properties from{" "}
+                  <span className=" capitalize">{`${property?.userId?.username}`}</span>
                 </span>
               </Link>
             </div>

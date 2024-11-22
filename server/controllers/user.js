@@ -132,6 +132,18 @@ export const Profile = async (req, res, next) => {
   } catch (error) {}
 };
 
+export const userProperties = async (req, res, nex) => {
+  try {
+    const user = await UserModel.findById(req.params.id).populate("properties");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    const properties = await user.properties;
+    res.status(200).json(properties);
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const UploadImg = async (req, res, nex) => {
   try {
   } catch (error) {
