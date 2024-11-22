@@ -23,6 +23,7 @@ import Upload from "./pages/upload";
 // import Edit from "./pages/Edit";
 import Protected from "./private/protected";
 import { useSelector } from "react-redux";
+import AgentProperties from "./pages/AgentProperties";
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -56,6 +57,7 @@ function App() {
           <Route path="/property-details/:id" element={<Property />} />
 
           <Route path="/agent" element={<Agent />} />
+          <Route path="/property/agent/:id" element={<AgentProperties />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/upload" element={<Upload />} />
           {/* <Route path="/edit/:name" element={<Edit />} /> */}

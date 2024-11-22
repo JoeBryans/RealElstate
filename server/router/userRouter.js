@@ -7,6 +7,7 @@ import {
   Update,
   UserID,
   Users,
+  userProperties,
 } from "../controllers/user.js";
 import { Authenticate } from "../Auth/auth.js";
 
@@ -19,4 +20,5 @@ userRouter.get("/user/save/:id", Authenticate, GetItem);
 userRouter.get("/user/:id", Authenticate, UserID);
 userRouter.put("/:id", Authenticate, Update);
 userRouter.delete("/:id", Authenticate, Deletes);
+userRouter.get("/user/properties/:id", userProperties);
 export default userRouter;
