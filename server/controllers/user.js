@@ -88,7 +88,9 @@ export const UserID = async (req, res, next) => {
     if (!user) {
       return next(Errors(402, "invalid "));
     }
-    res.json(user);
+    const { password, ...rest } = user._doc;
+
+    res.json(rest);
   } catch (error) {
     next(error);
   }

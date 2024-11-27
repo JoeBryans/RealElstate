@@ -1,22 +1,33 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import userimg from "../assets/users.jpeg";
 import { useSelector } from "react-redux";
+import * as MdIcons from "react-icons/md";
+import { Button } from "react-bootstrap";
 
 const NavBar = () => {
   const user = useSelector((state) => state.user.user);
   const [openNav, setOpenNav] = useState(false);
+  const navigate = useNavigate();
   const Bar = () => {
     setOpenNav(!openNav);
     console.log(openNav);
   };
-  const Search = () => {};
+  const LogOut = () => {
+    localStorage.clear("user");
+    navigate("/");
+    setOpenNav(false);
+  };
+  useEffect(() => {
+    LogOut;
+  }, [user, navigate]);
+
   return (
     <>
       {" "}
-      <div className="bg-blue-800 relative text-white py-2 z-50">
-        <div className="flex items-center justify-between  px-5 sm:px-0">
+      <div className="bg-blue-800 sticky top-0 sm:relative text-white py-2 z-50">
+        <div className="flex items-center justify-between  px-5 sm:px-0 z-50">
           <div>
             <h1>
               <Link to="/" className="">
@@ -59,13 +70,24 @@ const NavBar = () => {
             </Link>
 
             {user ? (
-              <Link to="/account" className="hidden sm:flex  ">
-                <img
-                  src={user?.picture}
-                  alt={user?.picture}
-                  className="w-7 h-7 rounded-full object-center "
-                />
-              </Link>
+              <div className="dropDown">
+                {" "}
+                <Link to="/profile" className="hidden sm:flex  ">
+                  <img
+                    src={user?.picture}
+                    alt={user?.picture}
+                    className="w-7 h-7 rounded-full object-center "
+                  />
+                </Link>
+                <div className="content bg-blue-800 px-1">
+                  <span
+                    className="rounded p-1 border font-semibold cursor-pointer"
+                    onClick={LogOut}
+                  >
+                    Logout
+                  </span>
+                </div>
+              </div>
             ) : (
               <Link
                 to="/login"
@@ -83,41 +105,60 @@ const NavBar = () => {
           <div
             className={
               openNav
-                ? " sm:hidden flex flex-col gap-3 absolute h-[93vh] bg-blue-800 w-44 top-12 right-0 p-4 z-30"
+                ? " sm:hidden flex flex-col gap-3 fixed h-[93vh] w-full bg-black opacity-85 top-[62px] right-0 p-4 z-30"
                 : "hidden"
             }
           >
-            <Link to="/about" className="  text-2xl text-white font-semibold ">
-              About
-            </Link>
-            <Link
-              to="/property"
-              className="  text-2xl text-white font-semibold "
-            >
-              Properties
-            </Link>
-            <Link to="/agent" className="  text-2xl text-white font-semibold ">
-              Agent
-            </Link>
-            {user ? (
+            <div className="flex flex-col gap-3 absolute h-[100vh] bg-blue-800 w-44 top-0 right-0 p-4 z-40 ">
               <Link
-                to="/account"
-                className=" text-2xl text-white font-semibold "
+                to="/about"
+                onClick={Bar}
+                className="  text-2xl text-white font-semibold "
               >
-                Account
+                About
               </Link>
-            ) : (
-              <Link to="/login" className=" text-2xl text-white font-semibold ">
-                Login
+              <Link
+                to="/property"
+                onClick={Bar}
+                className="  text-2xl text-white font-semibold "
+              >
+                Properties
               </Link>
-            )}
-            <div className="absolute left-0 bottom-1">
+              <Link
+                to="/agent"
+                onClick={Bar}
+                className="  text-2xl text-white font-semibold "
+              >
+                Agent
+              </Link>
+              {user ? (
+                <Link
+                  to="/profile"
+                  onClick={Bar}
+                  className=" text-2xl text-white font-semibold "
+                >
+                  Account
+                </Link>
+              ) : (
+                <Link
+                  to="/login"
+                  onClick={Bar}
+                  className=" text-2xl text-white font-semibold "
+                >
+                  Login
+                </Link>
+              )}
               {user && (
-                <img
-                  src={userimg}
-                  alt={userimg}
-                  className="w-10 h-10 rounded-full object-center "
-                />
+                <div className="absolute w-full left-0 bottom-16 flex justify-between items-center px-3">
+                  <Link to="/profile" className="" onClick={Bar}>
+                    <img
+                      src={user?.picture}
+                      alt={user?.picture}
+                      className="w-12 h-12 rounded-full object-center "
+                    />
+                  </Link>{" "}
+                  <MdIcons.MdLogout size={30} onClick={LogOut} />
+                </div>
               )}
             </div>
           </div>

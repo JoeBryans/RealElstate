@@ -8,7 +8,7 @@ import { Button } from "react-bootstrap";
 const AgentListen = () => {
   const user = useSelector((state) => state.user.user);
   const [currentpage, setCurrentPage] = useState(1);
-  const [page, setPage] = useState(4);
+  const [page, setPage] = useState(6);
   const lastIndex = currentpage * page;
   const firstIndex = lastIndex - page;
   const currentListen = user.properties.slice(firstIndex, lastIndex);
@@ -20,24 +20,22 @@ const AgentListen = () => {
   }
   return (
     <div className="text-slate-700 max-w-2xl mt-10 px-4">
-      <h2 className="capitalized">{user.username} Property</h2>
+      <h2 className="capitalized text-center mt-3">{user.username} Property</h2>
       <div className="flex flex-col mx-auto gap-4">
         {currentListen.map((items) => {
           return (
             <div className=" flex  items-start gap-3 mx-auto  rounded-lg py-2">
-              <img src={items.image[0].url} alt="" className="w-64" />
+              <img src={items.image[0].url} alt="" className="w-32" />
               <div className="flex flex-col gap-2">
                 <span className="font-semibold text-xl mb-1  line-clamp-1">
                   {items.name}
                 </span>
-                <span className="text-sm flex gap-2 items-center">
-                  <MdIcons.MdLocationOn color="green" size={20} />
-                  {items.address}
-                </span>
+
                 <div className="flex items-center gap-3">
-                  <span className="font-semibold text-xl mb-1 p-1 cursor-pointer  line-clamp-1 text-slate-700 ">
-                    $ {items.price}
-                  </span>
+                  <span className="text-sm flex gap-2 items-center">
+                    <MdIcons.MdLocationOn color="green" size={20} />
+                    {items.address}
+                  </span>{" "}
                   <span className="flex items-center gap-2">
                     <FaIcons.FaBed color="green" />
                     {items.bedroom} bed

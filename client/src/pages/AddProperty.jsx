@@ -3,14 +3,15 @@ import { Button } from "react-bootstrap";
 // import SimpleMDE from "react-simplemde-editor";
 import { useCreateListenMutation } from "../Api/Api";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const AddProperty = () => {
-  // const user = useSelector((state) => state.user.user);
-  // const [AddformData, isLoading] = useCreateListenMutation();
   const navigate = useNavigate();
   const [file, setFile] = useState([]);
+  const [error, setError] = useState(null);
+  const [loader, setLoader] = useState(false);
+  // const dispatch = useDispatch();
   console.log(file);
   const [data, setData] = useState({
     name: "",
@@ -30,7 +31,6 @@ const AddProperty = () => {
     withFeature: false,
     feature: [],
   });
-  console.log(data);
 
   const HandleChange = (e) => {
     if (e.target.id === "rent" || e.target.id === "sale") {
@@ -100,7 +100,7 @@ const AddProperty = () => {
       formData.append("image", eachFile);
     }
     try {
-      // isLoading(true);
+      // setLoader(true);
       const res = await axios.post(
         "http://localhost:5500/property/",
         formData,
@@ -109,11 +109,14 @@ const AddProperty = () => {
           withCredentials: true,
         }
       );
-      console.log(res.data);
+      const data = await res.json();
+
+      console.log(data);
+
+      // setLoader(false);
       navigate("/profile");
-      // isLoading(false);
     } catch (error) {
-      console.log(error);
+      setError(error.response.data.message);
       // isLoading(false);
     }
   };
@@ -121,9 +124,11 @@ const AddProperty = () => {
     <div className="text-slate-700 flex flex-wrap mt-10  ">
       <div className="w-4/5   mx-auto">
         <form className="flex flex-col gap-3 mx-auto w-max md:w-[40rem] shadow-md p-4">
+          <span className="text-red-600 font-semibold  ">{error}</span>
           <input
             type="text"
             placeholder="Name "
+            required
             id="name"
             onChange={HandleChange}
             className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
@@ -131,16 +136,19 @@ const AddProperty = () => {
           <input
             type="text"
             placeholder="Address "
+            required
             id="address"
             onChange={HandleChange}
             className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
           />
+
           {/* address
 price
 discountPrice */}
           <input
             type="number"
             placeholder="Price "
+            required
             id="price"
             onChange={HandleChange}
             className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
@@ -202,6 +210,7 @@ discountPrice */}
             <input
               type="file"
               name="file"
+              required
               multiple
               accept="image/*"
               // onChange={(e) => setFile(URL.createObjectURL(e.target.files[0]))}
@@ -216,6 +225,7 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
+                required
                 id="rent"
                 className="w-5 h-5"
                 checked={data.type === "rent"}
@@ -227,6 +237,7 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
+                required
                 id="sale"
                 className="w-5 h-5"
                 checked={data.type === "sale"}
@@ -238,6 +249,7 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
+                required
                 id="furnished"
                 className="w-5 h-5"
                 checked={data.furnished}
@@ -249,6 +261,7 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
+                required
                 id="offer"
                 className="w-5 h-5"
                 checked={data.offer}
@@ -260,6 +273,7 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
+                required
                 id="parking"
                 className="w-5 h-5"
                 checked={data.parking}
@@ -271,6 +285,7 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
+                required
                 id="pool"
                 className="w-5 h-5"
                 checked={data.pool}

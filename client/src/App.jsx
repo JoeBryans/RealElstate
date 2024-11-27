@@ -24,6 +24,7 @@ import Upload from "./pages/upload";
 import Protected from "./private/protected";
 import { useSelector } from "react-redux";
 import AgentProperties from "./pages/AgentProperties";
+import Addresse from "./pages/Addresse";
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -43,6 +44,7 @@ function App() {
             <Navigate to="/" />
           ) : ( */}
           <Route path="/login" element={<Login />} />
+          <Route path="/address" element={<Addresse />} />
           {/* )} */}
           {/* {user ? (
             <Navigate to="/" />

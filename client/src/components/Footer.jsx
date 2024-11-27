@@ -4,7 +4,7 @@ import * as FaIcons from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-blue-800 2084A2 relative text-white py-2 z-50 mt-20">
+    <footer className="bg-blue-800 2084A2 relative text-white py-2 z-30 mt-20">
       <div className="flex flex-wrap justify-between gap-4 py-5 px-10">
         <div className="text-white w-max flex flex-col space-y-2 px-2">
           <span className="text-xl">Quick Links</span>

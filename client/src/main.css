@@ -45,17 +45,30 @@
     cursor: pointer;
     transition: border-color 0.25s;
   }
-/*  
-  button:focus,
-  button:focus-visible {
-    color: #646cff;
-    background: #fff;
-  } */
+
  .bg-trans{
   background:rgb(67, 67, 66)
  }
  input,textarea,select,:checked{
   background: #fff;
+ }
+
+ .dropDown{
+  position: relative;
+  display: inline-block;
+ }
+ .content{
+  position: absolute;
+  height: 0;
+  width:150px;
+  transition: all 0.1s linear;
+  overflow: hidden;
+  
+ }
+ .dropDown:hover>.content{
+ height: 50px;
+ padding-top: 1rem;
+
  }
   /* .k{
     animation-name: k;

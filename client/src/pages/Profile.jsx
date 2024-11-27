@@ -64,7 +64,7 @@ const Profile = () => {
 
   return (
     <div className="flex flex-wrap relative">
-      <div className="max-w-2xl  mx-auto mt-44 text-slate-700 sticky top-20">
+      <div className="max-w-2xl  mx-auto mt-44 text-slate-700 relative">
         <input
           type="file"
           value=""

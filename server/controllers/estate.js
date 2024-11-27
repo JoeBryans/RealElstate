@@ -3,6 +3,7 @@ import { cloudinaryUploader } from "../middleware/cloudinary.js";
 import estateModel from "./../models/estateModle.js";
 import fs from "fs";
 import UserModel from "./../models/userModle.js";
+import { Errors } from "../utils/error.js";
 
 export const CreateImg = async (req, res, next) => {
   // console.log(req.files);
@@ -86,8 +87,33 @@ export const CreateImg = async (req, res, next) => {
 //   res.json(pro);
 export const Create = async (req, res, next) => {
   const user = req.user.id;
-  console.log(req.files);
+  const {
+    name,
+    description,
+    address,
+    type,
+    propertyType,
+    price,
+    bathroom,
+    bedroom,
+    image,
+  } = req.body;
+  const { password, ...rest } = user._doc;
   try {
+    if (
+      !name ||
+      !description ||
+      !address ||
+      !type ||
+      !propertyType ||
+      !price ||
+      !bathroom ||
+      !bedroom ||
+      !image
+    ) {
+      // return res.status(400).json("Please file out this field.  ");
+      return next(Errors(400, "Please file out this field.  "));
+    }
     const uploader = async (path) => await cloudinaryUploader(path, "Images");
     const urls = [];
     const files = req.files;
@@ -99,7 +125,7 @@ export const Create = async (req, res, next) => {
     }
     const property = await estateModel.create({
       ...req.body,
-      userId: user,
+      userId: rest,
       image: urls.map((url) => {
         return url;
       }),
@@ -129,6 +155,7 @@ export const GetItem = async (req, res, next) => {
   const { id } = req.params;
   try {
     const item = await estateModel.findById(id).populate("userId");
+    // .select("-password");
     // const item = await estateModel.findById(id);
     res.json(item);
   } catch (error) {
