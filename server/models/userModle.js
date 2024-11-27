@@ -20,7 +20,7 @@ const userSchema = new mongoose.Schema(
       required: true,
       // select: false,
     },
-    address: [{ city: String, state: String, country: String }],
+    address: [{ type: mongoose.Schema.Types.ObjectId, ref: "address" }],
     role: {
       type: String,
       defualt: "user",
