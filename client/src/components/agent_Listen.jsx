@@ -3,7 +3,7 @@ import home1 from "../assets/home1.jpg";
 import * as MdIcons from "react-icons/md";
 import * as FaIcons from "react-icons/fa";
 import { useSelector } from "react-redux";
-import { Button } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 
 const AgentListen = () => {
   const user = useSelector((state) => state.user.user);
@@ -68,15 +68,6 @@ const AgentListen = () => {
             </div>
           );
         })}
-      </div>
-      <div className="flex gap-3 mt-4">
-        {pages.map((page, i) => {
-          return (
-            <Button key={i} onClick={() => setCurrentPage(page)}>
-              {page}
-            </Button>
-          );
-        })}{" "}
       </div>
     </div>
   );

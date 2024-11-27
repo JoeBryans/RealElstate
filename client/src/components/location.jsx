@@ -8,7 +8,7 @@ import Loading from "./Loading";
 import * as FaIcons from "react-icons/fa";
 const Location = () => {
   const { data, error, isLoading } = useGetPropertyQuery();
-  const property = data && data.filter((items) => items.address);
+  const property = data && data.filter((items) => items.address === "lagos");
   console.log(property);
   return (
     <>
@@ -33,7 +33,7 @@ const Location = () => {
                       />
                     </Link>
                     <div className="absolute top-2 left-2 text-center">
-                      <span className="bg-green-600 text-white px-2 rounded ">
+                      <span className="bg-yellow-500 text-white px-2 rounded ">
                         Features
                       </span>
                     </div>
@@ -48,9 +48,9 @@ const Location = () => {
                         </span>
                       )}
                     </div>
-                    <div className="absolute top-10 right-2">
-                      <span className="bg-yellow-500 text-white px-2 rounded ">
-                        status
+                    <div className="absolute top-10 left-2">
+                      <span className="bg-green-600 text-white px-2 rounded ">
+                        {items.propertyStatus}
                       </span>
                     </div>
                     <div className="absolute bottom-1 right-2">

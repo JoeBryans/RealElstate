@@ -14,6 +14,11 @@ const userSlice = createSlice({
       state.user = action.payload;
       localStorage.setItem("user", JSON.stringify(state.user));
     },
+    logOut: (state) => {
+      state.user = null;
+      localStorage.clear("user");
+    },
+
     Loader: (state, action) => {
       state.loading = true;
     },
@@ -23,5 +28,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { getUser, Loader, Error } = userSlice.actions;
+export const { getUser, logOut, Loader, Error } = userSlice.actions;
 export default userSlice.reducer;

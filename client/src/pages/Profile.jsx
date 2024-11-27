@@ -7,11 +7,13 @@ import AgentListen from "../components/agent_Listen";
 import axios from "axios";
 import { Button } from "react-bootstrap";
 import * as FaIcons from "react-icons/fa";
+import Inputs from "../components/inputs";
 const Profile = () => {
   //
   // https://cdn-icons-png.flaticon.com/128/706/706830.png
   const user = useSelector((state) => state.user.user);
   const [file, setFile] = useState();
+  const [show, setShow] = useState(false);
   const [formdatas, setFormDatas] = useState({
     username: user.username || "",
     email: user.email || "",
@@ -98,7 +100,9 @@ const Profile = () => {
               Username
             </span>{" "}
             <div className="flex items-center gap-2 max-w-60 ">
-              <span className="line-clamp-1">{user.username}</span>
+              <span className={show ? "hidden" : "line-clamp-1"}>
+                {user.username}
+              </span>
               <FaIcons.FaUserEdit />
             </div>
           </label>
@@ -156,12 +160,14 @@ const Profile = () => {
           </button>
         </form>
         <div className="w-max flex flex-col gap-4 bg-white  mx-auto p-1  rounded-md  text-center">
-          <button
-            className="w-96  rounded p-1 bg-slate-600 hover:opacity-90 self-center text-white focus:bg-slate-600 focus:text-white "
-            onClick={() => navigate("/add-property")}
-          >
-            Create Property
-          </button>
+          {user.role === "agent" ? (
+            <button
+              className="w-96  rounded p-1 bg-slate-600 hover:opacity-90 self-center text-white focus:bg-slate-600 focus:text-white "
+              onClick={() => navigate("/add-property")}
+            >
+              Create Property
+            </button>
+          ) : null}
         </div>
       </div>
       {user.role === "agent" ? <AgentListen /> : null}

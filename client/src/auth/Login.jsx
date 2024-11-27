@@ -5,57 +5,60 @@ import { useLoginMutation } from "../Api/Api";
 import { useDispatch, useSelector } from "react-redux";
 import { getUser } from "../Api/Slices/userSlice";
 import axios from "axios";
-
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 const Login = () => {
+  const [loading, setLoading] = useState();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  // const [error, setError] = useState("");
-  const [AddformData, isLoading] = useLoginMutation();
-  const handleInput = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
-  };
-  const handelLogin = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    // setError(false);
-    try {
-      // const { data } = await AddformData(formData);
-      const { data } = await axios.post(
-        "http://localhost:5500/auth/login",
-        formData,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
+  const validationSchema = yup.object().shape({
+    email: yup.string().required("email field is required"),
+    password: yup
+      .string()
+      .min(10)
+      .max(50)
+      .required("password field is required"),
+  });
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+  });
 
-      console.log(data.message);
-      // setError(res.data);
-      dispatch(getUser(data));
+  const onSubmit = async (data) => {
+    setLoading(true);
+
+    try {
+      const res = await axios.post("http://localhost:5500/auth/login", data, {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
+
+      dispatch(getUser(res.data));
       setLoading(false);
       navigate("/");
     } catch (error) {
-      // setError(error);
       setLoading(false);
     }
   };
+
   return (
     <div className="max-w-2xl  mx-auto mt-44 text-slate-700 ">
-      <form className="w-max bg-white  mx-auto p-4  rounded-md shadow-lg text-center">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="w-max bg-white  mx-auto p-4  rounded-md shadow-lg text-center"
+      >
         <h1 className="text-center">Login</h1>
         {/* <span className="text-red-700"> {error ? error : null}</span> */}
         <label className="flex flex-col gap-1 items-start mt-5">
           <span>Email</span>
           <input
             placeholder="email"
-            id="email"
+            {...register("email")}
             type="text"
-            onChange={handleInput}
             className="p-2 rounded-lg focus:outline-none font-medium w-72 border"
           />
         </label>
@@ -64,16 +67,15 @@ const Login = () => {
           <span>Password</span>{" "}
           <input
             placeholder="password"
-            id="password"
             type="password"
-            onChange={handleInput}
+            {...register("password")}
             className="p-2 rounded-lg focus:outline-none font-medium w-72 border"
           />
         </label>
         <br />
 
         <button
-          onClick={handelLogin}
+          // onClick={handelLogin}
           disabled={loading}
           className="w-full rounded p-2 bg-blue-800 hover:opacity-90 self-center text-white "
         >

@@ -18,20 +18,12 @@ const Popular = () => {
               </div>
               <div className="absolute top-2 left-2 flex gap-2 items-center">
                 <span className=" text-2xl text-white">Lagos</span>
-                <span>flag</span>
               </div>
-              <div className="flex flex-col  gap-1 p-3">
+              {/* <div className="flex flex-col  gap-1 p-3">
                 <div className="flex flex-col mb-3 ">
-                  <span>1963 Crescent Height Blvd</span>
-                  <span>location: los Angeles, CA 90034</span>
-                </div>
-
-                <div className="w-64  flex justify-between">
-                  <span>10 Bedrooms</span>
-                  <span>10 Bathrooms</span>
-                </div>
-                <Button>$1,200,000</Button>
+     
               </div>
+              </div> */}
             </div>
           );
         })}

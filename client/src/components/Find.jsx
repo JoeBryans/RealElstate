@@ -45,7 +45,7 @@ const Find = () => {
   return (
     <div className="">
       <Container>
-        <div className="bg-red-800 absolute top-20  px-5  rounded-md text-slate-500">
+        <div className="bg-black opacity-30 absolute top-36  px-5  rounded-md text-white">
           <h2 className="mt-5 sm:text-2xl font-semibold">
             Find a Perfect Dream House
           </h2>

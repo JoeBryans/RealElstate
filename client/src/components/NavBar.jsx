@@ -1,27 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import userimg from "../assets/users.jpeg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as MdIcons from "react-icons/md";
 import { Button } from "react-bootstrap";
+import axios from "axios";
+import { logOut } from "../Api/Slices/userSlice";
 
 const NavBar = () => {
   const user = useSelector((state) => state.user.user);
   const [openNav, setOpenNav] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const Bar = () => {
     setOpenNav(!openNav);
     console.log(openNav);
   };
-  const LogOut = () => {
-    localStorage.clear("user");
-    navigate("/");
-    setOpenNav(false);
+  const LogOut = async () => {
+    try {
+      const res = axios.get("http://localhost:5500/auth/logOut", {
+        withCredentials: true,
+      });
+      dispatch(logOut());
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
-  useEffect(() => {
-    LogOut;
-  }, [user, navigate]);
 
   return (
     <>

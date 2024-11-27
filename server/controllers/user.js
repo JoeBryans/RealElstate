@@ -88,7 +88,14 @@ export const Login = async (req, res, next) => {
     next(error);
   }
 };
-
+export const LogOut = async (req, res, next) => {
+  try {
+    res.clearCookie("access_token");
+    res.status(200).json("LogOut successful");
+  } catch (error) {
+    next(error);
+  }
+};
 export const Users = async (req, res, nex) => {
   try {
     const user = await UserModel.find();

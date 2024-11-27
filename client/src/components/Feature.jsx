@@ -54,7 +54,7 @@ const Feature = () => {
                     </div>
                     <div className="absolute top-10 left-2">
                       <span className="bg-green-600 text-white px-2 rounded ">
-                        status
+                        {items.propertyStatus}{" "}
                       </span>
                     </div>
                     <div className="absolute bottom-1 right-2">

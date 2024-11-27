@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import * as MdIcons from "react-icons/md";
 import { useLocation, useNavigate } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
@@ -81,6 +81,48 @@ const SideBar = () => {
     const searchQuery = urlParams.toString();
     navigate(`/listen?${searchQuery}`);
   };
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchUrl = urlParams.get("search");
+
+    const addressUrl = urlParams.get("address");
+    const propertyTypeUrl = urlParams.get("property");
+    const bedroomUrl = urlParams.get("bedroom");
+    const bathroomUrl = urlParams.get("bathroom");
+    const minUrl = urlParams.get("min");
+    const maxUrl = urlParams.get("max");
+    const packingUrl = urlParams.get("parking");
+    const furnishedUrl = urlParams.get("furnished");
+    const typeUrl = urlParams.get("type");
+    const offerUrl = urlParams.get("offer");
+    if (
+      searchUrl ||
+      addressUrl ||
+      propertyTypeUrl ||
+      bedroomUrl ||
+      bathroomUrl ||
+      minUrl ||
+      maxUrl ||
+      packingUrl ||
+      furnishedUrl ||
+      typeUrl ||
+      offerUrl
+    ) {
+      setSearchForm({
+        search: searchUrl || "",
+        address: addressUrl || "",
+        bedroom: bedroomUrl || 0,
+        bathroom: bathroomUrl || 0,
+        min: minUrl || 0,
+        max: maxUrl || 0,
+        propertyType: propertyTypeUrl || "",
+        packing: packingUrl || false,
+        furnished: furnishedUrl || false,
+        type: typeUrl || "all",
+        offer: offerUrl || false,
+      });
+    }
+  }, []);
 
   return (
     <div className="w-full md:w-96 md:px-4  px-3 mt-10 sticky top-10  ">

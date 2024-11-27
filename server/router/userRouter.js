@@ -10,6 +10,7 @@ import {
   Users,
   UploadImg,
   userProperties,
+  LogOut,
 } from "../controllers/user.js";
 import { Authenticate } from "../Auth/auth.js";
 import upload from "../middleware/multer.js";
@@ -18,6 +19,7 @@ const userRouter = express.Router();
 
 userRouter.post("/register", Register);
 userRouter.post("/login", Login);
+userRouter.get("/logOut", LogOut);
 userRouter.get("/users", Users);
 userRouter.get("/user/save/:id", Authenticate, GetItem);
 userRouter.get("/user/:id", Authenticate, UserID);

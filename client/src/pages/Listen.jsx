@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import * as MdIcons from "react-icons/md";
 import * as FaIcons from "react-icons/fa";
 import { Button } from "react-bootstrap";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { useSearchPropertyQuery } from "../Api/Api";
 import SideBar from "./../components/SideBar";
 import user from "../assets/user.jpg";
+import axios from "axios";
 const Listen = () => {
   const [show, setShow] = useState(false);
   const [data, setData] = useState([]);
@@ -27,56 +28,70 @@ const Listen = () => {
   const handleClick = (i) => {
     setIndex(i);
   };
+  // useEffect(() => {
+  //   const urlParams = new URLSearchParams(location.search);
+  //   const searchUrl = urlParams.get("search");
+
+  //   const addressUrl = urlParams.get("address");
+  //   const propertyTypeUrl = urlParams.get("property");
+  //   const bedroomUrl = urlParams.get("bedroom");
+  //   const bathroomUrl = urlParams.get("bathroom");
+  //   const minUrl = urlParams.get("min");
+  //   const maxUrl = urlParams.get("max");
+  //   const packingUrl = urlParams.get("parking");
+  //   const furnishedUrl = urlParams.get("furnished");
+  //   const typeUrl = urlParams.get("type");
+  //   const offerUrl = urlParams.get("offer");
+  //   if (
+  //     searchUrl ||
+  //     addressUrl ||
+  //     propertyTypeUrl ||
+  //     bedroomUrl ||
+  //     bathroomUrl ||
+  //     minUrl ||
+  //     maxUrl ||
+  //     packingUrl ||
+  //     furnishedUrl ||
+  //     typeUrl ||
+  //     offerUrl
+  //   ) {
+  //     setSearchForm({
+  //       search: searchUrl || "",
+  //       address: addressUrl || "",
+  //       bedroom: bedroomUrl || 0,
+  //       bathroom: bathroomUrl || 0,
+  //       min: minUrl || 0,
+  //       max: maxUrl || 0,
+  //       propertyType: propertyTypeUrl || "",
+  //       packing: packingUrl || false,
+  //       furnished: furnishedUrl || false,
+  //       type: typeUrl || "all",
+  //       offer: offerUrl || false,
+  //     });
+  //   }
+  //   const fechData = async () => {
+  //     const searchQuery = urlParams.toString();
+  //     const res = await fetch(`http://localhost:5500/property/?${searchQuery}`);
+  //     const datas = await res.json();
+  //     console.log(datas);
+  //     setData(datas);
+  //   };
+  //   fechData();
+  // }, [location.search]);
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const searchUrl = urlParams.get("search");
 
-    const addressUrl = urlParams.get("address");
-    const propertyTypeUrl = urlParams.get("property");
-    const bedroomUrl = urlParams.get("bedroom");
-    const bathroomUrl = urlParams.get("bathroom");
-    const minUrl = urlParams.get("min");
-    const maxUrl = urlParams.get("max");
-    const packingUrl = urlParams.get("parking");
-    const furnishedUrl = urlParams.get("furnished");
-    const typeUrl = urlParams.get("type");
-    const offerUrl = urlParams.get("offer");
-    if (
-      searchUrl ||
-      addressUrl ||
-      propertyTypeUrl ||
-      bedroomUrl ||
-      bathroomUrl ||
-      minUrl ||
-      maxUrl ||
-      packingUrl ||
-      furnishedUrl ||
-      typeUrl ||
-      offerUrl
-    ) {
-      setSearchForm({
-        search: searchUrl || "",
-        address: addressUrl || "",
-        bedroom: bedroomUrl || 0,
-        bathroom: bathroomUrl || 0,
-        min: minUrl || 0,
-        max: maxUrl || 0,
-        propertyType: propertyTypeUrl || "",
-        packing: packingUrl || false,
-        furnished: furnishedUrl || false,
-        type: typeUrl || "all",
-        offer: offerUrl || false,
-      });
-    }
     const fechData = async () => {
       const searchQuery = urlParams.toString();
-      const res = await fetch(`http://localhost:5500/property/?${searchQuery}`);
-      const datas = await res.json();
-      console.log(datas);
-      setData(datas);
+      const { data } = await axios.get(
+        `http://localhost:5500/property/?${searchQuery}`
+      );
+      // const datas = await res.json();
+      console.log(data);
+      setData(data);
     };
     fechData();
-  }, [location]);
+  }, [location.search]);
   const HandleButton = () => {
     setShow(true);
   };

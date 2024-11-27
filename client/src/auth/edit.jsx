@@ -1,14 +1,9 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useRegisterMutation } from "../Api/Api";
+import React from "react";
+import { Link } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
-const Register = () => {
-  const [formData, setFormData] = useState({});
-  // const [AddformData] = useRegisterMutation();
-  const navigate = useNavigate();
-
+const Edit = () => {
   const validationSchema = yup.object().shape({
     username: yup.string().required("user name  is required"),
     mobile: yup.string().required("phone  is required"),
@@ -25,41 +20,7 @@ const Register = () => {
     resolver: yupResolver(validationSchema),
   });
 
-  const onSubmit = async (data) => {
-    try {
-      const res = await axios.post(
-        "http://localhost:5500/auth/register",
-        data,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-      console.log(res.data);
-      navigate("/address");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handInput = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
-  };
-  // console.log(formData);
-  const handRegistration = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await AddformData(formData);
-      console.log(res.data);
-      navigate("/login");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  const onSubmit = async (data) => {};
   return (
     <div className="max-w-2xl  mx-auto mt-44 text-slate-700 ">
       <form
@@ -180,4 +141,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Edit;

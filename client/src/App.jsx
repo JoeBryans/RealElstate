@@ -3,7 +3,7 @@ import { useState } from "react";
 import "./App.css";
 // import "easymde/dist/easymde.min.css";
 
-import { Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import NavBar from "./components/NavBar";
 import Listen from "./pages/Listen";
@@ -25,10 +25,12 @@ import Protected from "./private/protected";
 import { useSelector } from "react-redux";
 import AgentProperties from "./pages/AgentProperties";
 import Addresse from "./pages/Addresse";
+import Edit from "./auth/edit";
 
 function App() {
   const user = useSelector((state) => state.user.user);
-
+  const location = useLocation();
+  console.log(location.pathname);
   return (
     <>
       <div className="App p-0 m-0">
@@ -40,29 +42,29 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/save" element={<Saved />} />
           </Route>
-          {/* {user ? (
-            <Navigate to="/" />
-          ) : ( */}
-          <Route path="/login" element={<Login />} />
+          {user ? (
+            <Route path="*" element={<Navigate to="/" />} />
+          ) : (
+            <Route path="/login" element={<Login />} />
+          )}
+          {user ? (
+            <Route path="*" element={<Navigate to="/" />} />
+          ) : (
+            <Route path="/register" element={<Register />} />
+          )}
           <Route path="/address" element={<Addresse />} />
-          {/* )} */}
-          {/* {user ? (
-            <Navigate to="/" />
-          ) : ( */}
-          <Route path="/register" element={<Register />} />
-          {/* )} */}
-
           <Route path="/add-property" element={<AddProperty />} />
           <Route path="/property" element={<Properties />} />
           <Route path="/buy" element={<Buy />} />
           <Route path="/rent" element={<Rent />} />
           <Route path="/property-details/:id" element={<Property />} />
-
           <Route path="/agent" element={<Agent />} />
           <Route path="/property/agent/:id" element={<AgentProperties />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/upload" element={<Upload />} />
-          {/* <Route path="/edit/:name" element={<Edit />} /> */}
+          <Route path="*" element={<Navigate to="/" />} />
+
+          <Route path="/update/user/:name" element={<Edit />} />
         </Routes>
         <Footer />
       </div>

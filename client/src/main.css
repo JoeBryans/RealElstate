@@ -52,6 +52,9 @@
  input,textarea,select,:checked{
   background: #fff;
  }
+ /* input,textarea,select:focus{
+  background: #fff;
+ } */
 
  .dropDown{
   position: relative;

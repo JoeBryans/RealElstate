@@ -103,7 +103,9 @@ const Property = () => {
               alt=""
               onClick={() => handleClick()}
             /> */}
-
+            <span className="w-fit bg-green-600 text-white px-2 rounded ">
+              {property.propertyStatus}
+            </span>
             <strong className="text-xl ">$ {property?.price}</strong>
             <span className="flex gap-1 font-medium">
               <MdIcons.MdLocationPin size={25} color="green" />{" "}
