@@ -4,6 +4,10 @@ import bcrypt from "bcrypt";
 import UserModel from "../models/userModle.js";
 import savedModel from "../models/saveModle.js";
 import { Errors } from "../utils/error.js";
+import cloudinaryUploader from "../middleware/cloudinary.js";
+import cloudinary from "../middleware/cloudinary.js";
+import fs from "fs";
+import { log } from "console";
 dotenv.config();
 
 export const Register = async (req, res, next) => {
@@ -33,7 +37,7 @@ export const Login = async (req, res, next) => {
   const { email, password } = req.body;
 
   try {
-    const user = await UserModel.findOne({ email });
+    const user = await UserModel.findOne({ email }).populate("properties");
 
     if (!user) return next(Errors(402, "Wrong credential!"));
     const Compare = await bcrypt.compare(req.body.password, user.password);
@@ -93,6 +97,10 @@ export const UserID = async (req, res, next) => {
 export const Update = async (req, res, next) => {
   const id = req.user.id;
   try {
+    // const uploader = await cloudinary.uploader.upload(req.file.path);
+    // const userUpdate = await UserModel.findByIdAndUpdate(req.params.id, {
+    //   $push: { picture: uploader.secure_url },
+    // });
     const user = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
     await user.save();
     res.json(user);
@@ -144,9 +152,25 @@ export const userProperties = async (req, res, nex) => {
     console.log(error);
   }
 };
-export const UploadImg = async (req, res, nex) => {
+export const UploadImg = async (req, res, next) => {
   try {
+    const user = await UserModel.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    console.log(req.file);
+
+    const uploader = await cloudinary.uploader.upload(req.file.path);
+    console.log(uploader);
+    const userUpdate = await UserModel.findByIdAndUpdate(
+      req.params.id,
+      { $set: { ...req.body, picture: uploader.secure_url } },
+      { new: true }
+    );
+    await userUpdate.save();
+    // fs.unlinkSync(`./public/images/${req.file.filename}`);
+    res.status(200).json({ message: "Image uploaded successfully" });
   } catch (error) {
-    next(error);
+    console.log(error);
   }
 };

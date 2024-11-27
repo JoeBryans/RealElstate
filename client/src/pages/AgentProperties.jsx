@@ -24,7 +24,7 @@ const AgentProperties = () => {
       <h1 className="mb-5">Neighbourhood Properties</h1>
       <div className="flex flex-wrap gap-4 justify-start ">
         {property &&
-          property.slice(1, 5).map((items, i) => {
+          property.map((items, i) => {
             return (
               <div
                 key={i}

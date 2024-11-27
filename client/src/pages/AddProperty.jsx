@@ -4,10 +4,12 @@ import { Button } from "react-bootstrap";
 import { useCreateListenMutation } from "../Api/Api";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const AddProperty = () => {
   // const user = useSelector((state) => state.user.user);
   // const [AddformData, isLoading] = useCreateListenMutation();
+  const navigate = useNavigate();
   const [file, setFile] = useState([]);
   console.log(file);
   const [data, setData] = useState({
@@ -108,6 +110,7 @@ const AddProperty = () => {
         }
       );
       console.log(res.data);
+      navigate("/profile");
       // isLoading(false);
     } catch (error) {
       console.log(error);
@@ -115,7 +118,7 @@ const AddProperty = () => {
     }
   };
   return (
-    <div className="text-slate-700 flex mt-10  ">
+    <div className="text-slate-700 flex flex-wrap mt-10  ">
       <div className="w-4/5   mx-auto">
         <form className="flex flex-col gap-3 mx-auto w-max md:w-[40rem] shadow-md p-4">
           <input
@@ -201,6 +204,7 @@ discountPrice */}
               name="file"
               multiple
               accept="image/*"
+              // onChange={(e) => setFile(URL.createObjectURL(e.target.files[0]))}
               onChange={(e) => setFile(e.target.files)}
               className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
             />
@@ -279,6 +283,20 @@ discountPrice */}
           <Button onClick={handleCreate}>Create</Button>
         </form>
       </div>
+      {/* <div className="w-40  relative mx-auto mt-6 sm:top-96 sm:right-80">
+        {" "}
+        {file &&
+          file.map((item, i) => {
+            return (
+              <img
+                key={i}
+                src={item}
+                alt=""
+                className="w-40 h-40 object-cover rounded-lg"
+              />
+            );
+          })}
+      </div> */}
     </div>
   );
 };

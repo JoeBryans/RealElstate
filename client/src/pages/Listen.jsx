@@ -180,13 +180,13 @@ const Listen = () => {
                     </div>
                     <div className="w-60 mt-2">
                       <img
-                        src={user}
+                        src={items.userId?.picture[0]}
                         alt=""
                         className="w-10 h-10 rounded-full object-cover"
                       />
-                      <div className="w-40 sm:w-52 flex justify-between">
-                        <span>{items.userId?.username || "JoeBryan"}</span>
-                        <span>10/09/2023</span>
+                      <div className="w-40 sm:w-52 flex justify-between mt-2">
+                        <span>{items.userId?.username}</span>
+                        <span>{items.updatedAt.slice(0, 10)}</span>
                         {/* <span>{items.userId.username}</span> */}
                       </div>
                     </div>

@@ -166,7 +166,7 @@ const Property = () => {
           <div className="flex flex-col items-center mx-auto gap-6 ">
             <div className=" w-full sm:w-80 h-96 flex flex-col gap-2 shadow-md py-4 px-4 text-slate-700 mx-auto md:mt-20">
               <img
-                src={property?.userId?.image}
+                src={property?.userId?.picture[0]}
                 alt="photo"
                 className="w-24 h-24 rounded-full object-center self-center mb-3  "
               />

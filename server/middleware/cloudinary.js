@@ -6,7 +6,7 @@ cloudinary.config({
   api_key: process.env.Api_Key,
   api_secret: process.env.Api_Secret,
 });
-const cloudinaryUploader = async (fileToUpload) => {
+export const cloudinaryUploader = async (fileToUpload) => {
   //   return new Promise((resolve, reject) => {
   //     cloudinary.uploader.upload(fileToUpload, (error, result) => {
   //       if (error) {
@@ -39,15 +39,15 @@ const cloudinaryUploader = async (fileToUpload) => {
     });
   });
 };
-export default cloudinaryUploader;
+// export default cloudinaryUploader;
 // // RealEstate;
 // import { v2 as cloudinary } from "cloudinary";
 // import cloudinary from './cloudinary';
 
-// cloudinary.config({
-//   cloud_name: "dlwiafeam",
-//   api_key: "234171423617168",
-//   api_secret: "-rmD_5K5FXhqcAh3nRHKTsgt0dA",
-// });
+cloudinary.config({
+  cloud_name: "dlwiafeam",
+  api_key: "234171423617168",
+  api_secret: "-rmD_5K5FXhqcAh3nRHKTsgt0dA",
+});
 
-// export default cloudinary;
+export default cloudinary;

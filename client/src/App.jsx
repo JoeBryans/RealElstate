@@ -36,7 +36,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/listen" element={<Listen />} />
           <Route element={<Protected />}>
-            <Route path="/account" element={<Profile />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/save" element={<Saved />} />
           </Route>
           {/* {user ? (

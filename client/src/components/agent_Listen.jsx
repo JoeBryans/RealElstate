@@ -1,43 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import home1 from "../assets/home1.jpg";
 import * as MdIcons from "react-icons/md";
 import * as FaIcons from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { Button } from "react-bootstrap";
 
 const AgentListen = () => {
+  const user = useSelector((state) => state.user.user);
+  const [currentpage, setCurrentPage] = useState(1);
+  const [page, setPage] = useState(4);
+  const lastIndex = currentpage * page;
+  const firstIndex = lastIndex - page;
+  const currentListen = user.properties.slice(firstIndex, lastIndex);
+  const totalListen = user.properties.length;
+  console.log(totalListen);
+  let pages = [];
+  for (let index = 1; index <= Math.ceil(totalListen / page); index++) {
+    pages.push(index);
+  }
   return (
-    <div className="text-slate-700 max-w-2xl  px-4">
-      <h2>Your Properties</h2>
+    <div className="text-slate-700 max-w-2xl mt-10 px-4">
+      <h2 className="capitalized">{user.username} Property</h2>
       <div className="flex flex-col mx-auto gap-4">
-        {[1, 2, 3, 4, 5].map((items) => {
+        {currentListen.map((items) => {
           return (
-            <div className=" flex border items-start gap-3 mx-auto  rounded-lg py-2">
-              <img src={home1} alt="" className="w-64" />
+            <div className=" flex  items-start gap-3 mx-auto  rounded-lg py-2">
+              <img src={items.image[0].url} alt="" className="w-64" />
               <div className="flex flex-col gap-2">
                 <span className="font-semibold text-xl mb-1  line-clamp-1">
-                  New 3 Bedroom Semi Detached Duplex for Sale at Thomas Estate
-                  Ajah Lekki
+                  {items.name}
                 </span>
                 <span className="text-sm flex gap-2 items-center">
                   <MdIcons.MdLocationOn color="green" size={20} />
-                  Abuja
+                  {items.address}
                 </span>
                 <div className="flex items-center gap-3">
                   <span className="font-semibold text-xl mb-1 p-1 cursor-pointer  line-clamp-1 text-slate-700 ">
-                    $ 88400
+                    $ {items.price}
                   </span>
                   <span className="flex items-center gap-2">
                     <FaIcons.FaBed color="green" />
-                    bedroom
+                    {items.bedroom} bed
                   </span>
                   <span className="flex items-center gap-2">
                     <FaIcons.FaBath color="green" />
-                    bathroom
+                    {items.bathroom} bath
                   </span>
                 </div>
                 <div className="flex w-80  items-center justify-between">
-                  <span className="bg-blue-500 text-white px-2 rounded ">
-                    Sale
-                  </span>
+                  {items.type === "sale" ? (
+                    <span className="bg-blue-500 text-white px-2 rounded ">
+                      {items.type}
+                    </span>
+                  ) : (
+                    <span className="bg-red-500 text-white px-2 rounded ">
+                      {items.type}
+                    </span>
+                  )}
                   <div className="flex gap-3">
                     <span className="text-blue-500 bg-white border px-2 rounded flex items-center gap-1 cursor-pointer">
                       <FaIcons.FaEdit /> Edit
@@ -51,6 +70,15 @@ const AgentListen = () => {
             </div>
           );
         })}
+      </div>
+      <div className="flex gap-3 mt-4">
+        {pages.map((page, i) => {
+          return (
+            <Button key={i} onClick={() => setCurrentPage(page)}>
+              {page}
+            </Button>
+          );
+        })}{" "}
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-import cloudinaryUploader from "../middleware/cloudinary.js";
+import { cloudinaryUploader } from "../middleware/cloudinary.js";
 // import cloudinary from "../middleware/cloudinary.js";
 import estateModel from "./../models/estateModle.js";
 import fs from "fs";
@@ -95,7 +95,7 @@ export const Create = async (req, res, next) => {
       const { path } = file;
       const newPath = await uploader(path);
       urls.push(newPath);
-      fs.unlinkSync(path);
+      // fs.unlinkSync(path);
     }
     const property = await estateModel.create({
       ...req.body,
@@ -221,6 +221,7 @@ export const Search = async (req, res, next) => {
           },
         ],
       })
+      .populate("userId")
       .sort({ [sort]: order })
       .limit(limit)
       .skip(firstIndex);
