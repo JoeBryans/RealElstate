@@ -18,7 +18,7 @@ const Location = () => {
         <h1 className="mb-5">Properties In Lagos</h1>
         <div className="flex flex-wrap gap-4 justify-start ">
           {property &&
-            property.slice(1, 5).map((items, i) => {
+            property.slice(0, 4).map((items, i) => {
               return (
                 <div
                   key={i}

@@ -22,8 +22,15 @@ const Property = () => {
     setShow(true);
     setIndex(i);
   };
-  const HandleSlide = () => {
-    // setIndex(i);
+  const HandleSlide = (direction) => {
+    let slide;
+    if (direction === "l") {
+      slide = index - 1;
+    } else {
+      slide = index + 1;
+      // slide = index === 5 ? 0 : index + 1;
+    }
+    setIndex(slide);
   };
   const handleClose = (i) => {
     setShow(false);
@@ -37,6 +44,7 @@ const Property = () => {
   useEffect(() => {
     fetchData(id);
   }, [id]);
+  console.log(property);
   return (
     <div className="mx-auto relative">
       {/* {isLoading && <Loading />} */}
@@ -58,20 +66,20 @@ const Property = () => {
         <img
           src={property?.image && property?.image[index].url}
           alt=""
-          className="w-max h-[64vh] object-center "
+          className="max-w-2xl h-[64vh] object-center "
         />
         <div className="flex absolute justify-between w-4/6 ">
           <FaIcons.FaArrowAltCircleLeft
             size={30}
             color="white"
             className="z-10 cursor-pointer"
-            onClick={() => HandleSlide(l)}
+            onClick={() => HandleSlide("l")}
           />
           <FaIcons.FaArrowAltCircleRight
             size={30}
             color="white"
             className="z-10 cursor-pointer"
-            onClick={() => HandleSlide(r)}
+            onClick={() => HandleSlide("r")}
           />
           {/* <FaIcons.FaCircle size={20} color="red" className="z-10" />
           <FaIcons.FaCircle size={20} color="red" className="z-10" />

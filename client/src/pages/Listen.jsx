@@ -125,7 +125,7 @@ const Listen = () => {
                 <div
                   key={i}
                   // className="w-44 md:w-60  flex flex-col border  items-start md:items-center  mx-auto md:mx-1 overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
-                  className="w-48 md:w-60  flex flex-col border  items-start md:items-center   overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
+                  className="w-48 md:w-60  flex flex-col border  items-start md:items-center   overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg mx-auto "
                 >
                   <div className="relative overflow-hidden">
                     <Link to={`/property-details/${items._id}`}>
@@ -201,7 +201,7 @@ const Listen = () => {
                       />
                       <div className="w-40 sm:w-52 flex justify-between mt-2">
                         <span>{items.userId?.username}</span>
-                        <span>{items.updatedAt.slice(0, 10)}</span>
+                        <span>{items.updatedAt?.slice(0, 10)}</span>
                         {/* <span>{items.userId.username}</span> */}
                       </div>
                     </div>

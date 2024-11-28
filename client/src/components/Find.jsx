@@ -43,9 +43,9 @@ const Find = () => {
     // navigate("/listen", { state: { searchForm } });
   };
   return (
-    <div className="">
+    <div className="mt-3">
       <Container>
-        <div className="bg-black opacity-30 absolute top-36  px-5  rounded-md text-white">
+        <div className="bg-black opacity-50 absolute top-36  px-5  rounded-md text-white">
           <h2 className="mt-5 sm:text-2xl font-semibold">
             Find a Perfect Dream House
           </h2>
@@ -57,17 +57,17 @@ const Find = () => {
           </p>
         </div>
         <div className=" flex flex-col flex-wrap mb-5 ">
-          <div className="bg-blue-800 rounded p-1 mx-auto flex flex-wrap   items-center  gap-2 text-slate-700">
+          <div className=" rounded p-1 mx-auto flex flex-wrap   items-center  gap-2 text-slate-700">
             <input
               type="text"
               placeholder="keyword"
-              className="border p-2 rounded focus:outline-none text-slate-700"
+              className=" w-full sm:w-fit border p-2 rounded focus:outline-none text-slate-700"
               id="search"
               // value={searchlocation}
               // onChange={(e) => setSearchlocation(e.target.value)}
               onChange={HandleInput}
             />
-            <label className=" flex gap-2 items-center  rounded-lg border p-2 text-slate-500 text-xl bg-white">
+            <label className=" w-full sm:w-fit flex gap-2 items-center  rounded-lg border p-2 text-slate-500 text-xl bg-white">
               <MdIcons.MdLocationPin size={20} color="green" />
               <input
                 type="text"
@@ -77,11 +77,11 @@ const Find = () => {
                 onChange={HandleInput}
               />
             </label>
-            <div className="flex flex-wrap gap-3 ">
+            <div className=" w-full sm:w-fit flex flex-wrap gap-3 ">
               <select
                 id="propertyType"
                 onChange={HandleInput}
-                className="  rounded-lg border p-2 text-slate-500 text-xl"
+                className="  w-full sm:w-fit rounded-lg border p-2 text-slate-500 text-xl"
               >
                 <option value="">Property Type</option>
                 <option value="Property Type">Property Type</option>
@@ -89,7 +89,7 @@ const Find = () => {
                 <option value="Property Type">Property Type</option>
               </select>
               <select
-                className="  rounded-lg border p-2 text-slate-500 text-xl"
+                className=" w-full sm:w-fit  rounded-lg border p-2 text-slate-500 text-xl"
                 id="bedroom"
                 onChange={HandleInput}
               >
@@ -106,7 +106,7 @@ const Find = () => {
                 >
                   Search
                 </button> */}
-              <Button onClick={Search} className="">
+              <Button onClick={Search} className=" w-full sm:w-fit">
                 Search
               </Button>
             </div>

@@ -186,7 +186,6 @@ export const DeleteItem = async (req, res, next) => {
 };
 
 export const Search = async (req, res, next) => {
-  console.log(req.query);
   try {
     const limit = parseInt(req.query.limit) || 9;
     const firstIndex = parseInt(req.query.firstIndex) || 0;
@@ -216,12 +215,9 @@ export const Search = async (req, res, next) => {
     if (pool === undefined || pool === "false") {
       pool = { $in: [false, true] };
     }
-    // let pool = req.query.pool;
-    // if (pool === undefined || pool === "false") {
-    //   pool = { $in: [false, true] };
-    // }
-    const min = req.query.price || 0;
-    const max = req.query.price || 0;
+
+    const min = req.query.min || 0;
+    const max = req.query.max || 999999;
     const search = req.query.search || "";
     const address = req.query.address || "";
     const property = req.query.propertyType || "";
@@ -235,12 +231,12 @@ export const Search = async (req, res, next) => {
           {
             name: { $regex: search, $options: "i" },
             address: { $regex: address, $options: "i" },
-            // price: { $gte: min },
-            // price: { $lte: max },
+            price: { $lte: max },
+            price: { $gte: min },
             propertyType: { $regex: property, $options: "i" },
             bedroom: { $gte: bedroom },
             bathroom: { $gte: bathroom },
-            // pool,
+            pool,
             offer,
             furnished,
             type,

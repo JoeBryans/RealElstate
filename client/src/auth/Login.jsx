@@ -14,11 +14,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const validationSchema = yup.object().shape({
     email: yup.string().required("email field is required"),
-    password: yup
-      .string()
-      .min(10)
-      .max(50)
-      .required("password field is required"),
+    password: yup.string().required("password field is required"),
   });
   const {
     register,

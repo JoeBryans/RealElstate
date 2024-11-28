@@ -5,7 +5,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 const Register = () => {
-  const [formData, setFormData] = useState({});
   // const [AddformData] = useRegisterMutation();
   const navigate = useNavigate();
 
@@ -37,24 +36,6 @@ const Register = () => {
       );
       console.log(res.data);
       navigate("/address");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handInput = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.id]: e.target.value,
-    });
-  };
-  // console.log(formData);
-  const handRegistration = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await AddformData(formData);
-      console.log(res.data);
-      navigate("/login");
     } catch (error) {
       console.log(error);
     }
