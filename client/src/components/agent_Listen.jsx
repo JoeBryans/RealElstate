@@ -20,7 +20,9 @@ const AgentListen = () => {
   }
   return (
     <div className="text-slate-700 max-w-2xl mt-10 px-4">
-      <h2 className="capitalized text-center mt-3">{user.username} Property</h2>
+      {user.properties.length === 0 ? null : (
+        <h2 className="capitalized text-center mt-3"> Property</h2>
+      )}{" "}
       <div className="flex flex-col mx-auto gap-4">
         {currentListen.map((items) => {
           return (

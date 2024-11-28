@@ -26,6 +26,7 @@ import { useSelector } from "react-redux";
 import AgentProperties from "./pages/AgentProperties";
 import Addresse from "./pages/Addresse";
 import Edit from "./auth/edit";
+import Update from "./pages/update";
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -64,7 +65,8 @@ function App() {
           <Route path="/upload" element={<Upload />} />
           <Route path="*" element={<Navigate to="/" />} />
 
-          <Route path="/update/user/:name" element={<Edit />} />
+          <Route path="/update/user/:id" element={<Edit />} />
+          <Route path="/update/propert/:id" element={<Update />} />
         </Routes>
         <Footer />
       </div>

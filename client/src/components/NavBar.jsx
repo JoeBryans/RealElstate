@@ -111,7 +111,7 @@ const NavBar = () => {
           <div
             className={
               openNav
-                ? " sm:hidden flex flex-col gap-3 fixed h-[93vh] w-full bg-black opacity-85 top-[62px] right-0 p-4 z-30"
+                ? " sm:hidden flex flex-col gap-3 fixed h-[93vh] w-full bg-black opacity-85 top-[58px] right-0 p-4 z-30"
                 : "hidden"
             }
           >

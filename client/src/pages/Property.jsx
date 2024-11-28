@@ -53,7 +53,7 @@ const Property = () => {
       <div
         className={
           show
-            ? " mb-4  bg-black  -top-2 mt-2 fixed w-full flex justify-center items-center h-[100vh] opacity-95 z-20"
+            ? " mb-4  bg-black  -top-2 mt-2 fixed w-full flex justify-center items-center h-[100vh] opacity-95 z-40"
             : "hidden"
         }
       >
