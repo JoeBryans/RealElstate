@@ -221,8 +221,8 @@ export const Search = async (req, res, next) => {
     const search = req.query.search || "";
     const address = req.query.address || "";
     const property = req.query.propertyType || "";
-    const bedroom = req.query.bedroom || 0;
-    const bathroom = req.query.bathroom || 0;
+    const bedroom = req.query.bedroom || 1;
+    const bathroom = req.query.bathroom || 1;
     const sort = req.query.sort || "createdAt";
     const order = req.query.order || "desc";
     const findListen = await estateModel

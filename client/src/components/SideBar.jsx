@@ -172,8 +172,11 @@ const SideBar = () => {
         >
           <option value="">Property Type</option>
           <option value="Apartment">Apartment</option>
-          <option value="Property Type">Property Type</option>
-          <option value="Property Type">Property Type</option>
+          <option value="Bungalow">Bungalow</option>
+          <option value="Detached">Detached</option>
+          <option value="Duplex">Duplex</option>
+          <option value="Flat">Flat</option>
+          <option value="Townhouse">Townhouse</option>
         </select>
         <select
           id="bedroom"

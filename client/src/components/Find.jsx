@@ -9,13 +9,9 @@ const Find = () => {
     search: "",
     address: "",
     bedroom: 0,
-    // price,
     propertyType: "",
-    // offer,
-    // furnished,
-    // type,
-    // packing
   });
+  console.log(searchForm);
   const HandleInput = (e) => {
     setSearchForm({
       ...searchForm,
@@ -80,13 +76,16 @@ const Find = () => {
             <div className=" w-full sm:w-fit flex flex-wrap gap-3 ">
               <select
                 id="propertyType"
+                className=" w-full sm:w-fit  rounded-lg border p-2 text-slate-500 text-xl"
                 onChange={HandleInput}
-                className="  w-full sm:w-fit rounded-lg border p-2 text-slate-500 text-xl"
               >
                 <option value="">Property Type</option>
-                <option value="Property Type">Property Type</option>
-                <option value="Property Type">Property Type</option>
-                <option value="Property Type">Property Type</option>
+                <option value="Apartment">Apartment</option>
+                <option value="Bungalow">Bungalow</option>
+                <option value="Detached">Detached</option>
+                <option value="Duplex">Duplex</option>
+                <option value="Flat">Flat</option>
+                <option value="Townhouse">Townhouse</option>
               </select>
               <select
                 className=" w-full sm:w-fit  rounded-lg border p-2 text-slate-500 text-xl"

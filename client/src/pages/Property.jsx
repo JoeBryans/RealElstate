@@ -22,13 +22,15 @@ const Property = () => {
     setShow(true);
     setIndex(i);
   };
+
+  const imageLength = property?.image?.length - 1;
+
   const HandleSlide = (direction) => {
     let slide;
     if (direction === "l") {
-      slide = index - 1;
+      slide = index === 0 ? imageLength : index - 1;
     } else {
-      slide = index + 1;
-      // slide = index === 5 ? 0 : index + 1;
+      slide = index === imageLength ? 0 : index + 1;
     }
     setIndex(slide);
   };
