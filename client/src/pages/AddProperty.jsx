@@ -101,13 +101,7 @@ const AddProperty = () => {
     }
     try {
       // setLoader(true);
-      const res = await axios.post(
-        "http://localhost:5500/property/",
-        formData,
-        {
-          withCredentials: true,
-        }
-      );
+      const res = await axios.post("http://localhost:5500/property/", formData);
       const data = await res.json();
 
       console.log(data);
