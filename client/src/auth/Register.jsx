@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import axios from "axios";
 const Register = () => {
-  // const [AddformData] = useRegisterMutation();
+  const [AddformData] = useRegisterMutation();
   const navigate = useNavigate();
 
   const validationSchema = yup.object().shape({
@@ -27,14 +27,15 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await axios.post(
-        "http://localhost:5500/auth/register",
-        data
-        // {
-        //   headers: { "Content-Type": "application/json" },
-        //   withCredentials: true,
-        // }
-      );
+      const res = await AddformData(data);
+      //axios.post(
+      //   "http://localhost:5500/auth/register",
+      //   data
+      //   // {
+      //   //   headers: { "Content-Type": "application/json" },
+      //   //   withCredentials: true,
+      //   // }
+      // );
       console.log(res.data);
       navigate("/login");
     } catch (error) {
