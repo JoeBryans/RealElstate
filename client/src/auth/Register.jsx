@@ -4,6 +4,7 @@ import { useRegisterMutation } from "../Api/Api";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
+import axios from "axios";
 const Register = () => {
   // const [AddformData] = useRegisterMutation();
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const Register = () => {
         // }
       );
       console.log(res.data);
-      navigate("/address");
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }
