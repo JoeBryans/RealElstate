@@ -8,10 +8,11 @@ import estateRouter from "./router/estateRouter.js";
 import blogRouter from "./router/blogRouter.js";
 import saveRouter from "./router/saveRouter.js";
 import addressRouter from "./router/addressRouter.js";
-// import cookieParser from "cookie-parser";
+import path from "path";
+import e from "express";
 dotenv.config();
 const port = process.env.PORT || 8000;
-
+const __dirname = path.resolve();
 const app = express();
 app.use(
   cors({
@@ -25,7 +26,10 @@ app.use("/property", estateRouter);
 app.use("/blog", blogRouter);
 app.use("/address", addressRouter);
 app.use("/save", saveRouter);
-
+app.use(express.static(path.join(__dirname, "/client/dist")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "/client/dist/index.html"));
+});
 app.use((err, req, res, next) => {
   const errStatus = err.status || 500;
   const errMessage = err.message || "error from the server";
