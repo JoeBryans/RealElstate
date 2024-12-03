@@ -9,7 +9,6 @@ import blogRouter from "./router/blogRouter.js";
 import saveRouter from "./router/saveRouter.js";
 import addressRouter from "./router/addressRouter.js";
 import path from "path";
-import e from "express";
 dotenv.config();
 const port = process.env.PORT || 8000;
 const __dirname = path.resolve();
