@@ -15,7 +15,7 @@ const AgentProperties = () => {
 
   const AgentPropert = async () => {
     const res = await axios.get(
-      `http://localhost:5500/auth/user/properties/${id}`
+      `http://localhost:5500/property/agent/properties/${id}`
     );
     setProperty(res.data);
     console.log(res.data);
@@ -37,9 +37,9 @@ const AgentProperties = () => {
 
   return (
     <Container>
-      <div className="text-slate-800 text-center flex flex-col justify-center ml-9 md:ml-0">
+      <div className="text-slate-800 text-center flex flex-col items-center justify-center  md:ml-0">
         <h1 className="mb-5"> </h1>
-        <div className="flex flex-wrap gap-4 justify-start  ">
+        <div className="flex max-w-6xl flex-wrap gap-4 justify-start relative left-16 ">
           {currentListen &&
             currentListen.map((items, i) => {
               return (

@@ -98,22 +98,8 @@ export const Create = async (req, res, next) => {
     bedroom,
     image,
   } = req.body;
-  const { password, ...rest } = user._doc;
+  // const { password, ...rest } = user._doc;
   try {
-    if (
-      !name ||
-      !description ||
-      !address ||
-      !type ||
-      !propertyType ||
-      !price ||
-      !bathroom ||
-      !bedroom ||
-      !image
-    ) {
-      // return res.status(400).json("Please file out this field.  ");
-      return next(Errors(400, "Please file out this field.  "));
-    }
     const uploader = async (path) => await cloudinaryUploader(path, "Images");
     const urls = [];
     const files = req.files;
@@ -125,7 +111,7 @@ export const Create = async (req, res, next) => {
     }
     const property = await estateModel.create({
       ...req.body,
-      userId: rest,
+      userId: user,
       image: urls.map((url) => {
         return url;
       }),
@@ -165,11 +151,9 @@ export const GetItem = async (req, res, next) => {
 export const UpdateItem = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const item = await estateModel.findByIdAndUpdate(
-      id,
-      { $set: req.body },
-      { new: true }
-    );
+    const item = await estateModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     res.json(item);
   } catch (error) {
     console.log(error);
@@ -254,11 +238,28 @@ export const Search = async (req, res, next) => {
   }
 };
 export const GetuserListings = async (req, res, next) => {
-  const { userId } = req.body;
+  const { id } = req.params;
   try {
-    const AgentProperty = await estateModel.find({ userId });
+    const user = await UserModel.findById(id);
+    const AgentProperty = await estateModel.find({ userId: user._id });
 
     return res.json(AgentProperty);
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const MyListings = async (req, res, next) => {
+  const agent = req.user.id;
+
+  try {
+    const user = await UserModel.findById(agent);
+    if (!user) {
+      return res.status(400).json("No property found!");
+    } else {
+      const AgentProperty = await estateModel.find({ userId: agent });
+
+      return res.json(AgentProperty);
+    }
   } catch (error) {
     console.log(error);
   }

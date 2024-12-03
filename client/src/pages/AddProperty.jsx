@@ -105,7 +105,6 @@ const AddProperty = () => {
         "http://localhost:5500/property/",
         formData,
         {
-          // headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
       );
@@ -142,9 +141,6 @@ const AddProperty = () => {
             className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
           />
 
-          {/* address
-price
-discountPrice */}
           <input
             type="number"
             placeholder="Price "
@@ -195,15 +191,6 @@ discountPrice */}
             placeholder="descriptions"
             className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
           />
-          {/* <SimpleMDE
-            name=""
-            id="description"
-            // cols="30"
-            // rows="10"C
-            onChange={HandleChange}
-            placeholder="descriptions"
-            className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
-          /> */}
 
           <div className="flex w-full gap-2 items-center">
             <label htmlFor=""></label>
@@ -225,7 +212,6 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
-                required
                 id="rent"
                 className="w-5 h-5"
                 checked={data.type === "rent"}
@@ -237,7 +223,6 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
-                required
                 id="sale"
                 className="w-5 h-5"
                 checked={data.type === "sale"}
@@ -249,7 +234,6 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
-                required
                 id="furnished"
                 className="w-5 h-5"
                 checked={data.furnished}
@@ -261,7 +245,6 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
-                required
                 id="offer"
                 className="w-5 h-5"
                 checked={data.offer}
@@ -273,7 +256,6 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
-                required
                 id="parking"
                 className="w-5 h-5"
                 checked={data.parking}
@@ -285,7 +267,6 @@ discountPrice */}
               <input
                 type="checkbox"
                 name=""
-                required
                 id="pool"
                 className="w-5 h-5"
                 checked={data.pool}

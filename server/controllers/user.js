@@ -69,6 +69,7 @@ export const Login = async (req, res, next) => {
         id: user._id,
         email: user.email,
         mobile: user.mobile,
+        role: user.role,
       },
       process.env.Jkeys
     );

@@ -29,7 +29,6 @@ export const cloudinaryUploader = async (fileToUpload) => {
     cloudinary.uploader.upload(fileToUpload, (result) => {
       resolve(
         {
-          // public_id: result.public_id,
           url: result.secure_url,
         },
         {

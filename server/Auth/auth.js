@@ -8,15 +8,22 @@ export const Authenticate = (req, res, next) => {
     return res.status(403).json("unauthenticated");
   }
   jwt.verify(token, process.env.Jkeys, (err, user) => {
-    if (err) return res.json("invalid token");
-    req.user = user;
-    next();
+    if (err) {
+      return res.json("invalid token");
+    } else {
+      req.user = user;
+      next();
+    }
   });
 };
 export const Agent = (req, res, next) => {
   Authenticate(req, res, next, () => {
-    if (req.user.role === "agent") {
+    console.log(req.user);
+
+    if (req.user.role !== "agent") {
+      return res.ststus(403).json("Not Authenticated");
+    } else {
       next();
-    } else return res.ststus(403).json("Not Authenticated");
+    }
   });
 };

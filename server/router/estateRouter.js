@@ -6,6 +6,7 @@ import {
   GetItem,
   GetItems,
   GetuserListings,
+  MyListings,
   Search,
   UpdateItem,
 } from "../controllers/estate.js";
@@ -17,7 +18,8 @@ const estateRouter = express.Router();
 estateRouter.post("/", Agent, upload.array("image"), Create);
 estateRouter.post("/upload", upload.array("image"), CreateImg);
 estateRouter.get("/estate", GetItems);
-estateRouter.get("/estate/agent", GetuserListings);
+estateRouter.get("/agent/", Authenticate, Agent, MyListings);
+estateRouter.get("/agent/properties/:id", GetuserListings);
 estateRouter.get("/estate/:id", GetItem);
 estateRouter.get("/", Search);
 estateRouter.put("/:id", UpdateItem);

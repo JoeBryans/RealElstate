@@ -38,7 +38,7 @@ const Property = () => {
     setShow(false);
   };
 
-  const fetchData = async (id) => {
+  const fetchData = async () => {
     const res = await axios.get(`http://localhost:5500/property/estate/${id}`);
     setProperty(res.data);
     console.log(res.data);

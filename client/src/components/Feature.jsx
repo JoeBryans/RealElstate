@@ -17,7 +17,6 @@ const Feature = () => {
   return (
     <>
       {" "}
-      {isLoading && <Loading />}
       <div className="text-slate-800 text-center flex flex-col justify-center ml-9 md:ml-0 mb-16 ">
         <h1 className="mb-5">Feature home</h1>
         <div className="flex flex-wrap gap-4 justify-start ">
