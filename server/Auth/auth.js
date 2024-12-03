@@ -4,6 +4,7 @@ dotenv.config();
 
 export const Authenticate = (req, res, next) => {
   const token = req.cookies.access_token;
+  console.log(token);
   if (!token) {
     return res.status(403).json("unauthenticated");
   }
@@ -16,14 +17,27 @@ export const Authenticate = (req, res, next) => {
     }
   });
 };
-export const Agent = (req, res, next) => {
-  Authenticate(req, res, next, () => {
+export const verifyUser = (req, res, next) => {
+  Authenticate(req, res, () => {
     console.log(req.user);
+    const agent = req.user.role === "agent";
 
-    if (req.user.role !== "agent") {
-      return res.ststus(403).json("Not Authenticated");
-    } else {
+    if (req.user.id === req.params.id || agent) {
       next();
+    } else {
+      return res.status(403).json("Not Authenticated");
+    }
+  });
+};
+export const Agent = (req, res, next) => {
+  Authenticate(req, res, () => {
+    console.log(req.user);
+    const agent = req.user.role === "agent";
+
+    if (agent) {
+      next();
+    } else {
+      return res.status(403).json("Not Authenticated");
     }
   });
 };

@@ -16,6 +16,9 @@ import upload from "../middleware/multer.js";
 const estateRouter = express.Router();
 // Agent,Authenticate
 estateRouter.post("/", Agent, upload.array("image"), Create);
+estateRouter.get("/isAgent", Agent, (req, res, next) => {
+  res.json("You are an Agent");
+});
 estateRouter.post("/upload", upload.array("image"), CreateImg);
 estateRouter.get("/estate", GetItems);
 estateRouter.get("/agent/", Authenticate, Agent, MyListings);

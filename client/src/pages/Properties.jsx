@@ -3,21 +3,33 @@ import * as MdIcons from "react-icons/md";
 import * as FaIcons from "react-icons/fa";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useGetPropertyQuery } from "../Api/Api";
 import Loading from "../components/Loading";
 import SideBar from "../components/SideBar";
+import axios from "axios";
 
 const Properties = () => {
-  const { data, error, isLoading } = useGetPropertyQuery();
   const [show, setShow] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [property, setProperty] = useState([]);
 
   const [currentpage, setCurrentPage] = useState(1);
   const [page, setPage] = useState(12);
+  const FetchData = async () => {
+    setLoading(true);
+
+    try {
+      const res = await axios.get("http://localhost:5500/property/estate");
+      setProperty(res.data);
+      setLoading(false);
+      navigate("/");
+    } catch (error) {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    setProperty(data);
-  }, [data]);
+    FetchData();
+  }, []);
 
   const lastIndex = currentpage * page;
   const firstIndex = lastIndex - page;
@@ -56,7 +68,7 @@ const Properties = () => {
       </div>
       <div className="text-slate-800 text-center flex flex-col justify-center ml-9 md:ml-0 mb-16 mt-5">
         {/* <h1 className="mb-5">Feature home</h1> */}
-        {isLoading && <Loading />}
+        {loading && <Loading />}
         <div className="flex flex-col gap-2">
           <div className="flex flex-wrap gap-4  mx-auto">
             {currentListen &&
