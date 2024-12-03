@@ -26,7 +26,7 @@ import { useSelector } from "react-redux";
 import AgentProperties from "./pages/AgentProperties";
 import Addresse from "./pages/Addresse";
 import Edit from "./auth/edit";
-import Update from "./pages/update";
+import Update from "./pages/Update";
 
 function App() {
   const user = useSelector((state) => state.user.user);
