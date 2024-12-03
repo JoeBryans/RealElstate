@@ -1,7 +1,6 @@
 import express from "express";
 import {
   Deletes,
-  GetItem,
   Login,
   Profile,
   Register,
@@ -21,7 +20,6 @@ userRouter.post("/register", Register);
 userRouter.post("/login", Login);
 userRouter.get("/logOut", LogOut);
 userRouter.get("/users", Users);
-userRouter.get("/user/save/:id", Authenticate, GetItem);
 userRouter.get("/user/:id", Authenticate, UserID);
 userRouter.put("/:id", Authenticate, Update);
 userRouter.delete("/:id", Authenticate, Deletes);

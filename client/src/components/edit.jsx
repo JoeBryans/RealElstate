@@ -231,7 +231,7 @@ const Edit = () => {
               className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
             />
           </label>
-          <label className="flex flex-col gap-1 items-start ">
+          {/* <label className="flex flex-col gap-1 items-start ">
             <input
               type="file"
               name="file"
@@ -240,7 +240,7 @@ const Edit = () => {
               onChange={(e) => setFile(e.target.files)}
               className="p-2 rounded-lg focus:outline-none text-slate-700 font-medium border w-full  "
             />
-          </label>
+          </label> */}
 
           <div className="flex flex-wrap gap-2">
             <div className="flex gap-1 items-center ">

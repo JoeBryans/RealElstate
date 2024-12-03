@@ -97,7 +97,7 @@ export const LogOut = async (req, res, next) => {
     next(error);
   }
 };
-export const Users = async (req, res, nex) => {
+export const Users = async (req, res, next) => {
   try {
     const user = await UserModel.find();
     res.json({
@@ -147,21 +147,21 @@ export const Deletes = async (req, res, next) => {
   }
 };
 
-export const GetItem = async (req, res, next) => {
-  const { id } = req.params;
-  // const userId = req.user.id;
-  try {
-    const user = await UserModel.findById(id);
-    if (!user) {
-      return next(Errors(400, "No saved Item with this user"));
-    } else {
-      const item = await savedModel.find().populate("estateId");
-      res.json(item);
-    }
-  } catch (error) {
-    next(error);
-  }
-};
+// export const GetItem = async (req, res, next) => {
+//   const { id } = req.params;
+//   // const userId = req.user.id;
+//   try {
+//     const user = await UserModel.findById(id);
+//     if (!user) {
+//       return next(Errors(400, "No saved Item with this user"));
+//     } else {
+//       const item = await savedModel.find().populate("estateId");
+//       res.json(item);
+//     }
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 export const Profile = async (req, res, next) => {
   try {
