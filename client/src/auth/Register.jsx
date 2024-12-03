@@ -28,11 +28,11 @@ const Register = () => {
     try {
       const res = await axios.post(
         "http://localhost:5500/auth/register",
-        data,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
+        data
+        // {
+        //   headers: { "Content-Type": "application/json" },
+        //   withCredentials: true,
+        // }
       );
       console.log(res.data);
       navigate("/address");

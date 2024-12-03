@@ -28,10 +28,14 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post("http://localhost:5500/auth/login", data, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        "http://localhost:5500/auth/login",
+        data
+        // {
+        //   headers: { "Content-Type": "application/json" },
+        //   withCredentials: true,
+        // }
+      );
 
       dispatch(getUser(res.data));
       setLoading(false);
