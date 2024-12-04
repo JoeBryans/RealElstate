@@ -1,28 +1,32 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { useGetPropertyQuery } from "../Api/Api";
 import Loading from "../components/Loading";
 import * as MdIcons from "react-icons/md";
 import * as FaIcons from "react-icons/fa";
 import SideBar from "../components/SideBar";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 
 const Rent = () => {
   const [show, setShow] = useState(false);
-  const { data, isLoading, error } = useGetPropertyQuery();
   const [property, setProperty] = useState([]);
   const [currentpage, setCurrentPage] = useState(1);
   const [page, setPage] = useState(12);
-  const Rent = data && data.filter((items) => items.type === "rent");
-
+  const Rent = property && property.filter((items) => items.type === "rent");
+  const fetchData = async () => {
+    try {
+      const res = await axios.get("/api/property/estate");
+      setProperty(res.data);
+    } catch (error) {}
+  };
   useEffect(() => {
-    setProperty(Rent);
-  }, [data]);
+    fetchData();
+  }, []);
 
   const lastIndex = currentpage * page;
   const firstIndex = lastIndex - page;
-  const currentListen = property?.slice(firstIndex, lastIndex);
-  const totalListen = property?.length;
+  const currentListen = Rent?.slice(firstIndex, lastIndex);
+  const totalListen = Rent?.length;
 
   let pages = [];
   for (let index = 1; index <= Math.ceil(totalListen / page); index++) {
@@ -57,7 +61,7 @@ const Rent = () => {
         </div>
         <div className="w-full  md:mt-5  ">
           <div className="relative text-slate-700 ">
-            {isLoading && <Loading />}
+            {/* {isLoading && <Loading />} */}
             <div className="flex flex-col gap-2">
               <div className="flex flex-wrap gap-4  ">
                 {currentListen &&

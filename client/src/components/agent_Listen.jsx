@@ -25,9 +25,7 @@ const AgentListen = () => {
   }
   const fetchData = async () => {
     try {
-      const res = await axios.get("http://localhost:5500/property/agent", {
-        withCredentials: true,
-      });
+      const res = await axios.get("/api/property/agent");
       console.log(res.data);
       setProperty(res.data);
     } catch (error) {
@@ -37,9 +35,7 @@ const AgentListen = () => {
   // console.log(property._id);
   const handleDelete = async (_id) => {
     try {
-      const res = await axios.delete(`http://localhost:5500/property/${_id}`, {
-        withCredentials: true,
-      });
+      const res = await axios.delete(`/api/property/${_id}`);
       setProperty((prev) => prev.filter((property) => property._id !== _id));
     } catch (err) {
       console.log(err);

@@ -3,22 +3,31 @@ import React, { useEffect, useState } from "react";
 import * as MdIcons from "react-icons/md";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useGetPropertyQuery } from "../Api/Api";
 import Loading from "./Loading";
 import * as FaIcons from "react-icons/fa";
+import axios from "axios";
 const Location = () => {
-  const { data, error, isLoading } = useGetPropertyQuery();
-  const property = data && data.filter((items) => items.address === "lagos");
-  console.log(property);
+  const [property, setProperty] = useState([]);
+  const properties =
+    property && property.filter((items) => items.address === "lagos");
+  const fetchData = async () => {
+    try {
+      const res = await axios.get("/api/property/estate");
+      setProperty(res.data);
+    } catch (error) {}
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
       {" "}
-      {isLoading && <Loading />}
+      {/* {isLoading && <Loading />} */}
       <div className="text-slate-800 text-center flex flex-col justify-center ml-9 md:ml-0 mb-16 ">
         <h1 className="mb-5">Properties In Lagos</h1>
         <div className="flex flex-wrap gap-4 justify-start ">
-          {property &&
-            property.slice(0, 4).map((items, i) => {
+          {properties &&
+            properties.slice(0, 4).map((items, i) => {
               return (
                 <div
                   key={i}

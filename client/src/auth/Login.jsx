@@ -29,12 +29,11 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5500/auth/login",
-        data
-        // {
-        //   headers: { "Content-Type": "application/json" },
-        //   withCredentials: true,
-        // }
+        "api/auth/login",
+        data,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
       );
 
       dispatch(getUser(res.data));

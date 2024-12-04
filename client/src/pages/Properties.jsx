@@ -18,7 +18,7 @@ const Properties = () => {
     setLoading(true);
 
     try {
-      const res = await axios.get("http://localhost:5500/property/estate");
+      const res = await axios.get("/api/property/estate");
       setProperty(res.data);
       setLoading(false);
       navigate("/");

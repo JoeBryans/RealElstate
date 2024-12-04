@@ -9,6 +9,7 @@ import blogRouter from "./router/blogRouter.js";
 import saveRouter from "./router/saveRouter.js";
 import addressRouter from "./router/addressRouter.js";
 import path from "path";
+import authRouter from "./router/authRouter.js";
 dotenv.config();
 const port = process.env.PORT || 8000;
 const __dirname = path.resolve();
@@ -16,10 +17,13 @@ const app = express();
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
-app.use("/property", estateRouter);
-app.use("/blog", blogRouter);
-app.use("/address", addressRouter);
-app.use("/save", saveRouter);
+app.use("/api/property", estateRouter);
+app.use("/api/blog", blogRouter);
+app.use("/api/address", addressRouter);
+app.use("/api/save", saveRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/user", userRouter);
+
 app.use(express.static(path.join(__dirname, "/client/dist")));
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "/client/dist/index.html"));
@@ -36,7 +40,6 @@ app.use((err, req, res, next) => {
 });
 
 DataBase();
-app.use("/auth", userRouter);
 app.listen(port, () =>
   console.log(`server runing at http://localhost:${port}`)
 );

@@ -1,34 +1,38 @@
 import { Link } from "react-router-dom";
-import { useGetPropertyQuery } from "../Api/Api";
 import Loading from "../components/Loading";
 import * as MdIcons from "react-icons/md";
 import * as FaIcons from "react-icons/fa";
 import SideBar from "../components/SideBar";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
+import axios from "axios";
 
 const Buy = () => {
   const [show, setShow] = useState(false);
   const [property, setProperty] = useState([]);
   const [currentpage, setCurrentPage] = useState(1);
   const [page, setPage] = useState(12);
-  const { data, isLoading, error } = useGetPropertyQuery();
-  const Buy = data && data.filter((items) => items.type === "sale");
+  const Buy = property && property.filter((items) => items.type === "sale");
 
+  const fetchData = async () => {
+    try {
+      const res = await axios.get("/api/property/estate");
+      setProperty(res.data);
+    } catch (error) {}
+  };
   useEffect(() => {
-    setProperty(Buy);
-  }, [data]);
+    fetchData();
+  }, []);
 
   const lastIndex = currentpage * page;
   const firstIndex = lastIndex - page;
-  const currentListen = property?.slice(firstIndex, lastIndex);
-  const totalListen = property?.length;
+  const currentListen = Buy?.slice(firstIndex, lastIndex);
+  const totalListen = Buy?.length;
 
   let pages = [];
   for (let index = 1; index <= Math.ceil(totalListen / page); index++) {
     pages.push(index);
   }
-
   const HandleButton = () => {
     setShow(true);
   };
@@ -56,7 +60,7 @@ const Buy = () => {
           </div>
         </div>
         <div className="relative text-slate-700">
-          {isLoading && <Loading />}
+          {/* {isLoading && <Loading />} */}
           <div className="flex flex-col gap-2">
             <div className="flex flex-wrap gap-4 ">
               {currentListen &&

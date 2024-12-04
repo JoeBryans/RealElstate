@@ -27,15 +27,10 @@ const Register = () => {
 
   const onSubmit = async (data) => {
     try {
-      const res = await AddformData(data);
-      //axios.post(
-      //   "http://localhost:5500/auth/register",
-      //   data
-      //   // {
-      //   //   headers: { "Content-Type": "application/json" },
-      //   //   withCredentials: true,
-      //   // }
-      // );
+      // const res = await AddformData(data);
+      const res = axios.post("/api/auth/register", data, {
+        headers: { "Content-Type": "application/json" },
+      });
       console.log(res.data);
       navigate("/login");
     } catch (error) {

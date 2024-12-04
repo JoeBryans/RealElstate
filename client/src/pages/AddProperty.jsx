@@ -101,7 +101,7 @@ const AddProperty = () => {
     }
     try {
       // setLoader(true);
-      const res = await axios.post("http://localhost:5500/property/", formData);
+      const res = await axios.post("/api/property/", formData);
       const data = await res.json();
 
       console.log(data);
@@ -109,7 +109,7 @@ const AddProperty = () => {
       // setLoader(false);
       navigate("/profile");
     } catch (error) {
-      setError(error.response.data.message);
+      setError(error?.response?.data?.message);
       // isLoading(false);
     }
   };

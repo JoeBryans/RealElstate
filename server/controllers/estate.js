@@ -141,8 +141,7 @@ export const GetItem = async (req, res, next) => {
   const { id } = req.params;
   try {
     const item = await estateModel.findById(id).populate("userId");
-    // .select("-password");
-    // const item = await estateModel.findById(id);
+
     res.json(item);
   } catch (error) {
     console.log(error);

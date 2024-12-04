@@ -3,16 +3,20 @@ import React, { useEffect, useState } from "react";
 import * as MdIcons from "react-icons/md";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useGetPropertyQuery } from "../Api/Api";
 import Loading from "./Loading";
 import * as FaIcons from "react-icons/fa";
+import axios from "axios";
 const Feature = () => {
-  const { data, error, isLoading } = useGetPropertyQuery();
   const [property, setProperty] = useState([]);
-  console.log(property);
+  const fetchData = async () => {
+    try {
+      const res = await axios.get("/api/property/estate");
+      setProperty(res.data);
+    } catch (error) {}
+  };
   useEffect(() => {
-    setProperty(data);
-  }, [data]);
+    fetchData();
+  }, []);
 
   return (
     <>
