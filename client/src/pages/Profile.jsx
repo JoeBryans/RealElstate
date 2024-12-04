@@ -19,8 +19,7 @@ const Profile = () => {
     email: user.email || "",
     mobile: user.mobile || "",
   });
-  console.log(file);
-  console.log(user._id);
+
   const handelChange = (e) => {
     setFormDatas({ ...formdatas, [e.target.id]: e.target.value });
   };
@@ -50,11 +49,10 @@ const Profile = () => {
     formData.append("image", file);
     try {
       const { data } = axios.post(
-        `http://localhost:5500/auth/user/upload/${user._id}`,
+        `/api/auth/user/upload/${user._id}`,
         formData,
         {
-          // headers: { "Content-Type": "application/json" },
-          withCredentials: true,
+          headers: { "Content-Type": "application/json" },
         }
       );
       console.log(data);

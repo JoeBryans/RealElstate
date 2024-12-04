@@ -8,11 +8,9 @@ import * as FaIcons from "react-icons/fa";
 import axios from "axios";
 const Location = () => {
   const [property, setProperty] = useState([]);
-  const properties =
-    property && property.filter((items) => items.address === "lagos");
   const fetchData = async () => {
     try {
-      const res = await axios.get("/api/property/estate");
+      const res = await axios.get("/api/property/?address=lagos");
       setProperty(res.data);
     } catch (error) {}
   };
@@ -26,19 +24,19 @@ const Location = () => {
       <div className="text-slate-800 text-center flex flex-col justify-center ml-9 md:ml-0 mb-16 ">
         <h1 className="mb-5">Properties In Lagos</h1>
         <div className="flex flex-wrap gap-4 justify-start ">
-          {properties &&
-            properties.slice(0, 4).map((items, i) => {
+          {property &&
+            property.slice(0, 4).map((items, i) => {
               return (
                 <div
                   key={i}
-                  className="w-44 md:w-60  flex flex-col border  items-start md:items-center mx-auto  overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
+                  className="w-44 md:w-72  flex flex-col border  items-start md:items-center mx-auto  overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
                 >
                   <div className="relative overflow-hidden">
                     <Link to={`/property-details/${items._id}`}>
                       <img
                         src={items.image[0].url}
                         alt=""
-                        className="w-60 md hover:scale-150 transition-scale duration-300"
+                        className="w-72 md hover:scale-150 transition-scale duration-300"
                       />
                     </Link>
                     <div className="absolute top-2 left-2 text-center">

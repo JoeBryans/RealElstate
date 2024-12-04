@@ -149,7 +149,14 @@ export const GetItem = async (req, res, next) => {
 };
 export const SaleProperty = async (req, res, next) => {
   try {
-    const item = await estateModel.find(type === "sale").populate("userId");
+    let type = req.query.type;
+    if (type === "sale") {
+      type = "sale";
+    }
+    if (type === "sale") {
+      type = "rent";
+    }
+    const item = await estateModel.find({ type }).populate("userId");
 
     res.json(item);
   } catch (error) {

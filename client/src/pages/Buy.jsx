@@ -12,11 +12,10 @@ const Buy = () => {
   const [property, setProperty] = useState([]);
   const [currentpage, setCurrentPage] = useState(1);
   const [page, setPage] = useState(12);
-  const Buy = property && property.filter((items) => items.type === "sale");
 
   const fetchData = async () => {
     try {
-      const res = await axios.get("/api/property/estate");
+      const res = await axios.get("/api/property/?type=sale");
       setProperty(res.data);
     } catch (error) {}
   };
@@ -26,8 +25,8 @@ const Buy = () => {
 
   const lastIndex = currentpage * page;
   const firstIndex = lastIndex - page;
-  const currentListen = Buy?.slice(firstIndex, lastIndex);
-  const totalListen = Buy?.length;
+  const currentListen = property?.slice(firstIndex, lastIndex);
+  const totalListen = property?.length;
 
   let pages = [];
   for (let index = 1; index <= Math.ceil(totalListen / page); index++) {
@@ -68,14 +67,14 @@ const Buy = () => {
                   return (
                     <div
                       key={i}
-                      className="w-44 md:w-60 mx-2 flex flex-col border  items-start md:items-center    overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
+                      className="w-44 md:w-72 mx-2 flex flex-col border  items-start md:items-center    overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
                     >
                       <div className="relative overflow-hidden">
                         <Link to={`/property-details/${items._id}`}>
                           <img
                             src={items.image[0].url}
                             alt=""
-                            className="w-60 md hover:scale-150 transition-scale duration-300"
+                            className="w-72 md hover:scale-150 transition-scale duration-300"
                           />
                         </Link>
                         <div className="absolute top-2 left-2 text-center">

@@ -7,6 +7,7 @@ import {
   GetItems,
   GetuserListings,
   MyListings,
+  SaleProperty,
   Search,
   UpdateItem,
 } from "../controllers/estate.js";
@@ -21,6 +22,7 @@ estateRouter.get("/isAgent", Agent, (req, res, next) => {
 });
 estateRouter.post("/upload", upload.array("image"), CreateImg);
 estateRouter.get("/estate", GetItems);
+// estateRouter.get("/estate/", SaleProperty);
 estateRouter.get("/agent/", Authenticate, Agent, MyListings);
 estateRouter.get("/agent/properties/:id", GetuserListings);
 estateRouter.get("/estate/:id", GetItem);

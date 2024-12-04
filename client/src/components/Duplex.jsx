@@ -1,87 +1,42 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
+
 import * as MdIcons from "react-icons/md";
-import * as FaIcons from "react-icons/fa";
-import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useSearchPropertyQuery } from "../Api/Api";
-import SideBar from "./../components/SideBar";
-import user from "../assets/user.jpg";
+import Loading from "./Loading";
+import * as FaIcons from "react-icons/fa";
 import axios from "axios";
-const Listen = () => {
-  const [show, setShow] = useState(false);
-  const [data, setData] = useState([]);
-
-  const [searchForm, setSearchForm] = useState({
-    search: "",
-    address: "",
-    bedroom: 0,
-    bathroom: 0,
-    min: 0,
-    max: 0,
-    propertyType: "",
-    offer: false,
-    furnished: false,
-    type: "all",
-    packing: false,
-  });
-  const [index, setIndex] = useState(0);
-  const handleClick = (i) => {
-    setIndex(i);
+const Duplex = () => {
+  const [property, setProperty] = useState([]);
+  const fetchData = async () => {
+    try {
+      const res = await axios.get("/api/property/?search=Duplex");
+      setProperty(res.data);
+    } catch (error) {}
   };
-
   useEffect(() => {
-    const urlParams = new URLSearchParams(location.search);
+    fetchData();
+  }, []);
 
-    const fechData = async () => {
-      const searchQuery = urlParams.toString();
-      const { data } = await axios.get(
-        `http://localhost:5500/property/?${searchQuery}`
-      );
-      setData(data);
-    };
-    fechData();
-  }, [location.search]);
-  const HandleButton = () => {
-    setShow(true);
-  };
   return (
-    <div className="w-full flex flex-col lg:flex-row gap-3  text-slate-700 px-4 sm:px-5 ">
-      <div className="hidden lg:inline">
-        <SideBar searchForm={searchForm} setSearchForm={setSearchForm} />
-      </div>
-      <div className=" lg:hidden md:mx-16 -mx-10">
-        <div className={show ? "inline " : "hidden"}>
-          <SideBar searchForm={searchForm} setSearchForm={setSearchForm} />
-        </div>
-        <div className="md:mx-10 ">
-          <button
-            className={
-              show
-                ? "hidden"
-                : " p-2 rounded-lg text-white text-center bg-primary hover:opacity-90  w-36 mt-5"
-            }
-            onClick={HandleButton}
-          >
-            Filter
-          </button>
-        </div>
-      </div>
-      <div className="w-full  md:mt-5  ">
-        <div className=" flex  flex-wrap justify-start gap-4 py-3  ">
-          {data &&
-            data.map((items, i) => {
+    <>
+      {" "}
+      {/* {isLoading && <Loading />} */}
+      <div className="text-slate-800 text-center flex flex-col justify-center ml-9 md:ml-0 mb-16 ">
+        <h1 className="mb-5">Duplex homes </h1>
+        <div className="flex flex-wrap gap-4 justify-start ">
+          {property &&
+            property.slice(1, 5).map((items, i) => {
               return (
                 <div
                   key={i}
-                  // className="w-44 md:w-60  flex flex-col border  items-start md:items-center  mx-auto md:mx-1 overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
-                  className="w-48 md:w-60  flex flex-col border  items-start md:items-center   overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg mx-auto "
+                  className="w-44 md:w-72  flex flex-col border  items-start md:items-center mx-auto  overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
                 >
                   <div className="relative overflow-hidden">
                     <Link to={`/property-details/${items._id}`}>
                       <img
                         src={items.image[0].url}
                         alt=""
-                        className="w-60 md "
+                        className="w-72 md hover:scale-150 transition-scale duration-300"
                       />
                     </Link>
                     <div className="absolute top-2 left-2 text-center">
@@ -142,26 +97,14 @@ const Listen = () => {
                         {items.bathroom}
                       </small>
                     </div>
-                    <div className="w-60 mt-2">
-                      <img
-                        src={items.userId?.picture[0]}
-                        alt=""
-                        className="w-10 h-10 rounded-full object-cover"
-                      />
-                      <div className="w-40 sm:w-52 flex justify-between mt-2">
-                        <span>{items.userId?.username}</span>
-                        <span>{items.updatedAt?.slice(0, 10)}</span>
-                        {/* <span>{items.userId.username}</span> */}
-                      </div>
-                    </div>
                   </div>
                 </div>
               );
             })}
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
-export default Listen;
+export default Duplex;

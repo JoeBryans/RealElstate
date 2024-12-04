@@ -7,6 +7,7 @@ import Popular from "../components/Popular";
 import Location from "../components/location";
 import Luxury from "../components/Luxury";
 import { useSelector } from "react-redux";
+import Duplex from "../components/Duplex";
 
 const Home = () => {
   const user = useSelector((state) => state.user.user);
@@ -18,6 +19,7 @@ const Home = () => {
       <Container>
         <Feature />
         <Luxury />
+        <Duplex />
         <Location />
         <Popular />
       </Container>
