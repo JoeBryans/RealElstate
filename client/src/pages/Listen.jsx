@@ -34,9 +34,7 @@ const Listen = () => {
 
     const fechData = async () => {
       const searchQuery = urlParams.toString();
-      const { data } = await axios.get(
-        `http://localhost:5500/property/?${searchQuery}`
-      );
+      const { data } = await axios.get(`/api/property/?${searchQuery}`);
       setData(data);
     };
     fechData();

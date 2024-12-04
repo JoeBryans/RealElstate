@@ -39,7 +39,7 @@ const Property = () => {
   };
 
   const fetchData = async () => {
-    const res = await axios.get(`http://localhost:5500/property/estate/${id}`);
+    const res = await axios.get(`/api/property/estate/${id}`);
     setProperty(res.data);
     console.log(res.data);
   };
