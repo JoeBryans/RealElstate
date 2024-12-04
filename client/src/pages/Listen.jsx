@@ -22,7 +22,7 @@ const Listen = () => {
     offer: false,
     furnished: false,
     type: "all",
-    packing: false,
+    parking: false,
   });
   const [index, setIndex] = useState(0);
   const handleClick = (i) => {

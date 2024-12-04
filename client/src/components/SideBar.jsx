@@ -5,7 +5,6 @@ import * as FaIcons from "react-icons/fa";
 import { Button } from "react-bootstrap";
 const SideBar = () => {
   const navigate = useNavigate();
-  // { searchForm, setSearchForm }
   const [max, setMax] = useState();
   const [min, setMin] = useState(10);
   const [searchForm, setSearchForm] = useState({
@@ -19,7 +18,7 @@ const SideBar = () => {
     offer: false,
     furnished: false,
     type: "all",
-    packing: false,
+    parking: false,
   });
   const HandleInput = (e) => {
     if (
@@ -34,7 +33,7 @@ const SideBar = () => {
     }
     if (
       e.target.id === "furnished" ||
-      e.target.id === "packing" ||
+      e.target.id === "parking" ||
       e.target.id === "offer"
     ) {
       setSearchForm({
@@ -73,7 +72,7 @@ const SideBar = () => {
     urlParams.set("bathroom", searchForm.bathroom);
     urlParams.set("min", searchForm.min);
     urlParams.set("max", searchForm.max);
-    urlParams.set("packing", searchForm.packing);
+    urlParams.set("parking", searchForm.parking);
     urlParams.set("furnished", searchForm.furnished);
     urlParams.set("type", searchForm.type);
     urlParams.set("offer", searchForm.offer);
@@ -280,9 +279,9 @@ const SideBar = () => {
           <div className="flex gap-2 items-center ">
             <input
               type="checkbox"
-              id="packing"
+              id="parking"
               className="w-5 h-5"
-              checked={searchForm.packing}
+              checked={searchForm.parking}
               onChange={HandleInput}
             />
             <span className="font-semibold ">parking</span>
