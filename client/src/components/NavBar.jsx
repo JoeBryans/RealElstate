@@ -19,9 +19,7 @@ const NavBar = () => {
   };
   const LogOut = async () => {
     try {
-      const res = axios.get("http://localhost:5500/auth/logOut", {
-        withCredentials: true,
-      });
+      const res = axios.get("/api/auth/logOut");
       dispatch(logOut());
       navigate("/");
     } catch (error) {
