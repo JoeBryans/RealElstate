@@ -29,14 +29,14 @@ const Luxury = () => {
               return (
                 <div
                   key={i}
-                  className="w-44 md:w-60  flex flex-col border  items-start md:items-center mx-auto  overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
+                  className="w-44 md:w-72  flex flex-col border  items-start md:items-center mx-auto  overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
                 >
                   <div className="relative overflow-hidden">
                     <Link to={`/property-details/${items._id}`}>
                       <img
                         src={items.image[0].url}
                         alt=""
-                        className="w-60 md hover:scale-150 transition-scale duration-300"
+                        className="w-72 md hover:scale-150 transition-scale duration-300"
                       />
                     </Link>
                     <div className="absolute top-2 left-2 text-center">
