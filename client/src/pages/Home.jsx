@@ -21,7 +21,7 @@ const Home = () => {
         <Luxury />
         <Duplex />
         <Location />
-        <Popular />
+        {/* <Popular /> */}
       </Container>
     </div>
   );
