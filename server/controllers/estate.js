@@ -87,17 +87,17 @@ export const CreateImg = async (req, res, next) => {
 //   res.json(pro);
 export const Create = async (req, res, next) => {
   const user = req.user.id;
-  const {
-    name,
-    description,
-    address,
-    type,
-    propertyType,
-    price,
-    bathroom,
-    bedroom,
-    image,
-  } = req.body;
+  // const {
+  //   name,
+  //   description,
+  //   address,
+  //   type,
+  //   propertyType,
+  //   price,
+  //   bathroom,
+  //   bedroom,
+  //   image,
+  // } = req.body;
   // const { password, ...rest } = user._doc;
   try {
     const uploader = async (path) => await cloudinaryUploader(path, "Images");
@@ -141,6 +141,15 @@ export const GetItem = async (req, res, next) => {
   const { id } = req.params;
   try {
     const item = await estateModel.findById(id).populate("userId");
+
+    res.json(item);
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const SaleProperty = async (req, res, next) => {
+  try {
+    const item = await estateModel.find(type === "sale").populate("userId");
 
     res.json(item);
   } catch (error) {
