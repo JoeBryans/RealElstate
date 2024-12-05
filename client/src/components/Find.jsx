@@ -53,7 +53,7 @@ const Find = () => {
           </p>
         </div>
         <div className=" flex flex-col flex-wrap mb-5 ">
-          <div className=" rounded p-1 mx-auto flex flex-wrap   items-center  gap-2 text-slate-700">
+          <div className=" rounded sm:p-1 mx-auto flex flex-wrap   items-center  gap-2 text-slate-700">
             <input
               type="text"
               placeholder="keyword"

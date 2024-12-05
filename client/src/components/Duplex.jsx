@@ -29,7 +29,7 @@ const Duplex = () => {
               return (
                 <div
                   key={i}
-                  className="w-44 md:w-72  flex flex-col border  items-start md:items-center mx-auto  overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
+                  className="w-72  flex flex-col border  items-start md:items-center mx-auto  overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
                 >
                   <div className="relative overflow-hidden">
                     <Link to={`/property-details/${items._id}`}>

@@ -14,9 +14,7 @@ const AgentProperties = () => {
   const { id } = param;
 
   const AgentPropert = async () => {
-    const res = await axios.get(
-      `http://localhost:5500/property/agent/properties/${id}`
-    );
+    const res = await axios.get(`/api/property/agent/properties/${id}`);
     setProperty(res.data);
     console.log(res.data);
   };
@@ -45,7 +43,7 @@ const AgentProperties = () => {
               return (
                 <div
                   key={i}
-                  className="w-44 md:w-60  flex flex-col border  items-start md:items-center  overflow-hidden hover:shadow-lg transition-shadow duration-300 rounded-lg"
+                  className="w-60  flex flex-col border  items-start md:items-center  overflow-hidden hover:shadow-lg mx-auto transition-shadow duration-300 rounded-lg"
                 >
                   <div className="relative overflow-hidden">
                     <Link to={`/property-details/${items._id}`}>

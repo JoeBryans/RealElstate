@@ -115,25 +115,34 @@ const NavBar = () => {
           >
             <div className="flex flex-col gap-3 absolute h-[100vh] bg-blue-800 w-44 top-0 right-0 p-4 z-40 ">
               <Link
-                to="/about"
-                onClick={Bar}
-                className="  text-2xl text-white font-semibold "
+                to="/buy"
+                className="hidden sm:flex text-2xl text-white font-semibold "
               >
-                About
+                Buy
+              </Link>
+              <Link
+                to="/rent"
+                className="hidden sm:flex text-2xl text-white font-semibold "
+              >
+                Rent
               </Link>
               <Link
                 to="/property"
-                onClick={Bar}
-                className="  text-2xl text-white font-semibold "
+                className="hidden sm:flex text-2xl text-white font-semibold "
               >
                 Properties
               </Link>
               <Link
                 to="/agent"
-                onClick={Bar}
-                className="  text-2xl text-white font-semibold "
+                className="hidden sm:flex text-2xl text-white font-semibold "
               >
                 Agent
+              </Link>
+              <Link
+                to="/blog"
+                className="hidden sm:flex text-2xl text-white font-semibold "
+              >
+                Blog
               </Link>
               {user ? (
                 <Link
