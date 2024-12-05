@@ -97,7 +97,7 @@ const Property = () => {
                   return (
                     <div className="flex gap-2 justify-center " key={i}>
                       <img
-                        className="w-5/6 "
+                        className="sm:w-5/6 w-full "
                         src={item.url}
                         alt=""
                         onClick={() => handleClick(i)}
