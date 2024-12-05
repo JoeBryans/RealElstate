@@ -115,8 +115,8 @@ const AddProperty = () => {
   };
   return (
     <div className="text-slate-700 flex flex-wrap mt-10  ">
-      <div className="w-4/5   mx-auto">
-        <form className="flex flex-col gap-3 mx-auto w-max md:w-[40rem] shadow-md p-4">
+      <div className="w-4/4   mx-auto">
+        <form className="flex flex-col gap-3 mx-auto w-max md:w-[40rem] shadow-md p-4 ">
           <span className="text-red-600 font-semibold  ">{error}</span>
           <input
             type="text"

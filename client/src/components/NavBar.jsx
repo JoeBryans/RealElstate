@@ -116,30 +116,35 @@ const NavBar = () => {
             <div className="flex flex-col gap-3 absolute h-[100vh] bg-blue-800 w-44 top-0 right-0 p-4 z-40 ">
               <Link
                 to="/buy"
+                onClick={Bar}
                 className="inline sm:hidden text-2xl text-white font-semibold "
               >
                 Buy
               </Link>
               <Link
                 to="/rent"
+                onClick={Bar}
                 className="inline sm:hidden text-2xl text-white font-semibold "
               >
                 Rent
               </Link>
               <Link
                 to="/property"
+                onClick={Bar}
                 className="inline sm:hidden text-2xl text-white font-semibold "
               >
                 Properties
               </Link>
               <Link
                 to="/agent"
+                onClick={Bar}
                 className="inline sm:hidden text-2xl text-white font-semibold "
               >
                 Agent
               </Link>
               <Link
                 to="/blog"
+                onClick={Bar}
                 className="inline sm:hidden text-2xl text-white font-semibold "
               >
                 Blog

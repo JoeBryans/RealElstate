@@ -45,14 +45,14 @@ const Register = () => {
         className="max-w-xl flex flex-col gap-3 bg-white  mx-auto p-4  rounded-md shadow-lg text-center"
       >
         <h1 className="text-center">Register</h1>
-        <div className="flex gap-5 ">
+        <div className="flex  flex-wrap justify-center sm:justify-between   ">
           <label className="flex flex-col gap-1 items-start ">
             <span>UserName</span>
             <input
               placeholder="username"
               {...register("username")}
               type="text"
-              className="text-slate-700 p-2 rounded-lg focus:outline-none font-medium w-60 border"
+              className="text-slate-700 p-2 rounded-lg focus:outline-none font-medium w-96 sm:w-60 border"
             />{" "}
             {errors && (
               <span className="text-red-600 font-semibold">
@@ -66,7 +66,7 @@ const Register = () => {
               placeholder="email"
               {...register("email")}
               type="text"
-              className="text-slate-700 p-2 rounded-lg focus:outline-none font-medium w-60  border"
+              className="text-slate-700 p-2 rounded-lg focus:outline-none font-medium w-96 sm:w-60  border"
             />
             {errors && (
               <span className="text-red-600 font-semibold">
@@ -75,14 +75,14 @@ const Register = () => {
             )}
           </label>
         </div>
-        <div className="flex gap-5 ">
+        <div className="flex flex-wrap justify-center sm:justify-between ">
           <label className="flex flex-col gap-1 items-start ">
             <span>Phone</span>
             <input
               placeholder="phone"
               {...register("mobile")}
               type="text"
-              className="text-slate-700 p-2 rounded-lg focus:outline-none font-medium w-60 border"
+              className="text-slate-700 p-2 rounded-lg focus:outline-none font-medium w-96 sm:w-60 border"
             />
             {errors && (
               <span className="text-red-600 font-semibold">
@@ -97,7 +97,7 @@ const Register = () => {
               placeholder="password"
               {...register("password")}
               type="password"
-              className="text-slate-700 p-2 rounded-lg focus:outline-none font-medium w-60 border"
+              className="text-slate-700 p-2 rounded-lg focus:outline-none font-medium w-96 sm:w-60 border"
             />
             {errors && (
               <span className="text-red-600 font-semibold">
@@ -106,13 +106,13 @@ const Register = () => {
             )}
           </label>
         </div>
-        <div className="flex gap-5 ">
+        <div className="flex flex-wrap justify-center sm:justify-between ">
           <label className="flex flex-col gap-1 items-start ">
             <span>Gender</span>
             <select
               id="gender"
               {...register("gender")}
-              className="text-slate-700 p-2 rounded-lg focus:outline-none font-medium w-60 border"
+              className="text-slate-700 p-2 rounded-lg focus:outline-none font-medium w-96 sm:w-60 border"
             >
               <option value=""> gender</option>
               <option value="male"> Male</option>
@@ -128,7 +128,7 @@ const Register = () => {
             <span>Role</span>
             <select
               {...register("role")}
-              className="text-slate-700 p-2 rounded-lg focus:outline-none font-medium w-60 border"
+              className="text-slate-700 p-2 rounded-lg focus:outline-none font-medium w-96 sm:w-60 border"
             >
               <option value=""> role</option>
               <option value="user"> user</option>
